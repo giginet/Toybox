@@ -16,7 +16,21 @@
 		0785B9E81D85A38B0005AD4B /* ToyboxKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; };
 		0785B9E91D85A3980005AD4B /* Commandant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A61D858A4C0005AD4B /* Commandant.framework */; };
 		0785B9EA1D85A3980005AD4B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A81D858A5A0005AD4B /* Result.framework */; };
+		0785B9ED1D85B34E0005AD4B /* ToyboxKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0785B9EC1D85B3460005AD4B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0785B9ED1D85B34E0005AD4B /* ToyboxKit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0785B97B1D85577A0005AD4B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -141,6 +155,7 @@
 				0785B9C91D85A3270005AD4B /* Frameworks */,
 				0785B9CA1D85A3270005AD4B /* Resources */,
 				0785B9EB1D85A3A10005AD4B /* ShellScript */,
+				0785B9EC1D85B3460005AD4B /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -354,7 +369,7 @@
 		0785B9B81D858CFF0005AD4B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -383,7 +398,7 @@
 		0785B9B91D858CFF0005AD4B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -419,7 +434,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = Toybox/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @rpath/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.giginet.Toybox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -437,7 +452,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = Toybox/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @rpath/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.giginet.Toybox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
