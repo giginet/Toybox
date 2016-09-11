@@ -1,26 +1,31 @@
 import Foundation
+import Commandant
+import Result
 
-/*protocol CommandType {
-    static var name: String { get }
-    static func execute(options: [String: Any])
-    static var options: [OptionType] { get }
-}
-
-enum Platform {
-    case iOS
-    case macOS
-    case tvOS
-}
-
-struct CreateCommand: CommandType {
-    static let name: String = "create"
+public struct CreateOptions: OptionsType {
+    public typealias ClientError = NoError
+    let platform: Platform
     
-    static func execute(options: [String: Any]) {
+    static func create(_ platform: Platform) -> CreateOptions {
+        return self.init(platform: platform)
     }
     
-    static var options: [OptionType] {
-        return [
-            OptionType
-        ]
+    public static func evaluate(_ m: CommandMode) -> Result<CreateOptions, CommandantError<NoError>> {
+        return create
+            <*> m <| Option(key: "platform", defaultValue: Platform.iOS, usage: "Target platform (ios/macos/tvos)")
     }
-}*/
+}
+public struct CreateCommand: CommandType {
+    public typealias Options = CreateOptions
+    public typealias ClientError = NoError
+    
+    public init() {
+    }
+    
+    public let verb = "create"
+    public let function = "Create new Playground"
+    
+    public func run(_ options: Options) -> Result<(), NoError> {
+        return .success()
+    }
+}

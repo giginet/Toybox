@@ -6,7 +6,7 @@
 //  Copyright © 2016 giginet. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Cocoa/Cocoa.h>
 
 //! Project version number for ToyboxKit.
 FOUNDATION_EXPORT double ToyboxKitVersionNumber;
