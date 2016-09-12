@@ -7,14 +7,14 @@ public struct CreateOptions: OptionsType {
     let fileName: String?
     let platform: Platform
     
-    static func create(_ platform: Platform) -> (String) -> CreateOptions {
-        return { filename in self.init(fileName: filename, platform: platform) }
+    static func create(_ platform: Platform) -> ([String]) -> CreateOptions {
+        return { fileNames in self.init(fileName: fileNames.first, platform: platform) }
     }
     
     public static func evaluate(_ m: CommandMode) -> Result<CreateOptions, CommandantError<PlaygroundHandlerError>> {
         return create
             <*> m <| Option(key: "platform", defaultValue: Platform.iOS, usage: "Target platform (ios/macos/tvos)")
-            <*> m <| Argument(defaultValue: nil, usage: "Playground file name to create")
+            <*> m <| Argument(defaultValue: [], usage: "Playground file name to create")
     }
 }
 

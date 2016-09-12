@@ -85,7 +85,7 @@ struct PlaygroundHandler<Storage: StorageType> {
     private func generateDefaultFileName() -> String {
         let formatter = DateFormatter()
         let currentDate = Date()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.dateFormat = "yyyyMMddHHmmss"
         return formatter.string(from: currentDate)
     }
     
