@@ -3,7 +3,7 @@ import ToyboxKit
 import Commandant
 import Result
 
-let registry = CommandRegistry<NoError>()
+let registry = CommandRegistry<PlaygroundHandlerError>()
 registry.register(CreateCommand())
 
 let helpCommand = HelpCommand(registry: registry)
