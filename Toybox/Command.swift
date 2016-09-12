@@ -32,14 +32,14 @@ public struct CreateCommand: CommandType {
     
     public func run(_ options: Options) -> Result<(), NoError> {
         let bundle = Bundle(for: Foobar.self)
-        let builder = PlaygroundBuilder<FileSystemStorage>(bundle: bundle)
+        let handler = PlaygroundHandler<FileSystemStorage>(bundle: bundle)
         do {
-            try builder.bootstrap()
+            try handler.bootstrap()
         } catch {
         }
-        let fileName = options.fileName ?? builder.defaultFileName()
+        let fileName = options.fileName ?? handler.defaultFileName()
         do {
-            try builder.create(name: fileName, for: options.platform)
+            try handler.create(name: fileName, for: options.platform)
         } catch {
         }
         

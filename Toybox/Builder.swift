@@ -21,6 +21,7 @@ protocol StorageType {
     static func copy(at sourcePath: URL, for name: String) -> URL
     static func templatePath(of platform: Platform, bundle: Bundle) -> URL
     static func open(at path: URL)
+    static func isExist(at path: URL) -> Bool
 }
 
 enum BuilderError: Error {
@@ -37,7 +38,7 @@ struct FileSystemStorage: StorageType {
     
     static func bootstrap() throws {
         let manager = FileManager()
-        if !manager.fileExists(atPath: rootURL.absoluteString, isDirectory: nil) {
+        if !manager.fileExists(atPath: rootURL.path, isDirectory: nil) {
             do {
                 try manager.createDirectory(at: rootURL, withIntermediateDirectories: false, attributes: nil)
             } catch {
@@ -68,9 +69,14 @@ struct FileSystemStorage: StorageType {
         let workspace = NSWorkspace.shared()
         workspace.open(path)
     }
+    
+    static func isExist(at path: URL) -> Bool {
+        let manager = FileManager()
+        return manager.fileExists(atPath: path.path)
+    }
 }
 
-struct PlaygroundBuilder<Storage: StorageType> {
+struct PlaygroundHandler<Storage: StorageType> {
     let bundle: Bundle
     
     init(bundle: Bundle) {
@@ -79,6 +85,10 @@ struct PlaygroundBuilder<Storage: StorageType> {
     
     func bootstrap() throws {
         try Storage.bootstrap()
+    }
+    
+    private func fullPath(from name: String) -> URL {
+        return Storage.rootURL.appendingPathComponent("\(name).playground")
     }
     
     func defaultFileName() -> String {
@@ -91,6 +101,15 @@ struct PlaygroundBuilder<Storage: StorageType> {
     func create(name: String, for platform: Platform) {
         let source = Storage.templatePath(of: platform, bundle: bundle)
         let destinationPath = Storage.copy(at: source, for: "\(name).playground")
-        Storage.open(at: destinationPath)
+        open(name: name)
+    }
+    
+    func open(name: String) -> Bool {
+        let path = fullPath(from: name)
+        if Storage.isExist(at: path) {
+            Storage.open(at: path)
+            return true
+        }
+        return false
     }
 }
