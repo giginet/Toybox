@@ -17,6 +17,9 @@ public struct CreateOptions: OptionsType {
             <*> m <| Argument(defaultValue: nil, usage: "Playground file name to create")
     }
 }
+
+private class Foobar {}
+
 public struct CreateCommand: CommandType {
     public typealias Options = CreateOptions
     public typealias ClientError = NoError
@@ -28,7 +31,8 @@ public struct CreateCommand: CommandType {
     public let function = "Create new Playground"
     
     public func run(_ options: Options) -> Result<(), NoError> {
-        let builder = PlaygroundBuilder<FileSystemStorage>()
+        let bundle = Bundle(for: Foobar.self)
+        let builder = PlaygroundBuilder<FileSystemStorage>(bundle: bundle)
         do {
             try builder.bootstrap()
         } catch {

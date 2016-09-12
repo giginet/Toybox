@@ -17,7 +17,7 @@
 		0785B9E91D85A3980005AD4B /* Commandant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A61D858A4C0005AD4B /* Commandant.framework */; };
 		0785B9EA1D85A3980005AD4B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A81D858A5A0005AD4B /* Result.framework */; };
 		0785B9ED1D85B34E0005AD4B /* ToyboxKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0785B9EF1D85BEC20005AD4B /* Templates in Resources */ = {isa = PBXBuildFile; fileRef = 0785B9EE1D85BEC20005AD4B /* Templates */; };
+		0785B9F31D86F4530005AD4B /* Templates in Resources */ = {isa = PBXBuildFile; fileRef = 0785B9EE1D85BEC20005AD4B /* Templates */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -215,6 +215,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0785B9F31D86F4530005AD4B /* Templates in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +223,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0785B9EF1D85BEC20005AD4B /* Templates in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +483,7 @@
 				0785B9B91D858CFF0005AD4B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0785B9E11D85A3270005AD4B /* Build configuration list for PBXNativeTarget "Toybox" */ = {
 			isa = XCConfigurationList;
@@ -491,6 +492,7 @@
 				0785B9E31D85A3270005AD4B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
