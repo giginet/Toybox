@@ -20,12 +20,6 @@ protocol StorageType {
     static var bundle: Bundle { get }
 }
 
-public enum PlaygroundHandlerError: Error {
-    case bootstrapError
-    case createError
-    case openError
-}
-
 class Piyo {
 }
 
@@ -53,7 +47,7 @@ struct PlaygroundHandler<Storage: StorageType> {
             do {
                 try manager.createDirectory(at: Storage.rootURL, withIntermediateDirectories: false, attributes: nil)
             } catch {
-                throw PlaygroundHandlerError.bootstrapError
+                throw ToyboxError.bootstrapError
             }
         }
     }
@@ -77,7 +71,7 @@ struct PlaygroundHandler<Storage: StorageType> {
             try manager.copyItem(at: sourcePath, to: destinationPath)
             return destinationPath
         } catch {
-            throw PlaygroundHandlerError.createError
+            throw ToyboxError.createError
         }
     }
     
@@ -93,6 +87,16 @@ struct PlaygroundHandler<Storage: StorageType> {
         return formatter.string(from: currentDate)
     }
     
+    func list(for platform: Platform?) throws -> [String] {
+        do {
+            let files = try FileManager.default.contentsOfDirectory(atPath: rootURL.path)
+            let playgrounds = files.filter { $0.hasSuffix("playground") }
+            return playgrounds
+        } catch {
+            throw ToyboxError.listError
+        }
+    }
+    
     func create(name: String?, for platform: Platform) throws {
         let baseName: String = name ?? generateDefaultFileName()
         
@@ -106,7 +110,7 @@ struct PlaygroundHandler<Storage: StorageType> {
             let workspace = NSWorkspace.shared()
             workspace.open(path)
         } else {
-            throw PlaygroundHandlerError.openError
+            throw ToyboxError.openError
         }
     }
 }

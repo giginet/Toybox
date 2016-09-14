@@ -19,6 +19,8 @@
 		0785B9ED1D85B34E0005AD4B /* ToyboxKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0785B9F31D86F4530005AD4B /* Templates in Resources */ = {isa = PBXBuildFile; fileRef = 0785B9EE1D85BEC20005AD4B /* Templates */; };
 		0785B9F71D897C980005AD4B /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B9F51D897C010005AD4B /* Root.swift */; };
+		0785B9FA1D8981FD0005AD4B /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B9F81D8980A70005AD4B /* List.swift */; };
+		0785B9FC1D89879B0005AD4B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B9FB1D89879B0005AD4B /* Errors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +48,8 @@
 		0785B9CC1D85A3270005AD4B /* Toybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0785B9EE1D85BEC20005AD4B /* Templates */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Templates; path = Toybox/Templates; sourceTree = "<group>"; };
 		0785B9F51D897C010005AD4B /* Root.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Root.swift; path = Commands/Root.swift; sourceTree = "<group>"; };
+		0785B9F81D8980A70005AD4B /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		0785B9FB1D89879B0005AD4B /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,7 @@
 				0785B9821D8557EF0005AD4B /* Command.swift */,
 				0785B9F41D897BEF0005AD4B /* Commands */,
 				0785B9AB1D858B440005AD4B /* Handler.swift */,
+				0785B9FB1D89879B0005AD4B /* Errors.swift */,
 			);
 			path = Toybox;
 			sourceTree = "<group>";
@@ -124,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				0785B9F51D897C010005AD4B /* Root.swift */,
+				0785B9F81D8980A70005AD4B /* List.swift */,
 			);
 			name = Commands;
 			sourceTree = "<group>";
@@ -278,6 +284,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0785B9BA1D858D070005AD4B /* Command.swift in Sources */,
+				0785B9FC1D89879B0005AD4B /* Errors.swift in Sources */,
+				0785B9FA1D8981FD0005AD4B /* List.swift in Sources */,
 				0785B9BB1D858D0A0005AD4B /* Handler.swift in Sources */,
 				0785B9F71D897C980005AD4B /* Root.swift in Sources */,
 			);

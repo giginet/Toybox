@@ -3,8 +3,8 @@ import Commandant
 import Result
 
 public struct RootCommand: CommandType {
-    public typealias Options = NoOptions<PlaygroundHandlerError>
-    public typealias ClientError = PlaygroundHandlerError
+    public typealias Options = NoOptions<ToyboxError>
+    public typealias ClientError = ToyboxError
     
     public init() {
     }
@@ -12,7 +12,7 @@ public struct RootCommand: CommandType {
     public let verb = "root"
     public let function = "Show Playgrounds' root"
     
-    public func run(_ options: Options) -> Result<(), PlaygroundHandlerError> {
+    public func run(_ options: Options) -> Result<(), ToyboxError> {
         let handler = PlaygroundHandler<FileSystemStorage>()
         let standardOutput = FileHandle.standardOutput
         if let data = handler.rootURL.path.data(using: .utf8) {

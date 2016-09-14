@@ -3,9 +3,10 @@ import ToyboxKit
 import Commandant
 import Result
 
-let registry = CommandRegistry<PlaygroundHandlerError>()
+let registry = CommandRegistry<ToyboxError>()
 registry.register(CreateCommand())
 registry.register(OpenCommand())
+registry.register(ListCommand())
 registry.register(RootCommand())
 
 let helpCommand = HelpCommand(registry: registry)
@@ -16,16 +17,6 @@ var arguments = CommandLine.arguments
 assert(arguments.count >= 1)
 arguments.remove(at: 0)
 
-if let verb = arguments.first {
-    // Remove the command name.
-    arguments.remove(at: 0)
-    
-    if let result = registry.runCommand(verb, arguments: arguments) {
-        // Handle success or failure.
-        print(result)
-    } else {
-        // Unrecognized command.
-    }
-} else {
-    // No command given.
+registry.main(defaultVerb: helpCommand.verb) { error in
+    fputs(error.description + "\n", stderr)
 }
