@@ -22,6 +22,7 @@
 		0785BA051D8989320005AD4B /* Open.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785BA041D8989320005AD4B /* Open.swift */; };
 		0785BA081D898BE70005AD4B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785BA061D898BE70005AD4B /* Errors.swift */; };
 		0785BA091D898BE80005AD4B /* Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785BA071D898BE70005AD4B /* Handler.swift */; };
+		0785BA0B1D898C820005AD4B /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785BA0A1D898C820005AD4B /* Version.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +53,7 @@
 		0785BA041D8989320005AD4B /* Open.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Open.swift; path = Commands/Open.swift; sourceTree = "<group>"; };
 		0785BA061D898BE70005AD4B /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		0785BA071D898BE70005AD4B /* Handler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Handler.swift; sourceTree = "<group>"; };
+		0785BA0A1D898C820005AD4B /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Version.swift; path = Commands/Version.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				0785B9FF1D8989080005AD4B /* List.swift */,
 				0785B9FD1D8988EF0005AD4B /* Create.swift */,
 				0785BA041D8989320005AD4B /* Open.swift */,
+				0785BA0A1D898C820005AD4B /* Version.swift */,
 			);
 			name = Commands;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				0785BA011D89890E0005AD4B /* Root.swift in Sources */,
 				0785BA001D8989080005AD4B /* List.swift in Sources */,
 				0785BA031D8989110005AD4B /* Create.swift in Sources */,
+				0785BA0B1D898C820005AD4B /* Version.swift in Sources */,
 				0785BA051D8989320005AD4B /* Open.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

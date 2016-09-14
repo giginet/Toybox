@@ -8,6 +8,7 @@ registry.register(CreateCommand())
 registry.register(OpenCommand())
 registry.register(ListCommand())
 registry.register(RootCommand())
+registry.register(VersionCommand())
 
 let helpCommand = HelpCommand(registry: registry)
 registry.register(helpCommand)

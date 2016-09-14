@@ -3,7 +3,7 @@ import Cocoa
 import Commandant
 
 public class BundleWrapper {
-    static var bundle: Bundle {
+    public static var bundle: Bundle {
         return Bundle(for: BundleWrapper.self)
     }
 }
