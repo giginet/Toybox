@@ -43,6 +43,10 @@ struct FileSystemStorage: StorageType {
 }
 
 struct PlaygroundHandler<Storage: StorageType> {
+    var rootURL: URL {
+        return Storage.rootURL
+    }
+    
     func bootstrap() throws {
         let manager = FileManager()
         if !manager.fileExists(atPath: Storage.rootURL.path, isDirectory: nil) {
