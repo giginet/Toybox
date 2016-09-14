@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0785B9BA1D858D070005AD4B /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B9821D8557EF0005AD4B /* Command.swift */; };
-		0785B9BB1D858D0A0005AD4B /* Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B9AB1D858B440005AD4B /* Handler.swift */; };
 		0785B9BC1D858D2F0005AD4B /* Commandant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A61D858A4C0005AD4B /* Commandant.framework */; };
 		0785B9BD1D858D2F0005AD4B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A81D858A5A0005AD4B /* Result.framework */; };
 		0785B9BE1D858D360005AD4B /* ToyboxKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0785B99E1D858A1B0005AD4B /* ToyboxKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -18,9 +16,12 @@
 		0785B9EA1D85A3980005AD4B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A81D858A5A0005AD4B /* Result.framework */; };
 		0785B9ED1D85B34E0005AD4B /* ToyboxKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0785B9F31D86F4530005AD4B /* Templates in Resources */ = {isa = PBXBuildFile; fileRef = 0785B9EE1D85BEC20005AD4B /* Templates */; };
-		0785B9F71D897C980005AD4B /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B9F51D897C010005AD4B /* Root.swift */; };
-		0785B9FA1D8981FD0005AD4B /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B9F81D8980A70005AD4B /* List.swift */; };
-		0785B9FC1D89879B0005AD4B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B9FB1D89879B0005AD4B /* Errors.swift */; };
+		0785BA001D8989080005AD4B /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B9FF1D8989080005AD4B /* List.swift */; };
+		0785BA011D89890E0005AD4B /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B9F51D897C010005AD4B /* Root.swift */; };
+		0785BA031D8989110005AD4B /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B9FD1D8988EF0005AD4B /* Create.swift */; };
+		0785BA051D8989320005AD4B /* Open.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785BA041D8989320005AD4B /* Open.swift */; };
+		0785BA081D898BE70005AD4B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785BA061D898BE70005AD4B /* Errors.swift */; };
+		0785BA091D898BE80005AD4B /* Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785BA071D898BE70005AD4B /* Handler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,18 +39,19 @@
 
 /* Begin PBXFileReference section */
 		0785B97B1D85577A0005AD4B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		0785B9821D8557EF0005AD4B /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		0785B99E1D858A1B0005AD4B /* ToyboxKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToyboxKit.h; sourceTree = "<group>"; };
 		0785B99F1D858A1B0005AD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0785B9A61D858A4C0005AD4B /* Commandant.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Commandant.framework; path = Carthage/Build/Mac/Commandant.framework; sourceTree = "<group>"; };
 		0785B9A81D858A5A0005AD4B /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
-		0785B9AB1D858B440005AD4B /* Handler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Handler.swift; sourceTree = "<group>"; };
 		0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ToyboxKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0785B9CC1D85A3270005AD4B /* Toybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0785B9EE1D85BEC20005AD4B /* Templates */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Templates; path = Toybox/Templates; sourceTree = "<group>"; };
 		0785B9F51D897C010005AD4B /* Root.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Root.swift; path = Commands/Root.swift; sourceTree = "<group>"; };
-		0785B9F81D8980A70005AD4B /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
-		0785B9FB1D89879B0005AD4B /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		0785B9FD1D8988EF0005AD4B /* Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Create.swift; path = Commands/Create.swift; sourceTree = "<group>"; };
+		0785B9FF1D8989080005AD4B /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = List.swift; path = Commands/List.swift; sourceTree = "<group>"; };
+		0785BA041D8989320005AD4B /* Open.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Open.swift; path = Commands/Open.swift; sourceTree = "<group>"; };
+		0785BA061D898BE70005AD4B /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		0785BA071D898BE70005AD4B /* Handler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Handler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				0785B97B1D85577A0005AD4B /* main.swift */,
-				0785B9821D8557EF0005AD4B /* Command.swift */,
 				0785B9F41D897BEF0005AD4B /* Commands */,
-				0785B9AB1D858B440005AD4B /* Handler.swift */,
-				0785B9FB1D89879B0005AD4B /* Errors.swift */,
 			);
 			path = Toybox;
 			sourceTree = "<group>";
@@ -111,6 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				0785B99E1D858A1B0005AD4B /* ToyboxKit.h */,
+				0785BA061D898BE70005AD4B /* Errors.swift */,
+				0785BA071D898BE70005AD4B /* Handler.swift */,
 				0785B99F1D858A1B0005AD4B /* Info.plist */,
 			);
 			path = ToyboxKit;
@@ -129,7 +130,9 @@
 			isa = PBXGroup;
 			children = (
 				0785B9F51D897C010005AD4B /* Root.swift */,
-				0785B9F81D8980A70005AD4B /* List.swift */,
+				0785B9FF1D8989080005AD4B /* List.swift */,
+				0785B9FD1D8988EF0005AD4B /* Create.swift */,
+				0785BA041D8989320005AD4B /* Open.swift */,
 			);
 			name = Commands;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 					0785B9B11D858CFF0005AD4B = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 2AWR7Z4WYE;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					0785B9CB1D85A3270005AD4B = {
@@ -283,11 +287,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0785B9BA1D858D070005AD4B /* Command.swift in Sources */,
-				0785B9FC1D89879B0005AD4B /* Errors.swift in Sources */,
-				0785B9FA1D8981FD0005AD4B /* List.swift in Sources */,
-				0785B9BB1D858D0A0005AD4B /* Handler.swift in Sources */,
-				0785B9F71D897C980005AD4B /* Root.swift in Sources */,
+				0785BA091D898BE80005AD4B /* Handler.swift in Sources */,
+				0785BA081D898BE70005AD4B /* Errors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +297,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0785B9E71D85A34C0005AD4B /* main.swift in Sources */,
+				0785BA011D89890E0005AD4B /* Root.swift in Sources */,
+				0785BA001D8989080005AD4B /* List.swift in Sources */,
+				0785BA031D8989110005AD4B /* Create.swift in Sources */,
+				0785BA051D8989320005AD4B /* Open.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +398,7 @@
 		0785B9B81D858CFF0005AD4B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -413,6 +419,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -422,6 +429,7 @@
 		0785B9B91D858CFF0005AD4B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -451,6 +459,7 @@
 		0785B9E21D85A3270005AD4B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 2AWR7Z4WYE;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -469,6 +478,7 @@
 		0785B9E31D85A3270005AD4B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 2AWR7Z4WYE;
 				FRAMEWORK_SEARCH_PATHS = (

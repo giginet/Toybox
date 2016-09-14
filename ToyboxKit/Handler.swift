@@ -2,46 +2,52 @@ import Foundation
 import Cocoa
 import Commandant
 
-enum Platform: String, ArgumentType {
+public class BundleWrapper {
+    static var bundle: Bundle {
+        return Bundle(for: BundleWrapper.self)
+    }
+}
+
+public enum Platform: String, ArgumentType {
     case iOS = "ios"
     case macOS = "macos"
     case tvOS = "tvos"
     
-    static let name: String = "platform"
+    public static let name: String = "platform"
     
     /// Attempts to parse a value from the given command-line argument.
-    static func fromString(_ string: String) -> Platform? {
+    public static func fromString(_ string: String) -> Platform? {
         return Platform(rawValue: string)
     }
 }
 
-protocol StorageType {
+public protocol StorageType {
     static var rootURL: URL { get }
     static var bundle: Bundle { get }
 }
 
-class Piyo {
-}
-
-struct FileSystemStorage: StorageType {
-    static let rootDirectoryName = ".toybox"
+public struct FileSystemStorage: StorageType {
+    private static let rootDirectoryName = ".toybox"
     
-    static var rootURL: URL = {
+    public static var rootURL: URL = {
         let homeDirectoryPath = URL(fileURLWithPath: NSHomeDirectory())
         return homeDirectoryPath.appendingPathComponent(FileSystemStorage.rootDirectoryName, isDirectory: true)
     }()
     
-    static var bundle: Bundle {
-        return Bundle(for: Piyo.self)
+    public static var bundle: Bundle {
+        return BundleWrapper.bundle
     }
 }
 
-struct PlaygroundHandler<Storage: StorageType> {
-    var rootURL: URL {
+public struct PlaygroundHandler<Storage: StorageType> {
+    public var rootURL: URL {
         return Storage.rootURL
     }
     
-    func bootstrap() throws {
+    public init() {
+    }
+    
+    public func bootstrap() throws {
         let manager = FileManager()
         if !manager.fileExists(atPath: Storage.rootURL.path, isDirectory: nil) {
             do {
@@ -75,7 +81,7 @@ struct PlaygroundHandler<Storage: StorageType> {
         }
     }
     
-    func isExist(at path: URL) -> Bool {
+    private func isExist(at path: URL) -> Bool {
         let manager = FileManager()
         return manager.fileExists(atPath: path.path)
     }
@@ -87,7 +93,7 @@ struct PlaygroundHandler<Storage: StorageType> {
         return formatter.string(from: currentDate)
     }
     
-    func list(for platform: Platform?) throws -> [String] {
+    public func list(for platform: Platform?) throws -> [String] {
         do {
             let files = try FileManager.default.contentsOfDirectory(atPath: rootURL.path)
             let playgrounds = files.filter { $0.hasSuffix("playground") }
@@ -97,14 +103,14 @@ struct PlaygroundHandler<Storage: StorageType> {
         }
     }
     
-    func create(name: String?, for platform: Platform) throws {
+    public func create(name: String?, for platform: Platform) throws {
         let baseName: String = name ?? generateDefaultFileName()
         
         let destinationPath = try copyTemplate(of: platform, for: "\(baseName).playground")
         try open(name: baseName)
     }
     
-    func open(name: String) throws {
+    public func open(name: String) throws {
         let path = fullPath(from: name)
         if isExist(at: path) {
             let workspace = NSWorkspace.shared()
