@@ -49,3 +49,45 @@ public struct CreateCommand: CommandType {
         return .success()
     }
 }
+
+public struct OpenOptions: OptionsType {
+    public typealias ClientError = PlaygroundHandlerError
+    let fileName: String
+    let xcodePath: NSURL?
+    
+    static func create(_ fileName: String) -> (String?) -> OpenOptions {
+        return { xcodePath in self.init(fileName: fileName, xcodePath: nil) }
+    }
+    
+    public static func evaluate(_ m: CommandMode) -> Result<OpenOptions, CommandantError<PlaygroundHandlerError>> {
+        return create
+            <*> m <| Argument(defaultValue: "", usage: "Playground file name to open")
+            <*> m <| Option<String?>(key: "xcode_path", defaultValue: nil, usage: "Xcode path to open with")
+    }
+}
+
+public struct OpenCommand: CommandType {
+    public typealias Options = OpenOptions
+    public typealias ClientError = PlaygroundHandlerError
+    
+    public init() {
+    }
+    
+    public let verb = "open"
+    public let function = "Open the Playground"
+    
+    public func run(_ options: Options) -> Result<(), PlaygroundHandlerError> {
+        let bundle = Bundle(for: Foobar.self)
+        let handler = PlaygroundHandler<FileSystemStorage>()
+        let fileName = options.fileName
+        do {
+            try handler.open(name: fileName)
+        } catch let exception as PlaygroundHandlerError {
+            return .failure(exception)
+        } catch {
+        }
+        
+        return .success()
+    }
+
+}

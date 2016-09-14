@@ -5,6 +5,7 @@ import Result
 
 let registry = CommandRegistry<PlaygroundHandlerError>()
 registry.register(CreateCommand())
+registry.register(OpenCommand())
 
 let helpCommand = HelpCommand(registry: registry)
 registry.register(helpCommand)
