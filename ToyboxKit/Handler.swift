@@ -9,16 +9,15 @@ public class BundleWrapper {
 }
 
 public enum Platform: String, ArgumentType {
+    public static func from(string: String) -> Platform? {
+        return Platform(rawValue: string)
+    }
+
     case iOS = "ios"
     case macOS = "macos"
     case tvOS = "tvos"
     
     public static let name: String = "platform"
-    
-    /// Attempts to parse a value from the given command-line argument.
-    public static func fromString(_ string: String) -> Platform? {
-        return Platform(rawValue: string)
-    }
 }
 
 public protocol StorageType {
