@@ -2,22 +2,25 @@ import Foundation
 
 public enum ToyboxError: Error {
     case bootstrapError
-    case createError
-    case openError
+    case createError(String)
+    case openError(String)
     case listError
+    case duplicatedError(String)
 }
 
 public extension ToyboxError {
     var description: String {
         switch self {
         case .bootstrapError:
-            return "could not create workspace"
-        case .createError:
-            return "could not create playground"
-        case .openError:
-            return "could not open"
+            return "Could not create workspace"
+        case let .createError(playgroundName):
+            return "Could not create Playground named '\(playgroundName)'"
+        case let .openError(playgroundName):
+            return "Could not open '\(playgroundName)'"
         case .listError:
-            return "could not read workspace"
+            return "Could not read workspace"
+        case let .duplicatedError(playgroundName):
+            return "Playground '\(playgroundName)' is already exist. use '-f' flag to overwrite"
         }
     }
 }

@@ -76,7 +76,7 @@ public struct PlaygroundHandler<Storage: StorageType> {
             try manager.copyItem(at: sourcePath, to: destinationPath)
             return destinationPath
         } catch {
-            throw ToyboxError.createError
+            throw ToyboxError.createError(name)
         }
     }
     
@@ -113,9 +113,18 @@ public struct PlaygroundHandler<Storage: StorageType> {
         return filteredPlaygrounds.map { String(describing: $0) }
     }
     
-    public func create(name: String?, for platform: Platform) throws {
+    public func create(name: String?, for platform: Platform, force: Bool = false) throws {
         let baseName: String = name ?? generateDefaultFileName()
+        let targetPath = fullPath(from: baseName)
         
+        if isExist(at: targetPath) {
+            if force {
+                let manager = FileManager()
+                try manager.removeItem(at: targetPath)
+            } else {
+                throw ToyboxError.duplicatedError(baseName)
+            }
+        }
         _ = try copyTemplate(of: platform, for: "\(baseName).playground")
         try open(name: baseName)
     }
@@ -126,7 +135,7 @@ public struct PlaygroundHandler<Storage: StorageType> {
             let workspace = NSWorkspace.shared()
             workspace.open(path)
         } else {
-            throw ToyboxError.openError
+            throw ToyboxError.openError(name)
         }
     }
 }
