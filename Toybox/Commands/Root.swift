@@ -15,11 +15,7 @@ struct RootCommand: CommandType {
     
     func run(_ options: Options) -> Result<(), ToyboxError> {
         let handler = PlaygroundHandler<FileSystemStorage>()
-        let standardOutput = FileHandle.standardOutput
-        if let data = handler.rootURL.path.data(using: .utf8) {
-            standardOutput.write(data)
-        }
-        
+        toybox.println(object: handler.rootURL.path)
         return .success()
     }
 }

@@ -32,10 +32,7 @@ struct ListCommand: CommandType {
         do {
             let playgrounds = try handler.list(for: options.platform)
             let exportString = playgrounds.joined(separator: "\n")
-            let standardOutput = FileHandle.standardOutput
-            if let data = exportString.data(using: .utf8) {
-                standardOutput.write(data)
-            }
+            toybox.println(object: exportString)
         } catch let exception as ToyboxError {
             return .failure(exception)
         } catch {

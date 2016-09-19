@@ -13,7 +13,7 @@ public struct VersionCommand: CommandType {
     public func run(_ options: NoOptions<ToyboxError>) -> Result<(), ToyboxError> {
         let bundle = BundleWrapper.bundle
         let versionString = bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-        print(versionString)
+        toybox.println(object: versionString)
         return .success(())
     }
 }

@@ -13,6 +13,7 @@
 		0772C1771D900349006942AC /* ToyboxKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; };
 		0772C17E1D900358006942AC /* PlaygroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0772C17D1D900358006942AC /* PlaygroundTests.swift */; };
 		0772C1861D900A31006942AC /* fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 0772C1851D900A31006942AC /* fixtures */; };
+		0772C1881D900C35006942AC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0772C1871D900C35006942AC /* Utilities.swift */; };
 		0785B9BC1D858D2F0005AD4B /* Commandant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A61D858A4C0005AD4B /* Commandant.framework */; };
 		0785B9BD1D858D2F0005AD4B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A81D858A5A0005AD4B /* Result.framework */; };
 		0785B9BE1D858D360005AD4B /* ToyboxKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0785B99E1D858A1B0005AD4B /* ToyboxKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -61,6 +62,7 @@
 		0772C1761D900349006942AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0772C17D1D900358006942AC /* PlaygroundTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundTests.swift; sourceTree = "<group>"; };
 		0772C1851D900A31006942AC /* fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fixtures; sourceTree = "<group>"; };
+		0772C1871D900C35006942AC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		0785B97B1D85577A0005AD4B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		0785B99E1D858A1B0005AD4B /* ToyboxKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToyboxKit.h; sourceTree = "<group>"; };
 		0785B99F1D858A1B0005AD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			children = (
 				0785B97B1D85577A0005AD4B /* main.swift */,
 				0785B9F41D897BEF0005AD4B /* Commands */,
+				0772C1871D900C35006942AC /* Utilities.swift */,
 			);
 			path = Toybox;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 			files = (
 				0785B9E71D85A34C0005AD4B /* main.swift in Sources */,
 				0785BA011D89890E0005AD4B /* Root.swift in Sources */,
+				0772C1881D900C35006942AC /* Utilities.swift in Sources */,
 				0785BA001D8989080005AD4B /* List.swift in Sources */,
 				0785BA031D8989110005AD4B /* Create.swift in Sources */,
 				0785BA0B1D898C820005AD4B /* Version.swift in Sources */,
