@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		071B61EA1D8F3A8D00F6B0B5 /* ToyboxKit.framework in Resources */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; };
+		0772C16B1D8FDCFA006942AC /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0772C16A1D8FDCFA006942AC /* Playground.swift */; };
+		0772C16D1D8FE1AA006942AC /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0772C16C1D8FE1AA006942AC /* SWXMLHash.framework */; };
 		0785B9BC1D858D2F0005AD4B /* Commandant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A61D858A4C0005AD4B /* Commandant.framework */; };
 		0785B9BD1D858D2F0005AD4B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A81D858A5A0005AD4B /* Result.framework */; };
 		0785B9BE1D858D360005AD4B /* ToyboxKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0785B99E1D858A1B0005AD4B /* ToyboxKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -40,6 +42,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0772C16A1D8FDCFA006942AC /* Playground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
+		0772C16C1D8FE1AA006942AC /* SWXMLHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWXMLHash.framework; path = Carthage/Build/Mac/SWXMLHash.framework; sourceTree = "<group>"; };
 		0785B97B1D85577A0005AD4B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		0785B99E1D858A1B0005AD4B /* ToyboxKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToyboxKit.h; sourceTree = "<group>"; };
 		0785B99F1D858A1B0005AD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0772C16D1D8FE1AA006942AC /* SWXMLHash.framework in Frameworks */,
 				0785B9BC1D858D2F0005AD4B /* Commandant.framework in Frameworks */,
 				0785B9BD1D858D2F0005AD4B /* Result.framework in Frameworks */,
 			);
@@ -116,6 +121,7 @@
 				0785BA061D898BE70005AD4B /* Errors.swift */,
 				0785BA071D898BE70005AD4B /* Handler.swift */,
 				0785B99F1D858A1B0005AD4B /* Info.plist */,
+				0772C16A1D8FDCFA006942AC /* Playground.swift */,
 			);
 			path = ToyboxKit;
 			sourceTree = "<group>";
@@ -123,6 +129,7 @@
 		0785B9A51D858A4C0005AD4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0772C16C1D8FE1AA006942AC /* SWXMLHash.framework */,
 				0785B9A81D858A5A0005AD4B /* Result.framework */,
 				0785B9A61D858A4C0005AD4B /* Commandant.framework */,
 			);
@@ -263,6 +270,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/Result.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/Commandant.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/SWXMLHash.framework",
 			);
 			name = "[Carthage] copy-frameworks";
 			outputPaths = (
@@ -295,6 +303,7 @@
 			files = (
 				0785BA091D898BE80005AD4B /* Handler.swift in Sources */,
 				0785BA081D898BE70005AD4B /* Errors.swift in Sources */,
+				0772C16B1D8FDCFA006942AC /* Playground.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

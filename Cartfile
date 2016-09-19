@@ -1,1 +1,2 @@
 github "giginet/Commandant" "3.0"
+github "drmohundro/SWXMLHash" ~> 3.0
