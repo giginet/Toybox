@@ -21,9 +21,6 @@ struct ListCommand: CommandType {
     typealias Options = ListOptions
     typealias ClientError = ToyboxError
     
-    init() {
-    }
-    
     let verb = "list"
     let function = "List the Playground"
     

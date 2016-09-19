@@ -7,9 +7,6 @@ struct RootCommand: CommandType {
     typealias Options = NoOptions<ToyboxError>
     typealias ClientError = ToyboxError
     
-    init() {
-    }
-    
     let verb = "root"
     let function = "Show Playgrounds' root"
     

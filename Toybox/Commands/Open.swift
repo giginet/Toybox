@@ -23,9 +23,6 @@ struct OpenCommand: CommandType {
     typealias Options = OpenOptions
     typealias ClientError = ToyboxError
     
-    init() {
-    }
-    
     let verb = "open"
     let function = "Open the Playground"
     

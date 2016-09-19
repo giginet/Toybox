@@ -23,9 +23,6 @@ struct CreateCommand: CommandType {
     typealias Options = CreateOptions
     typealias ClientError = ToyboxError
     
-    init() {
-    }
-    
     let verb = "create"
     let function = "Create new Playground"
     
