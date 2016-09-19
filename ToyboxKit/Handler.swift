@@ -2,7 +2,7 @@ import Foundation
 import Cocoa
 import Commandant
 
-private class BundleWrapper {
+internal class BundleWrapper {
     public static var bundle: Bundle {
         return Bundle(for: BundleWrapper.self)
     }
