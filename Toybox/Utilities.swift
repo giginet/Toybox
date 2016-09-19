@@ -16,6 +16,9 @@ private let outputQueue = { () -> DispatchQueue in
     let queue = DispatchQueue(label: "org.giginet.toybox.outputQueue")
     let globalQueue = DispatchQueue.global()
     queue.setTarget(queue: globalQueue)
+    atexit_b {
+        queue.sync(flags: .barrier) { }
+    }
     return queue
 }()
 
