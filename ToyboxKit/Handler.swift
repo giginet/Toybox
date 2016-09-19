@@ -92,20 +92,31 @@ public struct PlaygroundHandler<Storage: StorageType> {
         return formatter.string(from: currentDate)
     }
     
-    public func list(for platform: Platform?) throws -> [String] {
+    private var playgrounds: [Playground] {
         do {
             let files = try FileManager.default.contentsOfDirectory(atPath: rootURL.path)
-            let playgrounds = files.filter { $0.hasSuffix("playground") }
+            let playgroundPathes = files.filter { $0.hasSuffix("playground") }.map { rootURL.appendingPathComponent($0) }
+            let playgrounds: [Playground] = playgroundPathes.flatMap { try? Playground.load(from: $0) }
             return playgrounds
         } catch {
-            throw ToyboxError.listError
+            return []
         }
+    }
+    
+    public func list(for platform: Platform?) throws -> [String] {
+        let filteredPlaygrounds: [Playground]
+        if let platform = platform {
+            filteredPlaygrounds = playgrounds.filter { $0.platform == platform }
+        } else {
+            filteredPlaygrounds = playgrounds
+        }
+        return filteredPlaygrounds.map { String(describing: $0) }
     }
     
     public func create(name: String?, for platform: Platform) throws {
         let baseName: String = name ?? generateDefaultFileName()
         
-        let destinationPath = try copyTemplate(of: platform, for: "\(baseName).playground")
+        _ = try copyTemplate(of: platform, for: "\(baseName).playground")
         try open(name: baseName)
     }
     

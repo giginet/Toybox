@@ -33,7 +33,7 @@ struct CreateCommand: CommandType {
         let handler = PlaygroundHandler<FileSystemStorage>()
         do {
             try handler.bootstrap()
-        } catch let _ as ToyboxError {
+        } catch _ as ToyboxError {
         } catch {
         }
         let fileName = options.fileName

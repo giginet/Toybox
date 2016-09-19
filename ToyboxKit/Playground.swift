@@ -2,34 +2,43 @@ import Cocoa
 import SWXMLHash
 
 enum PlaygroundError: Error {
-    case deserializeError
+    case loadError
 }
 
-struct Playground: XMLIndexerDeserializable {
+struct Playground: CustomStringConvertible {
     let platform: Platform
     let version: String
+    let name: String
+    let path: URL
     
-    static func deserialize(_ node: XMLIndexer) throws -> Playground {
-        guard let platform = try Platform(rawValue: node.value(ofAttribute: "target-platform")) else {
-            throw PlaygroundError.deserializeError
-        }
-        
-        return try Playground(
-            platform: platform,
-            version: node.value(ofAttribute: "version")
-        )
+    init(platform: Platform, version: String, path: URL) {
+        self.platform = platform
+        self.version = version
+        self.path = path
+        self.name = path.deletingPathExtension().pathComponents.last ?? ""
     }
     
-    static func load(from path: URL) -> Playground? {
+    static func load(from path: URL) throws -> Playground {
         let contentPath = path.appendingPathComponent("contents.xcplayground")
         guard let data = try? Data(contentsOf: contentPath) else {
-            return nil
+            throw PlaygroundError.loadError
         }
         
         let content = SWXMLHash.parse(data)
-        guard let playground: Playground = try? content["playground"].value() else {
-            return nil
+        guard let playgroundElement = content["playground"].element else {
+            throw PlaygroundError.loadError
         }
+        
+        guard let platform = try Platform(rawValue: playgroundElement.value(ofAttribute: "target-platform")) else {
+            throw PlaygroundError.loadError
+        }
+        let playground = try Playground(platform: platform,
+                                        version: playgroundElement.value(ofAttribute: "version"),
+                                        path: path)
         return playground
+    }
+    
+    var description: String {
+        return "\(name) (\(platform))"
     }
 }
