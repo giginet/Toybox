@@ -10,6 +10,9 @@
 		071B61EA1D8F3A8D00F6B0B5 /* ToyboxKit.framework in Resources */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; };
 		0772C16B1D8FDCFA006942AC /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0772C16A1D8FDCFA006942AC /* Playground.swift */; };
 		0772C16D1D8FE1AA006942AC /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0772C16C1D8FE1AA006942AC /* SWXMLHash.framework */; };
+		0772C1771D900349006942AC /* ToyboxKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; };
+		0772C17E1D900358006942AC /* PlaygroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0772C17D1D900358006942AC /* PlaygroundTests.swift */; };
+		0772C1861D900A31006942AC /* fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 0772C1851D900A31006942AC /* fixtures */; };
 		0785B9BC1D858D2F0005AD4B /* Commandant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A61D858A4C0005AD4B /* Commandant.framework */; };
 		0785B9BD1D858D2F0005AD4B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A81D858A5A0005AD4B /* Result.framework */; };
 		0785B9BE1D858D360005AD4B /* ToyboxKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0785B99E1D858A1B0005AD4B /* ToyboxKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -28,6 +31,16 @@
 		0785BA0B1D898C820005AD4B /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785BA0A1D898C820005AD4B /* Version.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0772C1781D900349006942AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0785B9701D85577A0005AD4B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0785B9B11D858CFF0005AD4B;
+			remoteInfo = ToyboxKit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		0785B9EC1D85B3460005AD4B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -44,6 +57,10 @@
 /* Begin PBXFileReference section */
 		0772C16A1D8FDCFA006942AC /* Playground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
 		0772C16C1D8FE1AA006942AC /* SWXMLHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWXMLHash.framework; path = Carthage/Build/Mac/SWXMLHash.framework; sourceTree = "<group>"; };
+		0772C1721D900349006942AC /* ToyboxKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToyboxKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0772C1761D900349006942AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0772C17D1D900358006942AC /* PlaygroundTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundTests.swift; sourceTree = "<group>"; };
+		0772C1851D900A31006942AC /* fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fixtures; sourceTree = "<group>"; };
 		0785B97B1D85577A0005AD4B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		0785B99E1D858A1B0005AD4B /* ToyboxKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToyboxKit.h; sourceTree = "<group>"; };
 		0785B99F1D858A1B0005AD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,6 +79,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0772C16F1D900349006942AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0772C1771D900349006942AC /* ToyboxKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0785B9AE1D858CFF0005AD4B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -85,12 +110,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0772C1731D900349006942AC /* ToyboxKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				0772C1851D900A31006942AC /* fixtures */,
+				0772C1761D900349006942AC /* Info.plist */,
+				0772C17D1D900358006942AC /* PlaygroundTests.swift */,
+			);
+			path = ToyboxKitTests;
+			sourceTree = "<group>";
+		};
 		0785B96F1D85577A0005AD4B = {
 			isa = PBXGroup;
 			children = (
 				0785B9EE1D85BEC20005AD4B /* Templates */,
 				0785B97A1D85577A0005AD4B /* Toybox */,
 				0785B99D1D858A1B0005AD4B /* ToyboxKit */,
+				0772C1731D900349006942AC /* ToyboxKitTests */,
 				0785B9791D85577A0005AD4B /* Products */,
 				0785B9A51D858A4C0005AD4B /* Frameworks */,
 			);
@@ -101,6 +137,7 @@
 			children = (
 				0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */,
 				0785B9CC1D85A3270005AD4B /* toybox.app */,
+				0772C1721D900349006942AC /* ToyboxKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,6 +199,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		0772C1711D900349006942AC /* ToyboxKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0772C17A1D900349006942AC /* Build configuration list for PBXNativeTarget "ToyboxKitTests" */;
+			buildPhases = (
+				0772C16E1D900349006942AC /* Sources */,
+				0772C16F1D900349006942AC /* Frameworks */,
+				0772C1701D900349006942AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0772C1791D900349006942AC /* PBXTargetDependency */,
+			);
+			name = ToyboxKitTests;
+			productName = ToyboxKitTests;
+			productReference = 0772C1721D900349006942AC /* ToyboxKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		0785B9B11D858CFF0005AD4B /* ToyboxKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0785B9B71D858CFF0005AD4B /* Build configuration list for PBXNativeTarget "ToyboxKit" */;
@@ -210,6 +265,11 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = giginet;
 				TargetAttributes = {
+					0772C1711D900349006942AC = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 2AWR7Z4WYE;
+						ProvisioningStyle = Automatic;
+					};
 					0785B9B11D858CFF0005AD4B = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 2AWR7Z4WYE;
@@ -238,11 +298,20 @@
 			targets = (
 				0785B9CB1D85A3270005AD4B /* Toybox */,
 				0785B9B11D858CFF0005AD4B /* ToyboxKit */,
+				0772C1711D900349006942AC /* ToyboxKitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0772C1701D900349006942AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0772C1861D900A31006942AC /* fixtures in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0785B9B01D858CFF0005AD4B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -297,6 +366,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0772C16E1D900349006942AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0772C17E1D900358006942AC /* PlaygroundTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0785B9AD1D858CFF0005AD4B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -322,7 +399,43 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0772C1791D900349006942AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0785B9B11D858CFF0005AD4B /* ToyboxKit */;
+			targetProxy = 0772C1781D900349006942AC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		0772C17B1D900349006942AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2AWR7Z4WYE;
+				INFOPLIST_FILE = ToyboxKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.giginet.ToyboxKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		0772C17C1D900349006942AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2AWR7Z4WYE;
+				INFOPLIST_FILE = ToyboxKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.giginet.ToyboxKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		0785B97D1D85577A0005AD4B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -515,6 +628,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0772C17A1D900349006942AC /* Build configuration list for PBXNativeTarget "ToyboxKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0772C17B1D900349006942AC /* Debug */,
+				0772C17C1D900349006942AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0785B9731D85577A0005AD4B /* Build configuration list for PBXProject "Toybox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

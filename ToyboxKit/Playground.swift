@@ -21,7 +21,8 @@ struct Playground: XMLIndexerDeserializable {
     }
     
     static func load(from path: URL) -> Playground? {
-        guard let data = try? Data(contentsOf: path) else {
+        let contentPath = path.appendingPathComponent("contents.xcplayground")
+        guard let data = try? Data(contentsOf: contentPath) else {
             return nil
         }
         
