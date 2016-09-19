@@ -27,7 +27,7 @@ struct OpenCommand: CommandType {
     let function = "Open the Playground"
     
     func run(_ options: Options) -> Result<(), ToyboxError> {
-        let handler = PlaygroundHandler<FileSystemStorage>()
+        let handler = ToyboxPlaygroundHandler()
         let fileName = options.fileName
         do {
             try handler.open(name: fileName)

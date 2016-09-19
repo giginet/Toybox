@@ -14,6 +14,7 @@
 		0772C17E1D900358006942AC /* PlaygroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0772C17D1D900358006942AC /* PlaygroundTests.swift */; };
 		0772C1861D900A31006942AC /* fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 0772C1851D900A31006942AC /* fixtures */; };
 		0772C1881D900C35006942AC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0772C1871D900C35006942AC /* Utilities.swift */; };
+		0772C18C1D904186006942AC /* PlaygroundHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0772C18B1D904186006942AC /* PlaygroundHandlerTests.swift */; };
 		0785B9BC1D858D2F0005AD4B /* Commandant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A61D858A4C0005AD4B /* Commandant.framework */; };
 		0785B9BD1D858D2F0005AD4B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A81D858A5A0005AD4B /* Result.framework */; };
 		0785B9BE1D858D360005AD4B /* ToyboxKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0785B99E1D858A1B0005AD4B /* ToyboxKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,6 +64,7 @@
 		0772C17D1D900358006942AC /* PlaygroundTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundTests.swift; sourceTree = "<group>"; };
 		0772C1851D900A31006942AC /* fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fixtures; sourceTree = "<group>"; };
 		0772C1871D900C35006942AC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		0772C18B1D904186006942AC /* PlaygroundHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundHandlerTests.swift; sourceTree = "<group>"; };
 		0785B97B1D85577A0005AD4B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		0785B99E1D858A1B0005AD4B /* ToyboxKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToyboxKit.h; sourceTree = "<group>"; };
 		0785B99F1D858A1B0005AD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				0772C1851D900A31006942AC /* fixtures */,
 				0772C1761D900349006942AC /* Info.plist */,
 				0772C17D1D900358006942AC /* PlaygroundTests.swift */,
+				0772C18B1D904186006942AC /* PlaygroundHandlerTests.swift */,
 			);
 			path = ToyboxKitTests;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0772C17E1D900358006942AC /* PlaygroundTests.swift in Sources */,
+				0772C18C1D904186006942AC /* PlaygroundHandlerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

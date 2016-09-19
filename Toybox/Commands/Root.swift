@@ -11,7 +11,7 @@ struct RootCommand: CommandType {
     let function = "Show Playgrounds' root"
     
     func run(_ options: Options) -> Result<(), ToyboxError> {
-        let handler = PlaygroundHandler<FileSystemStorage>()
+        let handler = ToyboxPlaygroundHandler()
         toybox.println(object: handler.rootURL.path)
         return .success()
     }

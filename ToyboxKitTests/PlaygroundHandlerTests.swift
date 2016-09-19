@@ -2,18 +2,31 @@ import XCTest
 import Cocoa
 @testable import ToyboxKit
 
-struct TestingStorage: StorageType {
+struct TestingStorage: WorkspaceType {
     static var rootURL: URL {
-        return URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-    }
-    
-    static var bundle: Bundle {
-        return BundleWrapper.bundle
+        return URL(fileURLWithPath: NSTemporaryDirectory(),
+                   isDirectory: true)
     }
 }
 
+struct TemplateLoader: TemplateLoaderType {
+    static func templatePath(of platform: Platform) -> URL {
+        let pathString = BundleWrapper.bundle.path(forResource: platform.rawValue,
+                                                   ofType: "playground",
+                                                   inDirectory: "Templates")!
+        return URL(fileURLWithPath: pathString)
+    }
+}
+
+struct DummyOpener: PlaygroundOpenerType {
+    static func open(at path: URL) {
+    }
+}
+
+typealias TestingPlaygroundHandler = PlaygroundHandler<TestingStorage, TemplateLoader, DummyOpener>
+
 class PlaygroundHandlerTests: XCTestCase {
-    let handler = PlaygroundHandler<TestingStorage>()
+    let handler = TestingPlaygroundHandler()
     let manager = FileManager()
     
     func playgroundFile(name: String) -> URL {

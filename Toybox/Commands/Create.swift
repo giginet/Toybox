@@ -33,7 +33,7 @@ struct CreateCommand: CommandType {
     let function = "Create new Playground"
     
     func run(_ options: Options) -> Result<(), ToyboxError> {
-        let handler = PlaygroundHandler<FileSystemStorage>()
+        let handler = ToyboxPlaygroundHandler()
         do {
             try handler.bootstrap()
         } catch let exception as ToyboxError {

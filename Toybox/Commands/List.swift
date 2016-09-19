@@ -25,7 +25,7 @@ struct ListCommand: CommandType {
     let function = "List the Playground"
     
     func run(_ options: Options) -> Result<(), ToyboxError> {
-        let handler = PlaygroundHandler<FileSystemStorage>()
+        let handler = ToyboxPlaygroundHandler()
         do {
             let playgrounds = try handler.list(for: options.platform)
             let exportString = playgrounds.joined(separator: "\n")

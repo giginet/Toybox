@@ -8,27 +8,48 @@ internal class BundleWrapper {
     }
 }
 
-public protocol StorageType {
+public protocol WorkspaceType {
     static var rootURL: URL { get }
-    static var bundle: Bundle { get }
 }
 
-public struct FileSystemStorage: StorageType {
+public protocol TemplateLoaderType {
+    static func templatePath(of platform: Platform) -> URL
+}
+
+public protocol PlaygroundOpenerType {
+    static func open(at path: URL)
+}
+
+public struct FileSystemWorkspace: WorkspaceType {
     private static let rootDirectoryName = ".toybox"
     
     public static var rootURL: URL = {
         let homeDirectoryPath = URL(fileURLWithPath: NSHomeDirectory())
-        return homeDirectoryPath.appendingPathComponent(FileSystemStorage.rootDirectoryName, isDirectory: true)
+        return homeDirectoryPath.appendingPathComponent(FileSystemWorkspace.rootDirectoryName, isDirectory: true)
     }()
+}
+
+public struct TemplateLoader: TemplateLoaderType {
+    public static let bundle = BundleWrapper.bundle
     
-    public static var bundle: Bundle {
-        return BundleWrapper.bundle
+    public static func templatePath(of platform: Platform) -> URL {
+        guard let resourceURL = bundle.resourceURL else {
+            fatalError("Loading template is failure")
+        }
+        return resourceURL.appendingPathComponent("Templates/\(platform.rawValue).playground")
     }
 }
 
-public struct PlaygroundHandler<Storage: StorageType> {
+public struct XcodeOpener: PlaygroundOpenerType {
+    public static func open(at path: URL) {
+        let workspace = NSWorkspace.shared()
+        workspace.open(path)
+    }
+}
+
+public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoaderType, Opener: PlaygroundOpenerType> {
     public var rootURL: URL {
-        return Storage.rootURL
+        return Workspace.rootURL
     }
     
     public init() {
@@ -36,9 +57,9 @@ public struct PlaygroundHandler<Storage: StorageType> {
     
     public func bootstrap() throws {
         let manager = FileManager()
-        if !manager.fileExists(atPath: Storage.rootURL.path, isDirectory: nil) {
+        if !manager.fileExists(atPath: Workspace.rootURL.path, isDirectory: nil) {
             do {
-                try manager.createDirectory(at: Storage.rootURL, withIntermediateDirectories: false, attributes: nil)
+                try manager.createDirectory(at: Workspace.rootURL, withIntermediateDirectories: false, attributes: nil)
             } catch {
                 throw ToyboxError.bootstrapError
             }
@@ -46,18 +67,15 @@ public struct PlaygroundHandler<Storage: StorageType> {
     }
     
     private func fullPath(from name: String) -> URL {
-        return Storage.rootURL.appendingPathComponent("\(name).playground")
+        return Workspace.rootURL.appendingPathComponent("\(name).playground")
     }
     
     private func templatePath(of platform: Platform) -> URL {
-        guard let resourceURL = Storage.bundle.resourceURL else {
-            fatalError("Templates are not found")
-        }
-        return resourceURL.appendingPathComponent("Templates/\(platform.rawValue).playground")
+        return Loader.templatePath(of: platform)
     }
     
     private func copyTemplate(of platform: Platform, for name: String) throws -> URL {
-        let destinationPath = Storage.rootURL.appendingPathComponent(name)
+        let destinationPath = Workspace.rootURL.appendingPathComponent(name)
         let sourcePath = templatePath(of: platform)
         let manager = FileManager()
         do {
@@ -120,10 +138,11 @@ public struct PlaygroundHandler<Storage: StorageType> {
     public func open(name: String) throws {
         let path = fullPath(from: name)
         if isExist(at: path) {
-            let workspace = NSWorkspace.shared()
-            workspace.open(path)
+            Opener.open(at: path)
         } else {
             throw ToyboxError.openError(name)
         }
     }
 }
+
+public typealias ToyboxPlaygroundHandler = PlaygroundHandler<FileSystemWorkspace, TemplateLoader, XcodeOpener>
