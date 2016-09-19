@@ -29,7 +29,7 @@ public struct FileSystemWorkspace: WorkspaceType {
     }()
 }
 
-public struct TemplateLoader: TemplateLoaderType {
+public struct PackagedTemplateLoader: TemplateLoaderType {
     public static let bundle = BundleWrapper.bundle
     
     public static func templatePath(of platform: Platform) -> URL {
@@ -145,4 +145,4 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
     }
 }
 
-public typealias ToyboxPlaygroundHandler = PlaygroundHandler<FileSystemWorkspace, TemplateLoader, XcodeOpener>
+public typealias ToyboxPlaygroundHandler = PlaygroundHandler<FileSystemWorkspace, PackagedTemplateLoader, XcodeOpener>
