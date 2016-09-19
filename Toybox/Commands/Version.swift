@@ -11,8 +11,7 @@ public struct VersionCommand: CommandType {
     public let function = "Display the current version of Toybox"
     
     public func run(_ options: NoOptions<ToyboxError>) -> Result<(), ToyboxError> {
-        let bundle = BundleWrapper.bundle
-        let versionString = bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        let versionString = FileSystemStorage.bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         toybox.println(object: versionString)
         return .success(())
     }

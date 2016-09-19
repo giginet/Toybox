@@ -1,8 +1,21 @@
 import Cocoa
 import SWXMLHash
+import Commandant
 
 enum PlaygroundError: Error {
     case loadError
+}
+
+public enum Platform: String, ArgumentType {
+    public static func from(string: String) -> Platform? {
+        return Platform(rawValue: string)
+    }
+    
+    case iOS = "ios"
+    case macOS = "macos"
+    case tvOS = "tvos"
+    
+    public static let name: String = "platform"
 }
 
 struct Playground: CustomStringConvertible {

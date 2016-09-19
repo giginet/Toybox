@@ -2,22 +2,10 @@ import Foundation
 import Cocoa
 import Commandant
 
-public class BundleWrapper {
+private class BundleWrapper {
     public static var bundle: Bundle {
         return Bundle(for: BundleWrapper.self)
     }
-}
-
-public enum Platform: String, ArgumentType {
-    public static func from(string: String) -> Platform? {
-        return Platform(rawValue: string)
-    }
-
-    case iOS = "ios"
-    case macOS = "macos"
-    case tvOS = "tvos"
-    
-    public static let name: String = "platform"
 }
 
 public protocol StorageType {
