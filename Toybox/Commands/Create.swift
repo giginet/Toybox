@@ -8,11 +8,14 @@ struct CreateOptions: OptionsType {
     let fileName: String?
     let platform: Platform
     let force: Bool
+    let noOpen: Bool
     
-    static func create(_ platform: Platform) -> ([String]) -> (Bool) -> CreateOptions {
+    static func create(_ platform: Platform) -> ([String]) -> (Bool) -> (Bool) -> CreateOptions {
         return { fileNames in
             { force in
-                self.init(fileName: fileNames.first, platform: platform, force: force)
+                { noOpen in
+                    self.init(fileName: fileNames.first, platform: platform, force: force, noOpen: noOpen)
+                }
             }
         }
     }
@@ -21,7 +24,8 @@ struct CreateOptions: OptionsType {
         return create
             <*> m <| Option(key: "platform", defaultValue: Platform.iOS, usage: "Target platform (ios/macos/tvos)")
             <*> m <| Argument(defaultValue: [], usage: "Playground file name to create")
-            <*> m <| Switch(flag: "f", key: "force", usage: "Whether overwrite existing playground")
+            <*> m <| Switch(flag: "f", key: "force", usage: "Whether to overwrite existing playground")
+            <*> m <| Switch(flag: "s", key: "no-open", usage: "Whether to open new playground")
     }
 }
 
@@ -41,11 +45,13 @@ struct CreateCommand: CommandType {
         } catch {
         }
         let fileName = options.fileName
-        do {
-            try handler.create(name: fileName, for: options.platform, force: options.force)
-        } catch let exception as ToyboxError {
-            return .failure(exception)
-        } catch {
+        if !options.noOpen {
+            do {
+                try handler.create(name: fileName, for: options.platform, force: options.force)
+            } catch let exception as ToyboxError {
+                return .failure(exception)
+            } catch {
+            }
         }
         
         return .success()
