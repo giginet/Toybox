@@ -68,6 +68,51 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         return .success()
     }
     
+    public func list(for platform: Platform? = nil) -> Result<[String], ToyboxError> {
+        let filteredPlaygrounds: [Playground]
+        if let platform = platform {
+            filteredPlaygrounds = playgrounds.filter { $0.platform == platform }
+        } else {
+            filteredPlaygrounds = playgrounds
+        }
+        return .success(filteredPlaygrounds.map { String(describing: $0) })
+    }
+    
+    public func create(name: String?, for platform: Platform, force: Bool = false) -> Result<(), ToyboxError> {
+        let baseName: String = name ?? generateDefaultFileName()
+        let targetPath = fullPath(from: baseName)
+        
+        if isExist(at: targetPath) {
+            do {
+                if force {
+                    let manager = FileManager()
+                    try manager.removeItem(at: targetPath)
+                } else {
+                    return .failure(ToyboxError.duplicatedError(baseName))
+                }
+            } catch {
+                return .failure(ToyboxError.createError(baseName))
+            }
+        }
+        guard case .success(_) = copyTemplate(of: platform, for: "\(baseName).playground") else {
+            return .failure(ToyboxError.createError(baseName))
+        }
+        guard case .success(_) = open(name: baseName) else {
+            return .failure(ToyboxError.createError(baseName))
+        }
+        return .success()
+    }
+    
+    public func open(name: String) -> Result<(), ToyboxError> {
+        let path = fullPath(from: name)
+        if isExist(at: path) {
+            Opener.open(at: path)
+        } else {
+            return .failure(ToyboxError.openError(name))
+        }
+        return .success()
+    }
+    
     private func fullPath(from name: String) -> URL {
         return Workspace.rootURL.appendingPathComponent("\(name).playground")
     }
@@ -116,47 +161,6 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         } catch {
             return []
         }
-    }
-    
-    public func list(for platform: Platform?) -> Result<[String], ToyboxError> {
-        let filteredPlaygrounds: [Playground]
-        if let platform = platform {
-            filteredPlaygrounds = playgrounds.filter { $0.platform == platform }
-        } else {
-            filteredPlaygrounds = playgrounds
-        }
-        return .success(filteredPlaygrounds.map { String(describing: $0) })
-    }
-    
-    public func create(name: String?, for platform: Platform, force: Bool = false) -> Result<(), ToyboxError> {
-        let baseName: String = name ?? generateDefaultFileName()
-        let targetPath = fullPath(from: baseName)
-        
-        if isExist(at: targetPath) {
-            do {
-                if force {
-                    let manager = FileManager()
-                    try manager.removeItem(at: targetPath)
-                } else {
-                    return .failure(ToyboxError.duplicatedError(baseName))
-                }
-            } catch {
-                return .failure(ToyboxError.createError(baseName))
-            }
-        }
-        _ = copyTemplate(of: platform, for: "\(baseName).playground")
-        _ = open(name: baseName)
-        return .success()
-    }
-    
-    public func open(name: String) -> Result<(), ToyboxError> {
-        let path = fullPath(from: name)
-        if isExist(at: path) {
-            Opener.open(at: path)
-        } else {
-            return .failure(ToyboxError.openError(name))
-        }
-        return .success()
     }
 }
 
