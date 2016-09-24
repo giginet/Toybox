@@ -26,15 +26,13 @@ struct ListCommand: CommandType {
     
     func run(_ options: Options) -> Result<(), ToyboxError> {
         let handler = ToyboxPlaygroundHandler()
-        do {
-            let playgrounds = try handler.list(for: options.platform)
+        switch handler.list(for: options.platform) {
+        case let .success(playgrounds):
             let exportString = playgrounds.joined(separator: "\n")
             toybox.println(object: exportString)
-        } catch let exception as ToyboxError {
-            return .failure(exception)
-        } catch {
+        case let .failure(error):
+            return .failure(error)
         }
-        
         return .success()
     }
 }

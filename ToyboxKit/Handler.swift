@@ -1,6 +1,7 @@
 import Foundation
 import Cocoa
 import Commandant
+import Result
 
 internal class BundleWrapper {
     public static var bundle: Bundle {
@@ -55,15 +56,16 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
     public init() {
     }
     
-    public func bootstrap() throws {
+    public func bootstrap() -> Result<(), ToyboxError> {
         let manager = FileManager()
         if !manager.fileExists(atPath: Workspace.rootURL.path, isDirectory: nil) {
             do {
                 try manager.createDirectory(at: Workspace.rootURL, withIntermediateDirectories: false, attributes: nil)
             } catch {
-                throw ToyboxError.bootstrapError
+                return .failure(ToyboxError.bootstrapError)
             }
         }
+        return .success()
     }
     
     private func fullPath(from name: String) -> URL {
@@ -74,15 +76,15 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         return Loader.templatePath(of: platform)
     }
     
-    private func copyTemplate(of platform: Platform, for name: String) throws -> URL {
+    private func copyTemplate(of platform: Platform, for name: String) -> Result<URL, ToyboxError> {
         let destinationPath = Workspace.rootURL.appendingPathComponent(name)
         let sourcePath = templatePath(of: platform)
         let manager = FileManager()
         do {
             try manager.copyItem(at: sourcePath, to: destinationPath)
-            return destinationPath
+            return .success(destinationPath)
         } catch {
-            throw ToyboxError.createError(name)
+            return .failure(ToyboxError.createError(name))
         }
     }
     
@@ -102,46 +104,59 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         do {
             let files = try FileManager.default.contentsOfDirectory(atPath: rootURL.path)
             let playgroundPathes = files.filter { $0.hasSuffix("playground") }.map { rootURL.appendingPathComponent($0) }
-            let playgrounds: [Playground] = playgroundPathes.flatMap { try? Playground.load(from: $0) }
+            let playgrounds: [Playground] = playgroundPathes.flatMap { path in
+                switch Playground.load(from: path) {
+                case let .success(playground):
+                    return playground
+                case .failure:
+                    return nil
+                }
+            }
             return playgrounds
         } catch {
             return []
         }
     }
     
-    public func list(for platform: Platform?) throws -> [String] {
+    public func list(for platform: Platform?) -> Result<[String], ToyboxError> {
         let filteredPlaygrounds: [Playground]
         if let platform = platform {
             filteredPlaygrounds = playgrounds.filter { $0.platform == platform }
         } else {
             filteredPlaygrounds = playgrounds
         }
-        return filteredPlaygrounds.map { String(describing: $0) }
+        return .success(filteredPlaygrounds.map { String(describing: $0) })
     }
     
-    public func create(name: String?, for platform: Platform, force: Bool = false) throws {
+    public func create(name: String?, for platform: Platform, force: Bool = false) -> Result<(), ToyboxError> {
         let baseName: String = name ?? generateDefaultFileName()
         let targetPath = fullPath(from: baseName)
         
         if isExist(at: targetPath) {
-            if force {
-                let manager = FileManager()
-                try manager.removeItem(at: targetPath)
-            } else {
-                throw ToyboxError.duplicatedError(baseName)
+            do {
+                if force {
+                    let manager = FileManager()
+                    try manager.removeItem(at: targetPath)
+                } else {
+                    return .failure(ToyboxError.duplicatedError(baseName))
+                }
+            } catch {
+                return .failure(ToyboxError.createError(baseName))
             }
         }
         _ = try copyTemplate(of: platform, for: "\(baseName).playground")
         try open(name: baseName)
+        return .success()
     }
     
-    public func open(name: String) throws {
+    public func open(name: String) -> Result<(), ToyboxError> {
         let path = fullPath(from: name)
         if isExist(at: path) {
             Opener.open(at: path)
         } else {
-            throw ToyboxError.openError(name)
+            return .failure(ToyboxError.openError(name))
         }
+        return .success()
     }
 }
 

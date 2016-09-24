@@ -1,6 +1,7 @@
 import Cocoa
 import SWXMLHash
 import Commandant
+import Result
 
 enum PlaygroundError: Error {
     case loadError
@@ -31,24 +32,27 @@ struct Playground: CustomStringConvertible {
         self.name = path.deletingPathExtension().pathComponents.last ?? ""
     }
     
-    static func load(from path: URL) throws -> Playground {
+    static func load(from path: URL) -> Result<Playground, PlaygroundError> {
         let contentPath = path.appendingPathComponent("contents.xcplayground")
         guard let data = try? Data(contentsOf: contentPath) else {
-            throw PlaygroundError.loadError
+            return .failure(PlaygroundError.loadError)
         }
         
         let content = SWXMLHash.parse(data)
         guard let playgroundElement = content["playground"].element else {
-            throw PlaygroundError.loadError
+            return .failure(PlaygroundError.loadError)
         }
         
-        guard let platform = try Platform(rawValue: playgroundElement.value(ofAttribute: "target-platform")) else {
-            throw PlaygroundError.loadError
+        guard let targetPlatform: String = playgroundElement.value(ofAttribute: "target-platform"),
+            let platform: Platform = Platform(rawValue: targetPlatform) else {
+                return .failure(PlaygroundError.loadError)
         }
-        let playground = try Playground(platform: platform,
+        if let playground = try? Playground(platform:platform,
                                         version: playgroundElement.value(ofAttribute: "version"),
-                                        path: path)
-        return playground
+                                        path: path) {
+            return .success(playground)
+        }
+        return .failure(PlaygroundError.loadError)
     }
     
     var description: String {

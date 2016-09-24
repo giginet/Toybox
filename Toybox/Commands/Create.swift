@@ -38,19 +38,14 @@ struct CreateCommand: CommandType {
     
     func run(_ options: Options) -> Result<(), ToyboxError> {
         let handler = ToyboxPlaygroundHandler()
-        do {
-            try handler.bootstrap()
-        } catch let exception as ToyboxError {
-            return .failure(exception)
-        } catch {
+        if case let .failure(error) = handler.bootstrap() {
+            return .failure(error)
         }
+        
         let fileName = options.fileName
         if !options.noOpen {
-            do {
-                try handler.create(name: fileName, for: options.platform, force: options.force)
-            } catch let exception as ToyboxError {
-                return .failure(exception)
-            } catch {
+            if case let .failure(error) = handler.create(name: fileName, for: options.platform, force: options.force) {
+                return .failure(error)
             }
         }
         
