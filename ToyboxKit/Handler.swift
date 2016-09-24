@@ -78,7 +78,7 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         return .success(filteredPlaygrounds.map { String(describing: $0) })
     }
     
-    public func create(name: String?, for platform: Platform, force: Bool = false) -> Result<(), ToyboxError> {
+    public func create(name: String?, for platform: Platform, force: Bool = false) -> Result<Playground, ToyboxError> {
         let baseName: String = name ?? generateDefaultFileName()
         let targetPath = fullPath(from: baseName)
         
@@ -94,13 +94,13 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
                 return .failure(ToyboxError.createError(baseName))
             }
         }
-        guard case .success(_) = copyTemplate(of: platform, for: "\(baseName).playground") else {
+        guard case let .success(createdURL) = copyTemplate(of: platform, for: "\(baseName).playground") else {
             return .failure(ToyboxError.createError(baseName))
         }
-        guard case .success(_) = open(name: baseName) else {
+        guard case let .success(playground) = Playground.load(from: createdURL) else {
             return .failure(ToyboxError.createError(baseName))
         }
-        return .success()
+        return .success(playground)
     }
     
     public func open(name: String) -> Result<(), ToyboxError> {

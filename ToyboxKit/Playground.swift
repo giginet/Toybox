@@ -3,7 +3,7 @@ import SWXMLHash
 import Commandant
 import Result
 
-enum PlaygroundError: Error {
+public enum PlaygroundError: Error {
     case loadError
 }
 
@@ -19,20 +19,20 @@ public enum Platform: String, ArgumentProtocol {
     public static let name: String = "platform"
 }
 
-struct Playground: CustomStringConvertible {
-    let platform: Platform
-    let version: String
-    let name: String
-    let path: URL
+public struct Playground: CustomStringConvertible {
+    public let platform: Platform
+    public let version: String
+    public let name: String
+    public let path: URL
     
-    init(platform: Platform, version: String, path: URL) {
+    public init(platform: Platform, version: String, path: URL) {
         self.platform = platform
         self.version = version
         self.path = path
         self.name = path.deletingPathExtension().pathComponents.last ?? ""
     }
     
-    static func load(from path: URL) -> Result<Playground, PlaygroundError> {
+    public static func load(from path: URL) -> Result<Playground, PlaygroundError> {
         let contentPath = path.appendingPathComponent("contents.xcplayground")
         guard let data = try? Data(contentsOf: contentPath) else {
             return .failure(PlaygroundError.loadError)
@@ -55,7 +55,7 @@ struct Playground: CustomStringConvertible {
         return .failure(PlaygroundError.loadError)
     }
     
-    var description: String {
+    public var description: String {
         return "\(name) (\(platform))"
     }
 }

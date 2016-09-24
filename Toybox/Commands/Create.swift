@@ -43,12 +43,14 @@ struct CreateCommand: CommandProtocol {
         }
         
         let fileName = options.fileName
-        if !options.noOpen {
-            if case let .failure(error) = handler.create(name: fileName, for: options.platform, force: options.force) {
-                return .failure(error)
+        switch handler.create(name: fileName, for: options.platform, force: options.force) {
+        case let .success(playground):
+            if !options.noOpen {
+                _ = handler.open(name: playground.name)
             }
+            return .success()
+        case let .failure(error):
+            return .failure(error)
         }
-        
-        return .success()
     }
 }

@@ -20,22 +20,9 @@ class HandlerTests: XCTestCase {
     let handler = TestingPlaygroundHandler()
     let manager = FileManager()
     
-    func playgroundFile(name: String) -> URL {
+    func playgroundURL(for name: String) -> URL {
         return handler.rootURL.appendingPathComponent("\(name).playground")
     }
-    
-    /*func testBootstrap() {
-        let workspacePath = handler.rootURL
-        var isDirectory = ObjCBool(false)
-        XCTAssertFalse(manager.fileExists(atPath: workspacePath.path, isDirectory: &isDirectory))
-        XCTAssertFalse(isDirectory.boolValue)
-        let result = handler.bootstrap()
-        if case .failure(_) = result {
-            XCTFail()
-        }
-        XCTAssertTrue(manager.fileExists(atPath: workspacePath.path, isDirectory: &isDirectory))
-        XCTAssertTrue(isDirectory.boolValue)
-    }*/
     
     func testList() {
         _ = handler.bootstrap()
@@ -62,20 +49,17 @@ class HandlerTests: XCTestCase {
     }
     
     func testCreate() {
-        XCTAssertFalse(manager.fileExists(atPath: playgroundFile(name: "hello").path))
+        XCTAssertFalse(manager.fileExists(atPath: playgroundURL(for: "hello").path))
         let result = handler.create(name: "hello", for: .iOS)
         if case .failure(_) = result {
             XCTFail()
         }
-        XCTAssertTrue(manager.fileExists(atPath: playgroundFile(name: "hello").path))
+        XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: "hello").path))
     }
     
     func testOpen() {
         struct AssertOpener: PlaygroundOpenerType {
             static var opened = false
-            
-            init() {
-            }
             
             static func open(at path: URL) {
                 opened = true
