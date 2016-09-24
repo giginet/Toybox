@@ -3,7 +3,7 @@ import ToyboxKit
 import Commandant
 import Result
 
-struct RootCommand: CommandType {
+struct RootCommand: CommandProtocol {
     typealias Options = NoOptions<ToyboxError>
     typealias ClientError = ToyboxError
     

@@ -26,7 +26,10 @@ class PlaygroundHandlerTests: XCTestCase {
     
     func testCreate() {
         XCTAssertFalse(manager.fileExists(atPath: playgroundFile(name: "hello").path))
-        try! handler.create(name: "hello", for: .iOS)
+        let result = handler.create(name: "hello", for: .iOS)
+        if case .failure(_) = result {
+            XCTFail()
+        }
         XCTAssertTrue(manager.fileExists(atPath: playgroundFile(name: "hello").path))
     }
     

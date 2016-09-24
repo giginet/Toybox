@@ -144,8 +144,8 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
                 return .failure(ToyboxError.createError(baseName))
             }
         }
-        _ = try copyTemplate(of: platform, for: "\(baseName).playground")
-        try open(name: baseName)
+        _ = copyTemplate(of: platform, for: "\(baseName).playground")
+        _ = open(name: baseName)
         return .success()
     }
     

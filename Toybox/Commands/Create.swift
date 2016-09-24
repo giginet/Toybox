@@ -3,7 +3,7 @@ import ToyboxKit
 import Commandant
 import Result
 
-struct CreateOptions: OptionsType {
+struct CreateOptions: OptionsProtocol {
     typealias ClientError = ToyboxError
     let fileName: String?
     let platform: Platform
@@ -29,7 +29,7 @@ struct CreateOptions: OptionsType {
     }
 }
 
-struct CreateCommand: CommandType {
+struct CreateCommand: CommandProtocol {
     typealias Options = CreateOptions
     typealias ClientError = ToyboxError
     

@@ -7,7 +7,7 @@ enum PlaygroundError: Error {
     case loadError
 }
 
-public enum Platform: String, ArgumentType {
+public enum Platform: String, ArgumentProtocol {
     public static func from(string: String) -> Platform? {
         return Platform(rawValue: string)
     }

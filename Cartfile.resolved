@@ -1,3 +1,3 @@
 github "antitypical/Result" "3.0.0"
 github "drmohundro/SWXMLHash" "3.0.2"
-github "giginet/Commandant" "035d6f30e72d86303b4ebf227e5248407a426b8e"
+github "Carthage/Commandant" "0.11.1"

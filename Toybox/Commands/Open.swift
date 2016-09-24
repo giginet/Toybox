@@ -3,7 +3,7 @@ import ToyboxKit
 import Commandant
 import Result
 
-struct OpenOptions: OptionsType {
+struct OpenOptions: OptionsProtocol {
     typealias ClientError = ToyboxError
     let fileName: String
     let xcodePath: NSURL?
@@ -19,7 +19,7 @@ struct OpenOptions: OptionsType {
     }
 }
 
-struct OpenCommand: CommandType {
+struct OpenCommand: CommandProtocol {
     typealias Options = OpenOptions
     typealias ClientError = ToyboxError
     
@@ -29,13 +29,9 @@ struct OpenCommand: CommandType {
     func run(_ options: Options) -> Result<(), ToyboxError> {
         let handler = ToyboxPlaygroundHandler()
         let fileName = options.fileName
-        do {
-            try handler.open(name: fileName)
-        } catch let exception as ToyboxError {
-            return .failure(exception)
-        } catch {
+        if case let .failure(error) = handler.open(name: fileName) {
+            return .failure(error)
         }
-        
         return .success()
     }
 }

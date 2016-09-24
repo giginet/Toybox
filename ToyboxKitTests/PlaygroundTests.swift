@@ -11,7 +11,7 @@ class PlaygroundTests: XCTestCase {
                                                 fatalError()
         }
         let iOSPath = URL(fileURLWithPath: iOSPathString)
-        guard let playground = try? Playground.load(from: iOSPath) else {
+        guard case let .success(playground) = Playground.load(from: iOSPath) else {
             fatalError()
         }
         return playground

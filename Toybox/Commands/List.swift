@@ -3,7 +3,7 @@ import ToyboxKit
 import Commandant
 import Result
 
-struct ListOptions: OptionsType {
+struct ListOptions: OptionsProtocol {
     typealias ClientError = ToyboxError
     let platform: Platform?
     
@@ -17,7 +17,7 @@ struct ListOptions: OptionsType {
     }
 }
 
-struct ListCommand: CommandType {
+struct ListCommand: CommandProtocol {
     typealias Options = ListOptions
     typealias ClientError = ToyboxError
     
