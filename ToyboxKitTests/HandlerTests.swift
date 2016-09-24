@@ -32,8 +32,8 @@ class HandlerTests: XCTestCase {
         }
         XCTAssertTrue(list0.isEmpty)
         
-        _ = handler.create(name: "ios", for: .iOS)
-        _ = handler.create(name: "mac", for: .macOS)
+        _ = handler.create("ios", for: .iOS)
+        _ = handler.create("mac", for: .macOS)
         
         guard case let .success(list1) = handler.list() else {
             XCTFail()
@@ -50,7 +50,7 @@ class HandlerTests: XCTestCase {
     
     func testCreate() {
         XCTAssertFalse(manager.fileExists(atPath: playgroundURL(for: "hello").path))
-        let result = handler.create(name: "hello", for: .iOS)
+        let result = handler.create("hello", for: .iOS)
         if case .failure(_) = result {
             XCTFail()
         }
@@ -66,8 +66,8 @@ class HandlerTests: XCTestCase {
             }
         }
         let handler = PlaygroundHandler<TestingStorage, PackagedTemplateLoader, AssertOpener>()
-        _ = handler.create(name: "foobar", for: .iOS)
-        _ = handler.open(name: "foobar")
+        _ = handler.create("foobar", for: .iOS)
+        _ = handler.open("foobar")
         XCTAssertTrue(AssertOpener.opened)
     }
     

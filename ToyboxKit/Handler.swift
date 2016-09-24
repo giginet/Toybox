@@ -78,7 +78,7 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         return .success(filteredPlaygrounds.map { String(describing: $0) })
     }
     
-    public func create(name: String?, for platform: Platform, force: Bool = false) -> Result<Playground, ToyboxError> {
+    public func create(_ name: String?, for platform: Platform, force: Bool = false) -> Result<Playground, ToyboxError> {
         let baseName: String = name ?? generateDefaultFileName()
         let targetPath = fullPath(from: baseName)
         
@@ -103,7 +103,7 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         return .success(playground)
     }
     
-    public func open(name: String) -> Result<(), ToyboxError> {
+    public func open(_ name: String) -> Result<(), ToyboxError> {
         let path = fullPath(from: name)
         if isExist(at: path) {
             Opener.open(at: path)

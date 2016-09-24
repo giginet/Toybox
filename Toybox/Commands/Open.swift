@@ -29,7 +29,7 @@ struct OpenCommand: CommandProtocol {
     func run(_ options: Options) -> Result<(), ToyboxError> {
         let handler = ToyboxPlaygroundHandler()
         let fileName = options.fileName
-        if case let .failure(error) = handler.open(name: fileName) {
+        if case let .failure(error) = handler.open(fileName) {
             return .failure(error)
         }
         return .success()

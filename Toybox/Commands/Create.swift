@@ -43,7 +43,7 @@ struct CreateCommand: CommandProtocol {
         }
         
         let fileName = options.fileName
-        switch handler.create(name: fileName, for: options.platform, force: options.force) {
+        switch handler.create(fileName, for: options.platform, force: options.force) {
         case let .success(playground):
             if !options.noOpen {
                 _ = handler.open(name: playground.name)
