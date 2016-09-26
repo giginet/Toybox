@@ -8,27 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		071B61EA1D8F3A8D00F6B0B5 /* ToyboxKit.framework in Resources */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; };
+		072279D51D99A70800DB3E80 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279D01D99A70800DB3E80 /* Errors.swift */; };
+		072279D61D99A70800DB3E80 /* Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279D11D99A70800DB3E80 /* Handler.swift */; };
+		072279D71D99A70800DB3E80 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 072279D21D99A70800DB3E80 /* Info.plist */; };
+		072279D81D99A70800DB3E80 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279D31D99A70800DB3E80 /* Playground.swift */; };
+		072279D91D99A70800DB3E80 /* ToyboxKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 072279D41D99A70800DB3E80 /* ToyboxKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		072279E91D99A72100DB3E80 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279DC1D99A72100DB3E80 /* Create.swift */; };
+		072279EA1D99A72100DB3E80 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279DD1D99A72100DB3E80 /* List.swift */; };
+		072279EB1D99A72100DB3E80 /* Open.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279DE1D99A72100DB3E80 /* Open.swift */; };
+		072279EC1D99A72100DB3E80 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279DF1D99A72100DB3E80 /* Root.swift */; };
+		072279ED1D99A72100DB3E80 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279E01D99A72100DB3E80 /* Version.swift */; };
+		072279EE1D99A72100DB3E80 /* Components.plist in Resources */ = {isa = PBXBuildFile; fileRef = 072279E11D99A72100DB3E80 /* Components.plist */; };
+		072279EF1D99A72100DB3E80 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 072279E21D99A72100DB3E80 /* Info.plist */; };
+		072279F01D99A72100DB3E80 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279E31D99A72100DB3E80 /* main.swift */; };
+		072279F11D99A72100DB3E80 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279E81D99A72100DB3E80 /* Utilities.swift */; };
+		072279FB1D99A73500DB3E80 /* HandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279F81D99A73500DB3E80 /* HandlerTests.swift */; };
+		072279FC1D99A73500DB3E80 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 072279F91D99A73500DB3E80 /* Info.plist */; };
+		072279FD1D99A73500DB3E80 /* PlaygroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279FA1D99A73500DB3E80 /* PlaygroundTests.swift */; };
+		072279FF1D99A75400DB3E80 /* fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 072279FE1D99A75400DB3E80 /* fixtures */; };
+		07227A011D99A77500DB3E80 /* Templates in Resources */ = {isa = PBXBuildFile; fileRef = 07227A001D99A77500DB3E80 /* Templates */; };
 		075AB53C1D96DC8300D1A323 /* ToyboxKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; };
 		076EE5111D99725800D2F2DA /* Commandant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A61D858A4C0005AD4B /* Commandant.framework */; };
-		0772C16B1D8FDCFA006942AC /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0772C16A1D8FDCFA006942AC /* Playground.swift */; };
 		0772C16D1D8FE1AA006942AC /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0772C16C1D8FE1AA006942AC /* SWXMLHash.framework */; };
-		0772C17E1D900358006942AC /* PlaygroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0772C17D1D900358006942AC /* PlaygroundTests.swift */; };
-		0772C1861D900A31006942AC /* fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 0772C1851D900A31006942AC /* fixtures */; };
-		0772C1881D900C35006942AC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0772C1871D900C35006942AC /* Utilities.swift */; };
-		0772C18C1D904186006942AC /* HandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0772C18B1D904186006942AC /* HandlerTests.swift */; };
 		0785B9BC1D858D2F0005AD4B /* Commandant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A61D858A4C0005AD4B /* Commandant.framework */; };
-		0785B9BE1D858D360005AD4B /* ToyboxKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0785B99E1D858A1B0005AD4B /* ToyboxKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0785B9E71D85A34C0005AD4B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B97B1D85577A0005AD4B /* main.swift */; };
 		0785B9E81D85A38B0005AD4B /* ToyboxKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; };
 		0785B9ED1D85B34E0005AD4B /* ToyboxKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0785B9F31D86F4530005AD4B /* Templates in Resources */ = {isa = PBXBuildFile; fileRef = 0785B9EE1D85BEC20005AD4B /* Templates */; };
-		0785BA001D8989080005AD4B /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B9FF1D8989080005AD4B /* List.swift */; };
-		0785BA011D89890E0005AD4B /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B9F51D897C010005AD4B /* Root.swift */; };
-		0785BA031D8989110005AD4B /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B9FD1D8988EF0005AD4B /* Create.swift */; };
-		0785BA051D8989320005AD4B /* Open.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785BA041D8989320005AD4B /* Open.swift */; };
-		0785BA081D898BE70005AD4B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785BA061D898BE70005AD4B /* Errors.swift */; };
-		0785BA091D898BE80005AD4B /* Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785BA071D898BE70005AD4B /* Handler.swift */; };
-		0785BA0B1D898C820005AD4B /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785BA0A1D898C820005AD4B /* Version.swift */; };
 		07B215AA1D9842E000122434 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 075AB53F1D96E3C400D1A323 /* Result.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,29 +60,31 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		072279D01D99A70800DB3E80 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		072279D11D99A70800DB3E80 /* Handler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Handler.swift; sourceTree = "<group>"; };
+		072279D21D99A70800DB3E80 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		072279D31D99A70800DB3E80 /* Playground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
+		072279D41D99A70800DB3E80 /* ToyboxKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToyboxKit.h; sourceTree = "<group>"; };
+		072279DC1D99A72100DB3E80 /* Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
+		072279DD1D99A72100DB3E80 /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		072279DE1D99A72100DB3E80 /* Open.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Open.swift; sourceTree = "<group>"; };
+		072279DF1D99A72100DB3E80 /* Root.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
+		072279E01D99A72100DB3E80 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
+		072279E11D99A72100DB3E80 /* Components.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Components.plist; sourceTree = "<group>"; };
+		072279E21D99A72100DB3E80 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		072279E31D99A72100DB3E80 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		072279E81D99A72100DB3E80 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		072279F81D99A73500DB3E80 /* HandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandlerTests.swift; sourceTree = "<group>"; };
+		072279F91D99A73500DB3E80 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		072279FA1D99A73500DB3E80 /* PlaygroundTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundTests.swift; sourceTree = "<group>"; };
+		072279FE1D99A75400DB3E80 /* fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fixtures; sourceTree = "<group>"; };
+		07227A001D99A77500DB3E80 /* Templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Templates; sourceTree = "<group>"; };
 		075AB53F1D96E3C400D1A323 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
-		0772C16A1D8FDCFA006942AC /* Playground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
 		0772C16C1D8FE1AA006942AC /* SWXMLHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWXMLHash.framework; path = Carthage/Build/Mac/SWXMLHash.framework; sourceTree = "<group>"; };
 		0772C1721D900349006942AC /* ToyboxKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToyboxKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0772C1761D900349006942AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0772C17D1D900358006942AC /* PlaygroundTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundTests.swift; sourceTree = "<group>"; };
-		0772C1851D900A31006942AC /* fixtures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fixtures; sourceTree = "<group>"; };
-		0772C1871D900C35006942AC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		0772C18B1D904186006942AC /* HandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandlerTests.swift; sourceTree = "<group>"; };
-		0785B97B1D85577A0005AD4B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		0785B99E1D858A1B0005AD4B /* ToyboxKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToyboxKit.h; sourceTree = "<group>"; };
-		0785B99F1D858A1B0005AD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0785B9A61D858A4C0005AD4B /* Commandant.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Commandant.framework; path = Carthage/Build/Mac/Commandant.framework; sourceTree = "<group>"; };
 		0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ToyboxKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0785B9CC1D85A3270005AD4B /* toybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = toybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0785B9EE1D85BEC20005AD4B /* Templates */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Templates; path = Toybox/Templates; sourceTree = "<group>"; };
-		0785B9F51D897C010005AD4B /* Root.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Root.swift; path = Commands/Root.swift; sourceTree = "<group>"; };
-		0785B9FD1D8988EF0005AD4B /* Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Create.swift; path = Commands/Create.swift; sourceTree = "<group>"; };
-		0785B9FF1D8989080005AD4B /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = List.swift; path = Commands/List.swift; sourceTree = "<group>"; };
-		0785BA041D8989320005AD4B /* Open.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Open.swift; path = Commands/Open.swift; sourceTree = "<group>"; };
-		0785BA061D898BE70005AD4B /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		0785BA071D898BE70005AD4B /* Handler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Handler.swift; sourceTree = "<group>"; };
-		0785BA0A1D898C820005AD4B /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Version.swift; path = Commands/Version.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,24 +118,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0772C1731D900349006942AC /* ToyboxKitTests */ = {
+		072279CF1D99A70800DB3E80 /* ToyboxKit */ = {
 			isa = PBXGroup;
 			children = (
-				0772C1851D900A31006942AC /* fixtures */,
-				0772C1761D900349006942AC /* Info.plist */,
-				0772C17D1D900358006942AC /* PlaygroundTests.swift */,
-				0772C18B1D904186006942AC /* HandlerTests.swift */,
+				072279D01D99A70800DB3E80 /* Errors.swift */,
+				072279D11D99A70800DB3E80 /* Handler.swift */,
+				072279D21D99A70800DB3E80 /* Info.plist */,
+				072279D31D99A70800DB3E80 /* Playground.swift */,
+				072279D41D99A70800DB3E80 /* ToyboxKit.h */,
+				07227A001D99A77500DB3E80 /* Templates */,
 			);
-			path = ToyboxKitTests;
+			name = ToyboxKit;
+			path = Sources/ToyboxKit;
+			sourceTree = "<group>";
+		};
+		072279DA1D99A72100DB3E80 /* toybox */ = {
+			isa = PBXGroup;
+			children = (
+				072279DB1D99A72100DB3E80 /* Commands */,
+				072279E11D99A72100DB3E80 /* Components.plist */,
+				072279E21D99A72100DB3E80 /* Info.plist */,
+				072279E31D99A72100DB3E80 /* main.swift */,
+				072279E81D99A72100DB3E80 /* Utilities.swift */,
+			);
+			name = toybox;
+			path = Sources/toybox;
+			sourceTree = "<group>";
+		};
+		072279DB1D99A72100DB3E80 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				072279DC1D99A72100DB3E80 /* Create.swift */,
+				072279DD1D99A72100DB3E80 /* List.swift */,
+				072279DE1D99A72100DB3E80 /* Open.swift */,
+				072279DF1D99A72100DB3E80 /* Root.swift */,
+				072279E01D99A72100DB3E80 /* Version.swift */,
+			);
+			path = Commands;
+			sourceTree = "<group>";
+		};
+		072279F21D99A73400DB3E80 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				072279F31D99A73400DB3E80 /* ToyboxKit */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		072279F31D99A73400DB3E80 /* ToyboxKit */ = {
+			isa = PBXGroup;
+			children = (
+				072279FE1D99A75400DB3E80 /* fixtures */,
+				072279F81D99A73500DB3E80 /* HandlerTests.swift */,
+				072279F91D99A73500DB3E80 /* Info.plist */,
+				072279FA1D99A73500DB3E80 /* PlaygroundTests.swift */,
+			);
+			path = ToyboxKit;
 			sourceTree = "<group>";
 		};
 		0785B96F1D85577A0005AD4B = {
 			isa = PBXGroup;
 			children = (
-				0785B9EE1D85BEC20005AD4B /* Templates */,
-				0785B97A1D85577A0005AD4B /* Toybox */,
-				0785B99D1D858A1B0005AD4B /* ToyboxKit */,
-				0772C1731D900349006942AC /* ToyboxKitTests */,
+				072279DA1D99A72100DB3E80 /* toybox */,
+				072279CF1D99A70800DB3E80 /* ToyboxKit */,
+				072279F21D99A73400DB3E80 /* Tests */,
 				0785B9791D85577A0005AD4B /* Products */,
 				0785B9A51D858A4C0005AD4B /* Frameworks */,
 			);
@@ -145,28 +197,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0785B97A1D85577A0005AD4B /* Toybox */ = {
-			isa = PBXGroup;
-			children = (
-				0785B97B1D85577A0005AD4B /* main.swift */,
-				0785B9F41D897BEF0005AD4B /* Commands */,
-				0772C1871D900C35006942AC /* Utilities.swift */,
-			);
-			path = Toybox;
-			sourceTree = "<group>";
-		};
-		0785B99D1D858A1B0005AD4B /* ToyboxKit */ = {
-			isa = PBXGroup;
-			children = (
-				0785B99E1D858A1B0005AD4B /* ToyboxKit.h */,
-				0785BA061D898BE70005AD4B /* Errors.swift */,
-				0785BA071D898BE70005AD4B /* Handler.swift */,
-				0785B99F1D858A1B0005AD4B /* Info.plist */,
-				0772C16A1D8FDCFA006942AC /* Playground.swift */,
-			);
-			path = ToyboxKit;
-			sourceTree = "<group>";
-		};
 		0785B9A51D858A4C0005AD4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,18 +207,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		0785B9F41D897BEF0005AD4B /* Commands */ = {
-			isa = PBXGroup;
-			children = (
-				0785B9F51D897C010005AD4B /* Root.swift */,
-				0785B9FF1D8989080005AD4B /* List.swift */,
-				0785B9FD1D8988EF0005AD4B /* Create.swift */,
-				0785BA041D8989320005AD4B /* Open.swift */,
-				0785BA0A1D898C820005AD4B /* Version.swift */,
-			);
-			name = Commands;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -196,7 +214,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0785B9BE1D858D360005AD4B /* ToyboxKit.h in Headers */,
+				072279D91D99A70800DB3E80 /* ToyboxKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +330,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0772C1861D900A31006942AC /* fixtures in Resources */,
+				072279FF1D99A75400DB3E80 /* fixtures in Resources */,
+				072279FC1D99A73500DB3E80 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,7 +339,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0785B9F31D86F4530005AD4B /* Templates in Resources */,
+				07227A011D99A77500DB3E80 /* Templates in Resources */,
+				072279D71D99A70800DB3E80 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +348,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				072279EE1D99A72100DB3E80 /* Components.plist in Resources */,
 				071B61EA1D8F3A8D00F6B0B5 /* ToyboxKit.framework in Resources */,
+				072279EF1D99A72100DB3E80 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,8 +396,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0772C17E1D900358006942AC /* PlaygroundTests.swift in Sources */,
-				0772C18C1D904186006942AC /* HandlerTests.swift in Sources */,
+				072279FD1D99A73500DB3E80 /* PlaygroundTests.swift in Sources */,
+				072279FB1D99A73500DB3E80 /* HandlerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,9 +405,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0785BA091D898BE80005AD4B /* Handler.swift in Sources */,
-				0785BA081D898BE70005AD4B /* Errors.swift in Sources */,
-				0772C16B1D8FDCFA006942AC /* Playground.swift in Sources */,
+				072279D51D99A70800DB3E80 /* Errors.swift in Sources */,
+				072279D81D99A70800DB3E80 /* Playground.swift in Sources */,
+				072279D61D99A70800DB3E80 /* Handler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,13 +415,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0785B9E71D85A34C0005AD4B /* main.swift in Sources */,
-				0785BA011D89890E0005AD4B /* Root.swift in Sources */,
-				0772C1881D900C35006942AC /* Utilities.swift in Sources */,
-				0785BA001D8989080005AD4B /* List.swift in Sources */,
-				0785BA031D8989110005AD4B /* Create.swift in Sources */,
-				0785BA0B1D898C820005AD4B /* Version.swift in Sources */,
-				0785BA051D8989320005AD4B /* Open.swift in Sources */,
+				072279E91D99A72100DB3E80 /* Create.swift in Sources */,
+				072279ED1D99A72100DB3E80 /* Version.swift in Sources */,
+				072279F11D99A72100DB3E80 /* Utilities.swift in Sources */,
+				072279F01D99A72100DB3E80 /* main.swift in Sources */,
+				072279EC1D99A72100DB3E80 /* Root.swift in Sources */,
+				072279EA1D99A72100DB3E80 /* List.swift in Sources */,
+				072279EB1D99A72100DB3E80 /* Open.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,13 +439,14 @@
 		0772C17B1D900349006942AC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 2AWR7Z4WYE;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = ToyboxKitTests/Info.plist;
+				INFOPLIST_FILE = Tests/ToyboxKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.giginet.ToyboxKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -435,13 +458,14 @@
 		0772C17C1D900349006942AC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 2AWR7Z4WYE;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = ToyboxKitTests/Info.plist;
+				INFOPLIST_FILE = Tests/ToyboxKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.giginet.ToyboxKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -556,7 +580,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = ToyboxKit/Info.plist;
+				INFOPLIST_FILE = Sources/ToyboxKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.giginet.ToyboxKit;
@@ -588,7 +612,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = ToyboxKit/Info.plist;
+				INFOPLIST_FILE = Sources/ToyboxKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.giginet.ToyboxKit;
@@ -611,7 +635,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = Toybox/Info.plist;
+				INFOPLIST_FILE = Sources/Toybox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @rpath/../Frameworks /Library/Frameworks/ /Library/Frameworks/ToyboxKit.framework/Versions/Current/Frameworks";
 				OTHER_LDFLAGS = "-headerpad_max_install_names";
 				PRODUCT_BUNDLE_IDENTIFIER = org.giginet.Toybox;
@@ -631,7 +655,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = Toybox/Info.plist;
+				INFOPLIST_FILE = Sources/Toybox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @rpath/../Frameworks /Library/Frameworks/ /Library/Frameworks/ToyboxKit.framework/Versions/Current/Frameworks";
 				OTHER_LDFLAGS = "-headerpad_max_install_names";
 				PRODUCT_BUNDLE_IDENTIFIER = org.giginet.Toybox;
