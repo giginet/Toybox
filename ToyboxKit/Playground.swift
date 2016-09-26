@@ -20,10 +20,27 @@ public enum Platform: String, ArgumentProtocol {
 }
 
 public struct Playground: CustomStringConvertible {
+    private let contentsFileName = "Contents.swift"
+    private var contentsPath: URL {
+        return path.appendingPathComponent(contentsFileName)
+    }
     public let platform: Platform
     public let version: String
     public let name: String
     public let path: URL
+    public var contents: Data? {
+        get {
+            if let data = try? Data(contentsOf: contentsPath) {
+                return data
+            }
+            return nil
+        }
+        set {
+            if let data = contents {
+                try? data.write(to: contentsPath)
+            }
+        }
+    }
     
     public init(platform: Platform, version: String, path: URL) {
         self.platform = platform
