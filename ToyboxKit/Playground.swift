@@ -36,7 +36,7 @@ public struct Playground: CustomStringConvertible {
             return nil
         }
         set {
-            if let data = contents {
+            if let data = newValue {
                 try? data.write(to: contentsPath)
             }
         }

@@ -47,11 +47,23 @@ class PlaygroundTests: XCTestCase {
         XCTAssertEqual(String(describing: iOSPlayground), "ios (iOS)")
     }
     
-    func testContents() {
+    func testReadContents() {
         let playground = iOSPlayground
         if let data = playground.contents {
             let contents = String(data: data, encoding: .utf8)
             XCTAssertEqual(contents, "var str = \"Hello, playground\"")
+        } else {
+            XCTFail()
+        }
+    }
+    
+    func testWriteContents() {
+        var playground = iOSPlayground
+        playground.contents = "print(\"Hello\")".data(using: .utf8)
+        
+        if let data = playground.contents {
+            let contents = String(data: data, encoding: .utf8)
+            XCTAssertEqual(contents, "print(\"Hello\")")
         } else {
             XCTFail()
         }
