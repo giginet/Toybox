@@ -11,8 +11,11 @@ public struct VersionCommand: CommandProtocol {
     public let function = "Display the current version of Toybox"
 
     public func run(_ options: NoOptions<ToyboxError>) -> Result<(), ToyboxError> {
-        let versionString = PackagedTemplateLoader.bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-        toybox.println(object: versionString)
-        return .success(())
+        if let versionString = PackagedTemplateLoader.bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
+            toybox.println(object: versionString)
+            return .success(())
+        } else {
+            return .failure(ToyboxError.versionError)
+        }
     }
 }

@@ -6,6 +6,7 @@ public enum ToyboxError: Error {
     case openError(String)
     case listError
     case duplicatedError(String)
+    case versionError
 }
 
 public extension ToyboxError {
@@ -21,6 +22,8 @@ public extension ToyboxError {
             return "Could not read workspace"
         case let .duplicatedError(playgroundName):
             return "Playground '\(playgroundName)' is already exist. use '-f' flag to overwrite"
+        case .versionError:
+            return "Cpuld not detect toybox version"
         }
     }
 }

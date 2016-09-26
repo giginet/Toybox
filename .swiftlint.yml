@@ -1,9 +1,13 @@
 included:
   - Sources
   - Tests
+excluded:
+  - Sources/ToyboxKit/Templates
+  - Tests/ToyboxKit/fixtures
 disabled_rules:
   - type_name
-  - variable_name
   - nesting
   - line_length
   - force_try
+variable_name:
+  excluded: m # It's used to parse commandant options

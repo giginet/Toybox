@@ -51,7 +51,7 @@ class PlaygroundTests: XCTestCase {
         let playground = iOSPlayground
         if let data = playground.contents {
             let contents = String(data: data, encoding: .utf8)
-            XCTAssertEqual(contents, "var str = \"Hello, playground\"")
+            XCTAssertEqual(contents, "var str = \"Hello, playground\"\n")
         } else {
             XCTFail()
         }
