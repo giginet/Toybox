@@ -613,6 +613,7 @@
 				);
 				INFOPLIST_FILE = Toybox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @rpath/../Frameworks /Library/Frameworks/ /Library/Frameworks/ToyboxKit.framework/Versions/Current/Frameworks";
+				OTHER_LDFLAGS = "-headerpad_max_install_names";
 				PRODUCT_BUNDLE_IDENTIFIER = org.giginet.Toybox;
 				PRODUCT_NAME = toybox;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -632,6 +633,7 @@
 				);
 				INFOPLIST_FILE = Toybox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @rpath/../Frameworks /Library/Frameworks/ /Library/Frameworks/ToyboxKit.framework/Versions/Current/Frameworks";
+				OTHER_LDFLAGS = "-headerpad_max_install_names";
 				PRODUCT_BUNDLE_IDENTIFIER = org.giginet.Toybox;
 				PRODUCT_NAME = toybox;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
