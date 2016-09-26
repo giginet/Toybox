@@ -23,7 +23,7 @@ public protocol PlaygroundOpenerType {
 
 public struct FileSystemWorkspace: WorkspaceType {
     private static let rootDirectoryName = ".toybox"
-    
+
     public static var rootURL: URL = {
         let homeDirectoryPath = URL(fileURLWithPath: NSHomeDirectory())
         return homeDirectoryPath.appendingPathComponent(FileSystemWorkspace.rootDirectoryName, isDirectory: true)
@@ -32,7 +32,7 @@ public struct FileSystemWorkspace: WorkspaceType {
 
 public struct PackagedTemplateLoader: TemplateLoaderType {
     public static let bundle = BundleWrapper.bundle
-    
+
     public static func templatePath(of platform: Platform) -> URL {
         guard let resourceURL = bundle.resourceURL else {
             fatalError("Loading template is failure")
@@ -52,10 +52,10 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
     public var rootURL: URL {
         return Workspace.rootURL
     }
-    
+
     public init() {
     }
-    
+
     public func bootstrap() -> Result<(), ToyboxError> {
         let manager = FileManager()
         if !manager.fileExists(atPath: Workspace.rootURL.path, isDirectory: nil) {
@@ -67,7 +67,7 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         }
         return .success()
     }
-    
+
     public func list(for platform: Platform? = nil) -> Result<[String], ToyboxError> {
         let filteredPlaygrounds: [Playground]
         if let platform = platform {
@@ -77,11 +77,11 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         }
         return .success(filteredPlaygrounds.map { String(describing: $0) })
     }
-    
+
     public func create(_ name: String?, for platform: Platform, force: Bool = false) -> Result<Playground, ToyboxError> {
         let baseName: String = name ?? generateDefaultFileName()
         let targetPath = fullPath(from: baseName)
-        
+
         if isExist(at: targetPath) {
             do {
                 if force {
@@ -102,7 +102,7 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         }
         return .success(playground)
     }
-    
+
     public func open(_ name: String) -> Result<(), ToyboxError> {
         let path = fullPath(from: name)
         if isExist(at: path) {
@@ -112,15 +112,15 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         }
         return .success()
     }
-    
+
     private func fullPath(from name: String) -> URL {
         return Workspace.rootURL.appendingPathComponent("\(name).playground")
     }
-    
+
     private func templatePath(of platform: Platform) -> URL {
         return Loader.templatePath(of: platform)
     }
-    
+
     private func copyTemplate(of platform: Platform, for name: String) -> Result<URL, ToyboxError> {
         let destinationPath = Workspace.rootURL.appendingPathComponent(name)
         let sourcePath = templatePath(of: platform)
@@ -132,19 +132,19 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
             return .failure(ToyboxError.createError(name))
         }
     }
-    
+
     private func isExist(at path: URL) -> Bool {
         let manager = FileManager()
         return manager.fileExists(atPath: path.path)
     }
-    
+
     private func generateDefaultFileName() -> String {
         let formatter = DateFormatter()
         let currentDate = Date()
         formatter.dateFormat = "yyyyMMddHHmmss"
         return formatter.string(from: currentDate)
     }
-    
+
     private var playgrounds: [Playground] {
         do {
             let files = try FileManager.default.contentsOfDirectory(atPath: rootURL.path)

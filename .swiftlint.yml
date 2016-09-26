@@ -1,0 +1,9 @@
+included:
+  - Sources
+  - Tests
+disabled_rules:
+  - type_name
+  - variable_name
+  - nesting
+  - line_length
+  - force_try

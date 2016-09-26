@@ -19,11 +19,11 @@ typealias TestingPlaygroundHandler = PlaygroundHandler<TestingStorage, PackagedT
 class HandlerTests: XCTestCase {
     let handler = TestingPlaygroundHandler()
     let manager = FileManager()
-    
+
     func playgroundURL(for name: String) -> URL {
         return handler.rootURL.appendingPathComponent("\(name).playground")
     }
-    
+
     func testList() {
         _ = handler.bootstrap()
         guard case let .success(list0) = handler.list() else {
@@ -31,23 +31,23 @@ class HandlerTests: XCTestCase {
             return
         }
         XCTAssertTrue(list0.isEmpty)
-        
+
         _ = handler.create("ios", for: .iOS)
         _ = handler.create("mac", for: .macOS)
-        
+
         guard case let .success(list1) = handler.list() else {
             XCTFail()
             return
         }
         XCTAssertEqual(list1.count, 2)
-        
+
         guard case let .success(list2) = handler.list(for: .macOS) else {
             XCTFail()
             return
         }
         XCTAssertEqual(list2.count, 1)
     }
-    
+
     func testCreate() {
         XCTAssertFalse(manager.fileExists(atPath: playgroundURL(for: "hello").path))
         let result = handler.create("hello", for: .iOS)
@@ -56,11 +56,11 @@ class HandlerTests: XCTestCase {
         }
         XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: "hello").path))
     }
-    
+
     func testOpen() {
         struct AssertOpener: PlaygroundOpenerType {
             static var opened = false
-            
+
             static func open(at path: URL) {
                 opened = true
             }
@@ -70,10 +70,10 @@ class HandlerTests: XCTestCase {
         _ = handler.open("foobar")
         XCTAssertTrue(AssertOpener.opened)
     }
-    
+
     override func tearDown() {
         super.tearDown()
-        
+
         let enumerator = manager.enumerator(at: TestingStorage.rootURL,
                            includingPropertiesForKeys: nil,
                            options: [],
@@ -82,5 +82,5 @@ class HandlerTests: XCTestCase {
             try? manager.removeItem(at: filepath)
         }
     }
-    
+
 }

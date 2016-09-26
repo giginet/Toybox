@@ -10,12 +10,9 @@ struct CreateOptions: OptionsProtocol {
     let force: Bool
     let noOpen: Bool
     let enableStandardInput: Bool
-    
+
     static func create(_ platform: Platform) -> ([String]) -> (Bool) -> (Bool) -> (Bool) -> CreateOptions {
-        return { fileNames in
-            { force in
-                { noOpen in
-                    { standardInput in
+        return { fileNames in { force in { noOpen in { standardInput in
                         self.init(fileName: fileNames.first,
                                   platform: platform,
                                   force: force,
@@ -26,7 +23,7 @@ struct CreateOptions: OptionsProtocol {
             }
         }
     }
-    
+
     static func evaluate(_ m: CommandMode) -> Result<CreateOptions, CommandantError<ToyboxError>> {
         return create
             <*> m <| Option(key: "platform", defaultValue: Platform.iOS, usage: "Target platform (ios/macos/tvos)")
@@ -40,20 +37,20 @@ struct CreateOptions: OptionsProtocol {
 struct CreateCommand: CommandProtocol {
     typealias Options = CreateOptions
     typealias ClientError = ToyboxError
-    
+
     let verb = "create"
     let function = "Create new Playground"
-    
+
     func run(_ options: Options) -> Result<(), ToyboxError> {
         let handler = ToyboxPlaygroundHandler()
         if case let .failure(error) = handler.bootstrap() {
             return .failure(error)
         }
-        
+
         let fileName = options.fileName
         switch handler.create(fileName, for: options.platform, force: options.force) {
         case let .success(playground):
-            
+
             if options.enableStandardInput {
                 let data = FileHandle.standardInput.readDataToEndOfFile()
                 if data.count > 0 {
@@ -61,7 +58,7 @@ struct CreateCommand: CommandProtocol {
                     mutablePlayground.contents = data
                 }
             }
-            
+
             if !options.noOpen {
                 _ = handler.open(playground.name)
             }
