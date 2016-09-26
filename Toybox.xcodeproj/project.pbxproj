@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		071B61EA1D8F3A8D00F6B0B5 /* ToyboxKit.framework in Resources */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; };
 		075AB53C1D96DC8300D1A323 /* ToyboxKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; };
+		076EE5111D99725800D2F2DA /* Commandant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A61D858A4C0005AD4B /* Commandant.framework */; };
 		0772C16B1D8FDCFA006942AC /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0772C16A1D8FDCFA006942AC /* Playground.swift */; };
 		0772C16D1D8FE1AA006942AC /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0772C16C1D8FE1AA006942AC /* SWXMLHash.framework */; };
 		0772C17E1D900358006942AC /* PlaygroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0772C17D1D900358006942AC /* PlaygroundTests.swift */; };
@@ -19,7 +20,6 @@
 		0785B9BE1D858D360005AD4B /* ToyboxKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0785B99E1D858A1B0005AD4B /* ToyboxKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0785B9E71D85A34C0005AD4B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B97B1D85577A0005AD4B /* main.swift */; };
 		0785B9E81D85A38B0005AD4B /* ToyboxKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; };
-		0785B9E91D85A3980005AD4B /* Commandant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0785B9A61D858A4C0005AD4B /* Commandant.framework */; };
 		0785B9ED1D85B34E0005AD4B /* ToyboxKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0785B9F31D86F4530005AD4B /* Templates in Resources */ = {isa = PBXBuildFile; fileRef = 0785B9EE1D85BEC20005AD4B /* Templates */; };
 		0785BA001D8989080005AD4B /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785B9FF1D8989080005AD4B /* List.swift */; };
@@ -29,6 +29,7 @@
 		0785BA081D898BE70005AD4B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785BA061D898BE70005AD4B /* Errors.swift */; };
 		0785BA091D898BE80005AD4B /* Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785BA071D898BE70005AD4B /* Handler.swift */; };
 		0785BA0B1D898C820005AD4B /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0785BA0A1D898C820005AD4B /* Version.swift */; };
+		07B215AA1D9842E000122434 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 075AB53F1D96E3C400D1A323 /* Result.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,7 +103,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0785B9E91D85A3980005AD4B /* Commandant.framework in Frameworks */,
+				076EE5111D99725800D2F2DA /* Commandant.framework in Frameworks */,
+				07B215AA1D9842E000122434 /* Result.framework in Frameworks */,
 				0785B9E81D85A38B0005AD4B /* ToyboxKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,7 +365,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
