@@ -9,12 +9,19 @@ struct CreateOptions: OptionsProtocol {
     let platform: Platform
     let force: Bool
     let noOpen: Bool
+    let enableStandardInput: Bool
     
-    static func create(_ platform: Platform) -> ([String]) -> (Bool) -> (Bool) -> CreateOptions {
+    static func create(_ platform: Platform) -> ([String]) -> (Bool) -> (Bool) -> (Bool) -> CreateOptions {
         return { fileNames in
             { force in
                 { noOpen in
-                    self.init(fileName: fileNames.first, platform: platform, force: force, noOpen: noOpen)
+                    { standardInput in
+                        self.init(fileName: fileNames.first,
+                                  platform: platform,
+                                  force: force,
+                                  noOpen: noOpen,
+                                  enableStandardInput: standardInput)
+                    }
                 }
             }
         }
@@ -26,6 +33,7 @@ struct CreateOptions: OptionsProtocol {
             <*> m <| Argument(defaultValue: [], usage: "Playground file name to create")
             <*> m <| Switch(flag: "f", key: "force", usage: "Whether to overwrite existing playground")
             <*> m <| Switch(flag: "s", key: "no-open", usage: "Whether to open new playground")
+            <*> m <| Switch(flag: "i", key: "input", usage: "Whether to enable standard input")
     }
 }
 
@@ -45,6 +53,15 @@ struct CreateCommand: CommandProtocol {
         let fileName = options.fileName
         switch handler.create(fileName, for: options.platform, force: options.force) {
         case let .success(playground):
+            
+            if options.enableStandardInput {
+                let data = FileHandle.standardInput.readDataToEndOfFile()
+                if data.count > 0 {
+                    var mutablePlayground = playground
+                    mutablePlayground.contents = data
+                }
+            }
+            
             if !options.noOpen {
                 _ = handler.open(playground.name)
             }
