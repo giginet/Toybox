@@ -4,7 +4,7 @@ env:
 before_install:
   - brew install swiftlint
 install:
-  - carthage update --platform macOS
+  - carthage update --platform mac
 matrix:
   include:
   - os: osx
