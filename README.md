@@ -1,5 +1,7 @@
 # Toybox
 
+[![Build Status](https://travis-ci.org/giginet/Toybox.svg?branch=master)](https://travis-ci.org/giginet/Toybox)
+
 Toybox made easy to manage Xcode Playgrounds.
 
 This product is under development so interfaces might change.
