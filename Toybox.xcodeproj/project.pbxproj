@@ -267,9 +267,9 @@
 				0785B9C81D85A3270005AD4B /* Sources */,
 				0785B9C91D85A3270005AD4B /* Frameworks */,
 				0785B9CA1D85A3270005AD4B /* Resources */,
-				0785B9EB1D85A3A10005AD4B /* ShellScript */,
+				0785B9EB1D85A3A10005AD4B /* [Carhgage] copy-frameworks */,
 				0785B9EC1D85B3460005AD4B /* CopyFiles */,
-				07227A031D99AA9800DB3E80 /* ShellScript */,
+				07227A031D99AA9800DB3E80 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -373,13 +373,14 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		07227A031D99AA9800DB3E80 /* ShellScript */ = {
+		07227A031D99AA9800DB3E80 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = SwiftLint;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,9 +415,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "PATH=$PATH:/usr/local/bin:/opt/brew/bin\ncarthage copy-frameworks";
 		};
-		0785B9EB1D85A3A10005AD4B /* ShellScript */ = {
+		0785B9EB1D85A3A10005AD4B /* [Carhgage] copy-frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -425,11 +426,12 @@
 				"$(SRCROOT)/Carthage/Build/Mac/Result.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/Commandant.framework",
 			);
+			name = "[Carhgage] copy-frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "PATH=$PATH:/usr/local/bin:/opt/brew/bin\ncarthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
