@@ -21,6 +21,12 @@
 				<key>RootRelativeBundlePath</key>
 				<string>Library/Frameworks/ToyboxKit.framework/Versions/A/Frameworks/Result.framework</string>
 			</dict>
+			<dict>
+				<key>BundleOverwriteAction</key>
+				<string></string>
+				<key>RootRelativeBundlePath</key>
+				<string>Library/Frameworks/ToyboxKit.framework/Versions/A/Frameworks/SWXMLHash.framework</string>
+			</dict>
 		</array>
 		<key>RootRelativeBundlePath</key>
 		<string>Library/Frameworks/ToyboxKit.framework</string>
