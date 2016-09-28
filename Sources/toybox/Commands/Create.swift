@@ -10,23 +10,30 @@ struct CreateOptions: OptionsProtocol {
     let force: Bool
     let noOpen: Bool
     let enableStandardInput: Bool
+    let xcodePath: URL?
 
-    static func create(_ platform: Platform) -> ([String]) -> (Bool) -> (Bool) -> (Bool) -> CreateOptions {
-        return { fileNames in { force in { noOpen in { standardInput in
-                        self.init(fileName: fileNames.first,
-                                  platform: platform,
-                                  force: force,
-                                  noOpen: noOpen,
-                                  enableStandardInput: standardInput)
-                    }
-                }
+    static func create(_ platform: Platform) -> (String?) -> ([String]) -> (Bool) -> (Bool) -> (Bool) -> CreateOptions {
+        return { xcodePathString in { fileNames in { force in { noOpen in { standardInput in
+            let xcodePath: URL?
+            if let xcodePathString = xcodePathString {
+                xcodePath = URL(fileURLWithPath: xcodePathString)
+            } else {
+                xcodePath = nil
             }
+            return self.init(fileName: fileNames.first,
+                             platform: platform,
+                             force: force,
+                             noOpen: noOpen,
+                             enableStandardInput: standardInput,
+                             xcodePath: xcodePath)
+            } } } }
         }
     }
 
     static func evaluate(_ m: CommandMode) -> Result<CreateOptions, CommandantError<ToyboxError>> {
         return create
             <*> m <| Option(key: "platform", defaultValue: Platform.iOS, usage: "Target platform (ios/macos/tvos)")
+            <*> m <| Option<String?>(key: "xcode-path", defaultValue: nil, usage: "Xcode path to open with")
             <*> m <| Argument(defaultValue: [], usage: "Playground file name to create")
             <*> m <| Switch(flag: "f", key: "force", usage: "Whether to overwrite existing playground")
             <*> m <| Switch(key: "no-open", usage: "Whether to open new playground")
@@ -60,7 +67,8 @@ struct CreateCommand: CommandProtocol {
             }
 
             if !options.noOpen {
-                _ = handler.open(playground.name)
+                _ = handler.open(playground.name,
+                                 with: options.xcodePath)
             }
             return .success()
         case let .failure(error):
