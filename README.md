@@ -8,6 +8,13 @@
 
 Toybox made easy to manage Xcode Playgrounds.
 
+You can create and open Xcode Playground from CLI.
+
+```
+$ toybox create Snippet
+# Generate ~/.toybox/Snippet.playground and open with Xcode
+```
+
 This product is under development so interfaces might change.
 
 ## Before Toybox
@@ -40,10 +47,10 @@ Download installer from [Releases](https://github.com/giginet/Toybox/releases/do
 ### Create new Playground
 
 ```sh
-# Create new Playground for iOS named with timestamp
-$ toybox create
 # Create 'UIKitDemo.playground' for iOS
 $ toybox create UIKitDemo
+# Create new Playground named with timestamp
+$ toybox create
 # Create 'SpriteKit.playground' for macOS
 $ toybox create SpriteKitDemo --platform macos
 # Overwrite existing playground 'UIKitDemo'
