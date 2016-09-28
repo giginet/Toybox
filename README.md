@@ -21,6 +21,8 @@ $ brew tap giginet/toybox
 $ brew install giginet/toybox/toybox
 ```
 
+Xcode 8 is required.
+
 ## Features
 
 ### Create new Playground
@@ -68,10 +70,18 @@ $ toybox version
 $ toybox root
 ```
 
-# Extra Usage
+## Extra Usage
 
 Open existing playgrouds with [peco](https://github.com/peco/peco)
 
 ```sh
 toybox list | peco | sed -E 's/\(.*\)$//g' | xargs toybox open
 ```
+
+## Author
+
+giginet <<giginet.net@gmail.com>>
+
+## License
+
+MIT License
