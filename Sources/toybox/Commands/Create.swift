@@ -29,8 +29,8 @@ struct CreateOptions: OptionsProtocol {
             <*> m <| Option(key: "platform", defaultValue: Platform.iOS, usage: "Target platform (ios/macos/tvos)")
             <*> m <| Argument(defaultValue: [], usage: "Playground file name to create")
             <*> m <| Switch(flag: "f", key: "force", usage: "Whether to overwrite existing playground")
-            <*> m <| Switch(flag: "s", key: "no-open", usage: "Whether to open new playground")
-            <*> m <| Switch(flag: "i", key: "input", usage: "Whether to enable standard input")
+            <*> m <| Switch(key: "no-open", usage: "Whether to open new playground")
+            <*> m <| Switch(key: "input", usage: "Whether to enable standard input")
     }
 }
 

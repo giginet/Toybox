@@ -37,9 +37,9 @@ $ toybox create SpriteKitDemo --platform macos
 # Overwrite existing playground 'UIKitDemo'
 $ toybox create UIKitDemo -f
 # Create but don't open with Xcode
-$ toybox create UIKitDemo -s
+$ toybox create UIKitDemo --no-open
 # Create Playground from standard input
-$ echo 'print("Hello World")' | toybox create -i
+$ echo 'print("Hello World")' | toybox create --input
 ```
 
 Created Playgrounds will be saved under `$HOME/.toybox`
