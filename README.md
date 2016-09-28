@@ -20,6 +20,8 @@ This product is under development so interfaces might change.
 
 ## Installation
 
+### Homebrew
+
 You can install Toybox via [Homebrew](http://brew.sh/index.html).
 
 ```sh
@@ -28,6 +30,10 @@ $ brew install giginet/toybox/toybox
 ```
 
 Xcode 8 is required.
+
+### Installer
+
+Download installer from [Releases](https://github.com/giginet/Toybox/releases/download/0.1.0/toybox.pkg)
 
 ## Features
 
