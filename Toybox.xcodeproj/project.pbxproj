@@ -10,7 +10,6 @@
 		071B61EA1D8F3A8D00F6B0B5 /* ToyboxKit.framework in Resources */ = {isa = PBXBuildFile; fileRef = 0785B9B21D858CFF0005AD4B /* ToyboxKit.framework */; };
 		072279D51D99A70800DB3E80 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279D01D99A70800DB3E80 /* Errors.swift */; };
 		072279D61D99A70800DB3E80 /* Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279D11D99A70800DB3E80 /* Handler.swift */; };
-		072279D71D99A70800DB3E80 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 072279D21D99A70800DB3E80 /* Info.plist */; };
 		072279D81D99A70800DB3E80 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279D31D99A70800DB3E80 /* Playground.swift */; };
 		072279D91D99A70800DB3E80 /* ToyboxKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 072279D41D99A70800DB3E80 /* ToyboxKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		072279E91D99A72100DB3E80 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279DC1D99A72100DB3E80 /* Create.swift */; };
@@ -19,11 +18,9 @@
 		072279EC1D99A72100DB3E80 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279DF1D99A72100DB3E80 /* Root.swift */; };
 		072279ED1D99A72100DB3E80 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279E01D99A72100DB3E80 /* Version.swift */; };
 		072279EE1D99A72100DB3E80 /* Components.plist in Resources */ = {isa = PBXBuildFile; fileRef = 072279E11D99A72100DB3E80 /* Components.plist */; };
-		072279EF1D99A72100DB3E80 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 072279E21D99A72100DB3E80 /* Info.plist */; };
 		072279F01D99A72100DB3E80 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279E31D99A72100DB3E80 /* main.swift */; };
 		072279F11D99A72100DB3E80 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279E81D99A72100DB3E80 /* Utilities.swift */; };
 		072279FB1D99A73500DB3E80 /* HandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279F81D99A73500DB3E80 /* HandlerTests.swift */; };
-		072279FC1D99A73500DB3E80 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 072279F91D99A73500DB3E80 /* Info.plist */; };
 		072279FD1D99A73500DB3E80 /* PlaygroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072279FA1D99A73500DB3E80 /* PlaygroundTests.swift */; };
 		072279FF1D99A75400DB3E80 /* fixtures in Resources */ = {isa = PBXBuildFile; fileRef = 072279FE1D99A75400DB3E80 /* fixtures */; };
 		07227A011D99A77500DB3E80 /* Templates in Resources */ = {isa = PBXBuildFile; fileRef = 07227A001D99A77500DB3E80 /* Templates */; };
@@ -334,7 +331,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				072279FF1D99A75400DB3E80 /* fixtures in Resources */,
-				072279FC1D99A73500DB3E80 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +339,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				07227A011D99A77500DB3E80 /* Templates in Resources */,
-				072279D71D99A70800DB3E80 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,7 +348,6 @@
 			files = (
 				072279EE1D99A72100DB3E80 /* Components.plist in Resources */,
 				071B61EA1D8F3A8D00F6B0B5 /* ToyboxKit.framework in Resources */,
-				072279EF1D99A72100DB3E80 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,7 +365,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "PATH=$PATH:/usr/local/bin:/opt/brew/bin\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		07227A031D99AA9800DB3E80 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -398,7 +392,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "PATH=$PATH:/usr/local/bin:/opt/brew/bin\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		0785B9BF1D858D480005AD4B /* [Carthage] copy-frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -484,8 +478,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2AWR7Z4WYE;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -503,8 +498,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2AWR7Z4WYE;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -536,6 +532,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -584,6 +581,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -609,16 +607,16 @@
 		0785B9B81D858CFF0005AD4B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 2AWR7Z4WYE;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -641,16 +639,16 @@
 		0785B9B91D858CFF0005AD4B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 2AWR7Z4WYE;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -673,8 +671,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2AWR7Z4WYE;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -693,8 +692,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2AWR7Z4WYE;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",

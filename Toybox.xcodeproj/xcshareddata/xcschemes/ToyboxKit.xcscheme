@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0772C1711D900349006942AC"
+               BuildableName = "ToyboxKitTests.xctest"
+               BlueprintName = "ToyboxKitTests"
+               ReferencedContainer = "container:Toybox.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0785B9B11D858CFF0005AD4B"
+            BuildableName = "ToyboxKit.framework"
+            BlueprintName = "ToyboxKit"
+            ReferencedContainer = "container:Toybox.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
