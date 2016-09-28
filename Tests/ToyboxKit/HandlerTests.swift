@@ -20,6 +20,12 @@ class HandlerTests: XCTestCase {
     let handler = TestingPlaygroundHandler()
     let manager = FileManager()
 
+    override func setUp() {
+        super.setUp()
+
+        _ = handler.bootstrap()
+    }
+
     func playgroundURL(for name: String) -> URL {
         return handler.rootURL.appendingPathComponent("\(name).playground")
     }
