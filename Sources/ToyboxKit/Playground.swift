@@ -9,7 +9,7 @@ public enum PlaygroundError: Error {
 
 public enum Platform: String, ArgumentProtocol {
     public static func from(string: String) -> Platform? {
-        return Platform(rawValue: string)
+        return Platform(rawValue: string.lowercased())
     }
 
     case iOS = "ios"
