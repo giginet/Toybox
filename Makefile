@@ -8,14 +8,14 @@ OUTPUT_FRAMEWORK=ToyboxKit.framework
 OUTPUT_FRAMEWORK_ZIP=ToyboxKit.framework.zip
 
 BUILT_BUNDLE=$(TEMPORARY_FOLDER)/Applications/toybox.app
-CARTHAGEKIT_BUNDLE=$(BUILT_BUNDLE)/Contents/Frameworks/$(OUTPUT_FRAMEWORK)
-CARTHAGE_EXECUTABLE=$(BUILT_BUNDLE)/Contents/MacOS/toybox
+TOYBOXKIT_BUNDLE=$(BUILT_BUNDLE)/Contents/Frameworks/$(OUTPUT_FRAMEWORK)
+TOYBOX_EXECUTABLE=$(BUILT_BUNDLE)/Contents/MacOS/toybox
 
 FRAMEWORKS_FOLDER=/Library/Frameworks
 BINARIES_FOLDER=/usr/local/bin
 
 VERSION_STRING=$(shell agvtool what-marketing-version -terse1)
-COMPONENTS_PLIST=Toybox/Components.plist
+COMPONENTS_PLIST=Sources/toybox/Components.plist
 
 .PHONY: all bootstrap clean install package test uninstall
 
@@ -46,8 +46,8 @@ installables: clean bootstrap
 	xcodebuild $(XCODEFLAGS) install
 
 	mkdir -p "$(TEMPORARY_FOLDER)$(FRAMEWORKS_FOLDER)" "$(TEMPORARY_FOLDER)$(BINARIES_FOLDER)"
-	mv -f "$(CARTHAGEKIT_BUNDLE)" "$(TEMPORARY_FOLDER)$(FRAMEWORKS_FOLDER)/$(OUTPUT_FRAMEWORK)"
-	mv -f "$(CARTHAGE_EXECUTABLE)" "$(TEMPORARY_FOLDER)$(BINARIES_FOLDER)/toybox"
+	mv -f "$(TOYBOXKIT_BUNDLE)" "$(TEMPORARY_FOLDER)$(FRAMEWORKS_FOLDER)/$(OUTPUT_FRAMEWORK)"
+	mv -f "$(TOYBOX_EXECUTABLE)" "$(TEMPORARY_FOLDER)$(BINARIES_FOLDER)/toybox"
 	rm -rf "$(BUILT_BUNDLE)"
 
 prefix_install: installables
