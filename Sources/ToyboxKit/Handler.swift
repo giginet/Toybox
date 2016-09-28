@@ -18,7 +18,7 @@ public protocol TemplateLoaderType {
 }
 
 public protocol PlaygroundOpenerType {
-    static func open(at path: URL)
+    static func open(at path: URL, with xcodePath: URL?)
 }
 
 public struct FileSystemWorkspace: WorkspaceType {
@@ -42,9 +42,17 @@ public struct PackagedTemplateLoader: TemplateLoaderType {
 }
 
 public struct XcodeOpener: PlaygroundOpenerType {
-    public static func open(at path: URL) {
-        let workspace = NSWorkspace.shared()
-        workspace.open(path)
+    public static func open(at path: URL, with xcodePath: URL? = nil) {
+        if let xcodePath = xcodePath {
+            let workspace = NSWorkspace.shared()
+            _ = try? workspace.open([path],
+                                    withApplicationAt: xcodePath,
+                                    options: [],
+                                    configuration: [:])
+        } else {
+            let workspace = NSWorkspace.shared()
+            workspace.open(path)
+        }
     }
 }
 
@@ -103,10 +111,10 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         return .success(playground)
     }
 
-    public func open(_ name: String) -> Result<(), ToyboxError> {
+    public func open(_ name: String, with xcodePath: URL? = nil) -> Result<(), ToyboxError> {
         let path = fullPath(from: name)
         if isExist(at: path) {
-            Opener.open(at: path)
+            Opener.open(at: path, with: xcodePath)
         } else {
             return .failure(ToyboxError.openError(name))
         }

@@ -6,16 +6,24 @@ import Result
 struct OpenOptions: OptionsProtocol {
     typealias ClientError = ToyboxError
     let fileName: String
-    let xcodePath: NSURL?
+    let xcodePath: URL?
 
     static func create(_ fileName: String) -> (String?) -> OpenOptions {
-        return { xcodePath in self.init(fileName: fileName, xcodePath: nil) }
+        return { xcodePathString in
+            let xcodePath: URL?
+            if let xcodePathString = xcodePathString {
+                xcodePath = URL(fileURLWithPath: xcodePathString)
+            } else {
+                xcodePath = nil
+            }
+            return self.init(fileName: fileName, xcodePath: xcodePath)
+        }
     }
 
     static func evaluate(_ m: CommandMode) -> Result<OpenOptions, CommandantError<ToyboxError>> {
         return create
             <*> m <| Argument(defaultValue: "", usage: "Playground file name to open")
-            <*> m <| Option<String?>(key: "xcode_path", defaultValue: nil, usage: "Xcode path to open with")
+            <*> m <| Option<String?>(key: "xcode-path", defaultValue: nil, usage: "Xcode path to open with")
     }
 }
 
@@ -29,7 +37,7 @@ struct OpenCommand: CommandProtocol {
     func run(_ options: Options) -> Result<(), ToyboxError> {
         let handler = ToyboxPlaygroundHandler()
         let fileName = options.fileName
-        if case let .failure(error) = handler.open(fileName) {
+        if case let .failure(error) = handler.open(fileName, with: options.xcodePath) {
             return .failure(error)
         }
         return .success()

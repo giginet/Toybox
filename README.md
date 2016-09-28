@@ -58,6 +58,8 @@ $ toybox list --platform ios
 ```sh
 # Open UIKitDemo.playground with default Xcode
 $ toybox open UIKitDemo
+# Open UIKitDemo.playground with specific Xcode
+$ toybox open UIKitDemo --xcode-path /Application/Xcode7.3.app
 ```
 
 ### Other

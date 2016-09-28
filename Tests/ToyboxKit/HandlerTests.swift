@@ -10,7 +10,7 @@ struct TestingStorage: WorkspaceType {
 }
 
 struct DummyOpener: PlaygroundOpenerType {
-    static func open(at path: URL) {
+    static func open(at path: URL, with xcodePath: URL?) {
     }
 }
 
@@ -61,7 +61,7 @@ class HandlerTests: XCTestCase {
         struct AssertOpener: PlaygroundOpenerType {
             static var opened = false
 
-            static func open(at path: URL) {
+            static func open(at path: URL, with xcodePath: URL?) {
                 opened = true
             }
         }
