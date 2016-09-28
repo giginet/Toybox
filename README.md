@@ -2,6 +2,8 @@
 
 Toybox made easy to manage Xcode Playgrounds.
 
+This product is under development so interfaces might change.
+
 ## Before Toybox
 
 ![](Documentation/Images/before.gif)
