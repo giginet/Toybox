@@ -63,6 +63,26 @@ class HandlerTests: XCTestCase {
         XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: "hello").path))
     }
 
+    func testCreateWithAutoremoveOption() {
+        XCTAssertFalse(manager.fileExists(atPath: playgroundURL(for: "hello").path))
+        let result = handler.create("hello", for: .iOS, autoremove: true)
+        if case .failure(_) = result {
+            XCTFail()
+        }
+        XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: "hello.autoremove").path))
+    }
+
+    func testListHidesAutoremoveFile() {
+        _ = handler.create("foo", for: .iOS)
+        _ = handler.create("bar", for: .iOS, autoremove: true)
+
+        guard case let .success(list1) = handler.list() else {
+            XCTFail()
+            return
+        }
+        XCTAssertEqual(list1.count, 1)
+    }
+
     func testOpen() {
         struct AssertOpener: PlaygroundOpenerType {
             static var opened = false
@@ -75,6 +95,18 @@ class HandlerTests: XCTestCase {
         _ = handler.create("foobar", for: .iOS)
         _ = handler.open("foobar")
         XCTAssertTrue(AssertOpener.opened)
+    }
+
+    func testAutoremoveFileWhenHandlerCreated() {
+        let handler = TestingPlaygroundHandler()
+        _ = handler.create("foo", for: .iOS)
+        _ = handler.create("bar", for: .iOS, autoremove: true)
+        XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: "foo").path))
+        XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: "bar.autoremove").path))
+
+        _ = TestingPlaygroundHandler()
+        XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: "foo").path))
+        XCTAssertFalse(manager.fileExists(atPath: playgroundURL(for: "bar.autoremove").path))
     }
 
     override func tearDown() {

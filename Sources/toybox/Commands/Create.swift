@@ -11,9 +11,10 @@ struct CreateOptions: OptionsProtocol {
     let noOpen: Bool
     let enableStandardInput: Bool
     let xcodePath: URL?
+    let autoremove: Bool
 
-    static func create(_ platform: Platform) -> (String?) -> ([String]) -> (Bool) -> (Bool) -> (Bool) -> CreateOptions {
-        return { xcodePathString in { fileNames in { force in { noOpen in { standardInput in
+    static func create(_ platform: Platform) -> (String?) -> ([String]) -> (Bool) -> (Bool) -> (Bool) -> (Bool) -> CreateOptions {
+        return { xcodePathString in { fileNames in { force in { noOpen in { standardInput in { autoremove in
             let xcodePath: URL?
             if let xcodePathString = xcodePathString {
                 xcodePath = URL(fileURLWithPath: xcodePathString)
@@ -25,8 +26,9 @@ struct CreateOptions: OptionsProtocol {
                              force: force,
                              noOpen: noOpen,
                              enableStandardInput: standardInput,
-                             xcodePath: xcodePath)
-            } } } }
+                             xcodePath: xcodePath,
+                             autoremove: autoremove)
+            } } } } }
         }
     }
 
@@ -38,6 +40,7 @@ struct CreateOptions: OptionsProtocol {
             <*> m <| Switch(flag: "f", key: "force", usage: "Whether to overwrite existing playground")
             <*> m <| Switch(key: "no-open", usage: "Whether to open new playground")
             <*> m <| Switch(key: "input", usage: "Whether to enable standard input")
+            <*> m <| Switch(key: "rm", usage: "Remove playground file automatically")
     }
 }
 
@@ -55,7 +58,7 @@ struct CreateCommand: CommandProtocol {
         }
 
         let fileName = options.fileName
-        switch handler.create(fileName, for: options.platform, force: options.force) {
+        switch handler.create(fileName, for: options.platform, force: options.force, autoremove: options.autoremove) {
         case let .success(playground):
 
             if options.enableStandardInput {
