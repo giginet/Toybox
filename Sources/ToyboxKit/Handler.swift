@@ -57,14 +57,11 @@ public struct XcodeOpener: PlaygroundOpenerType {
 }
 
 public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoaderType, Opener: PlaygroundOpenerType> {
-    private let autoremoveSuffix = ".autoremove"
-
     public var rootURL: URL {
         return Workspace.rootURL
     }
 
     public init() {
-        executeAutoremove()
     }
 
     public func bootstrap() -> Result<(), ToyboxError> {
@@ -80,27 +77,22 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
     }
 
     public func list(for platform: Platform? = nil) -> Result<[String], ToyboxError> {
-        var filteredPlaygrounds: [Playground]
+        let filteredPlaygrounds: [Playground]
         if let platform = platform {
             filteredPlaygrounds = playgrounds.filter { $0.platform == platform }
         } else {
             filteredPlaygrounds = playgrounds
         }
-        filteredPlaygrounds = filteredPlaygrounds.filter { !$0.name.hasSuffix(autoremoveSuffix) }
-
         return .success(filteredPlaygrounds.map { String(describing: $0) })
     }
 
-    public func create(_ name: String?, for platform: Platform, force: Bool = false, autoremove: Bool = false) -> Result<Playground, ToyboxError> {
-        var baseName: String = name ?? generateDefaultFileName()
-        if autoremove {
-            baseName = baseName.appending(autoremoveSuffix)
-        }
-        let targetPath = fullPath(from: baseName)
+    public func create(_ name: String?, for platform: Platform, force: Bool = false, temporary: Bool = false) -> Result<Playground, ToyboxError> {
+        let baseName: String = name ?? generateDefaultFileName()
+        let targetPath = fullPath(from: baseName, temporary: temporary)
 
         if isExist(at: targetPath) {
             do {
-                if force {
+                if force || temporary {
                     let manager = FileManager()
                     try manager.removeItem(at: targetPath)
                 } else {
@@ -110,7 +102,7 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
                 return .failure(ToyboxError.createError(baseName))
             }
         }
-        guard case let .success(createdURL) = copyTemplate(of: platform, for: "\(baseName).playground") else {
+        guard case let .success(createdURL) = copyTemplate(of: platform, for: baseName, temporary: temporary) else {
             return .failure(ToyboxError.createError(baseName))
         }
         guard case let .success(playground) = Playground.load(from: createdURL) else {
@@ -119,8 +111,8 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         return .success(playground)
     }
 
-    public func open(_ name: String, with xcodePath: URL? = nil) -> Result<(), ToyboxError> {
-        let path = fullPath(from: name)
+    public func open(_ name: String, with xcodePath: URL? = nil, temporary: Bool = false) -> Result<(), ToyboxError> {
+        let path = fullPath(from: name, temporary: temporary)
         if isExist(at: path) {
             Opener.open(at: path, with: xcodePath)
         } else {
@@ -129,16 +121,20 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         return .success()
     }
 
-    private func fullPath(from name: String) -> URL {
-        return Workspace.rootURL.appendingPathComponent("\(name).playground")
+    private func fullPath(from name: String, temporary: Bool = false) -> URL {
+        if temporary {
+            return temporaryDirectory.appendingPathComponent("\(name).playground")
+        } else {
+            return Workspace.rootURL.appendingPathComponent("\(name).playground")
+        }
     }
 
     private func templatePath(of platform: Platform) -> URL {
         return Loader.templatePath(of: platform)
     }
 
-    private func copyTemplate(of platform: Platform, for name: String) -> Result<URL, ToyboxError> {
-        let destinationPath = Workspace.rootURL.appendingPathComponent(name)
+    private func copyTemplate(of platform: Platform, for name: String, temporary: Bool = false) -> Result<URL, ToyboxError> {
+        let destinationPath = fullPath(from: name, temporary: temporary)
         let sourcePath = templatePath(of: platform)
         let manager = FileManager()
         do {
@@ -179,10 +175,12 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         }
     }
 
-    private func executeAutoremove() {
-        playgrounds
-            .filter { $0.name.hasSuffix(autoremoveSuffix) }
-            .forEach { try? FileManager.default.removeItem(at: $0.path) }
+    private var temporaryDirectory: URL {
+        if #available(OSX 10.12, *) {
+            return FileManager.default.temporaryDirectory
+        } else {
+            return URL(fileURLWithPath: NSTemporaryDirectory())
+        }
     }
 }
 

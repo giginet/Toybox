@@ -30,6 +30,14 @@ class HandlerTests: XCTestCase {
         return handler.rootURL.appendingPathComponent("\(name).playground")
     }
 
+    func temporaryPlaygroundURL(for name: String) -> URL {
+        if #available(OSX 10.12, *) {
+            return manager.temporaryDirectory.appendingPathComponent("\(name).playground")
+        } else {
+            return URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(name).playground")
+        }
+    }
+
     func testList() {
         _ = handler.bootstrap()
         guard case let .success(list0) = handler.list() else {
@@ -63,18 +71,15 @@ class HandlerTests: XCTestCase {
         XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: "hello").path))
     }
 
-    func testCreateWithAutoremoveOption() {
+    func testCreateWithTemporaryOption() {
+        _ = handler.create("hello", for: .iOS, temporary: true)
+        XCTAssertTrue(manager.fileExists(atPath: temporaryPlaygroundURL(for: "hello").path))
         XCTAssertFalse(manager.fileExists(atPath: playgroundURL(for: "hello").path))
-        let result = handler.create("hello", for: .iOS, autoremove: true)
-        if case .failure(_) = result {
-            XCTFail()
-        }
-        XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: "hello.autoremove").path))
     }
 
-    func testListHidesAutoremoveFile() {
+    func testListDoesNotShowTemporaryFile() {
         _ = handler.create("foo", for: .iOS)
-        _ = handler.create("bar", for: .iOS, autoremove: true)
+        _ = handler.create("bar", for: .iOS, temporary: true)
 
         guard case let .success(list1) = handler.list() else {
             XCTFail()
@@ -97,16 +102,18 @@ class HandlerTests: XCTestCase {
         XCTAssertTrue(AssertOpener.opened)
     }
 
-    func testAutoremoveFileWhenHandlerCreated() {
-        let handler = TestingPlaygroundHandler()
-        _ = handler.create("foo", for: .iOS)
-        _ = handler.create("bar", for: .iOS, autoremove: true)
-        XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: "foo").path))
-        XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: "bar.autoremove").path))
+    func testOpenTemporaryFile() {
+        struct AssertOpener: PlaygroundOpenerType {
+            static var opened = false
 
-        _ = TestingPlaygroundHandler()
-        XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: "foo").path))
-        XCTAssertFalse(manager.fileExists(atPath: playgroundURL(for: "bar.autoremove").path))
+            static func open(at path: URL, with xcodePath: URL?) {
+                opened = true
+            }
+        }
+        let handler = PlaygroundHandler<TestingStorage, PackagedTemplateLoader, AssertOpener>()
+        _ = handler.create("foobar", for: .iOS, temporary: true)
+        _ = handler.open("foobar", temporary: true)
+        XCTAssertTrue(AssertOpener.opened)
     }
 
     override func tearDown() {
