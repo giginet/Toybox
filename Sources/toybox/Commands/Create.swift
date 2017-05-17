@@ -40,7 +40,7 @@ struct CreateOptions: OptionsProtocol {
             <*> m <| Switch(flag: "f", key: "force", usage: "Whether to overwrite existing playground")
             <*> m <| Switch(key: "no-open", usage: "Whether to open new playground")
             <*> m <| Switch(key: "input", usage: "Whether to enable standard input")
-            <*> m <| Switch(key: "no-save", usage: "Remove playground file automatically")
+            <*> m <| Switch(flag: "n", key: "no-save", usage: "Remove playground file automatically")
     }
 }
 
