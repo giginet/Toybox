@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/giginet/Toybox.svg?branch=master)](https://travis-ci.org/giginet/Toybox)
 [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/giginet/Toybox/master/LICENSE.md) 
 [![GitHub release](https://img.shields.io/github/release/giginet/Toybox.svg)](https://github.com/giginet/Toybox/releases)
-[![Language](https://img.shields.io/badge/language-Swift%203-orange.svg)](https://swift.org)
+[![Language](https://img.shields.io/badge/language-Swift%203.1-orange.svg)](https://swift.org)
 
 
 Toybox made easy to manage Xcode Playgrounds.
@@ -31,21 +31,12 @@ This product is under development so interfaces might change.
 
 You can install Toybox via [Homebrew](http://brew.sh/index.html).
 
-```sh
+```console
+$ brew tap giginet/toybox
 $ brew install giginet/toybox/toybox
 ```
 
 Xcode 8 is required.
-
-### Installer
-
-Download installer from [Releases](https://github.com/giginet/Toybox/releases/download/0.1.0/toybox.pkg)
-
-If you are using macOS Sierra, you have to disable Gatekeeper with following.
-
-```
-$ sudo spctl --master-disable
-```
 
 ## Features
 
