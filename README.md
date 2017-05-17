@@ -62,6 +62,8 @@ $ toybox create SpriteKitDemo --platform macos
 $ toybox create UIKitDemo -f
 # Create but don't open with Xcode
 $ toybox create UIKitDemo --no-open
+# Create and remove the file automatically
+$ toybox create UIKitDemo --no-save
 # Create and open with specific Xcode
 $ toybox create UIKitDemo --xcode-path /Application/Xcode7.3.app
 # Create Playground from standard input
