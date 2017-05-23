@@ -11,10 +11,9 @@ struct CreateOptions: OptionsProtocol {
     let noOpen: Bool
     let enableStandardInput: Bool
     let xcodePath: URL?
-    let noSave: Bool
 
-    static func create(_ platform: Platform) -> (String?) -> ([String]) -> (Bool) -> (Bool) -> (Bool) -> (Bool) -> CreateOptions {
-        return { xcodePathString in { fileNames in { force in { noOpen in { standardInput in { noSave in
+    static func create(_ platform: Platform) -> (String?) -> ([String]) -> (Bool) -> (Bool) -> (Bool) -> CreateOptions {
+        return { xcodePathString in { fileNames in { force in { noOpen in { standardInput in
             let xcodePath: URL?
             if let xcodePathString = xcodePathString {
                 xcodePath = URL(fileURLWithPath: xcodePathString)
@@ -26,9 +25,8 @@ struct CreateOptions: OptionsProtocol {
                              force: force,
                              noOpen: noOpen,
                              enableStandardInput: standardInput,
-                             xcodePath: xcodePath,
-                             noSave: noSave)
-            } } } } }
+                             xcodePath: xcodePath)
+            } } } }
         }
     }
 
@@ -40,7 +38,6 @@ struct CreateOptions: OptionsProtocol {
             <*> m <| Switch(flag: "f", key: "force", usage: "Whether to overwrite existing playground")
             <*> m <| Switch(key: "no-open", usage: "Whether to open new playground")
             <*> m <| Switch(key: "input", usage: "Whether to enable standard input")
-            <*> m <| Switch(flag: "n", key: "no-save", usage: "Remove playground file automatically")
     }
 }
 
@@ -58,7 +55,8 @@ struct CreateCommand: CommandProtocol {
         }
 
         let fileName = options.fileName
-        switch handler.create(fileName, for: options.platform, force: options.force, temporary: options.noSave) {
+        let temporary = (fileName == nil)
+        switch handler.create(fileName, for: options.platform, force: options.force, temporary: temporary) {
         case let .success(playground):
 
             if options.enableStandardInput {
@@ -72,7 +70,7 @@ struct CreateCommand: CommandProtocol {
             if !options.noOpen {
                 _ = handler.open(playground.name,
                                  with: options.xcodePath,
-                                 temporary: options.noSave)
+                                 temporary: temporary)
             }
             return .success()
         case let .failure(error):
