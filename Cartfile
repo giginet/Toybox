@@ -1,2 +1,2 @@
-github "Carthage/Commandant" ~> 0.11
-github "drmohundro/SWXMLHash" ~> 3.0
+github "Carthage/Commandant" ~> 0.12
+github "drmohundro/SWXMLHash" ~> 4.0
