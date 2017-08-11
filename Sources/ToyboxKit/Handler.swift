@@ -44,13 +44,13 @@ public struct PackagedTemplateLoader: TemplateLoaderType {
 public struct XcodeOpener: PlaygroundOpenerType {
     public static func open(at path: URL, with xcodePath: URL? = nil) {
         if let xcodePath = xcodePath {
-            let workspace = NSWorkspace.shared()
+            let workspace = NSWorkspace.shared
             _ = try? workspace.open([path],
                                     withApplicationAt: xcodePath,
                                     options: [],
                                     configuration: [:])
         } else {
-            let workspace = NSWorkspace.shared()
+            let workspace = NSWorkspace.shared
             workspace.open(path)
         }
     }
@@ -73,7 +73,7 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
                 return .failure(ToyboxError.bootstrapError)
             }
         }
-        return .success()
+        return .success(())
     }
 
     public func list(for platform: Platform? = nil) -> Result<[String], ToyboxError> {
@@ -118,7 +118,7 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         } else {
             return .failure(ToyboxError.openError(name))
         }
-        return .success()
+        return .success(())
     }
 
     private func fullPath(from name: String, temporary: Bool = false) -> URL {

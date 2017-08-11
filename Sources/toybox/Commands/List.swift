@@ -33,6 +33,6 @@ struct ListCommand: CommandProtocol {
         case let .failure(error):
             return .failure(error)
         }
-        return .success()
+        return .success(())
     }
 }
