@@ -72,7 +72,7 @@ struct CreateCommand: CommandProtocol {
                                  with: options.xcodePath,
                                  temporary: temporary)
             }
-            return .success()
+            return .success(())
         case let .failure(error):
             return .failure(error)
         }

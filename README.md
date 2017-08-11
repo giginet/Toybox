@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/giginet/Toybox.svg?branch=master)](https://travis-ci.org/giginet/Toybox)
 [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/giginet/Toybox/master/LICENSE.md) 
 [![GitHub release](https://img.shields.io/github/release/giginet/Toybox.svg)](https://github.com/giginet/Toybox/releases)
-[![Language](https://img.shields.io/badge/language-Swift%203.1-orange.svg)](https://swift.org)
+[![Language](https://img.shields.io/badge/language-Swift%204-orange.svg)](https://swift.org)
 
 
 Toybox made easy to manage Xcode Playgrounds.
@@ -35,8 +35,6 @@ You can install Toybox via [Homebrew](http://brew.sh/index.html).
 $ brew tap giginet/toybox
 $ brew install giginet/toybox/toybox
 ```
-
-Xcode 8 is required.
 
 ## Features
 

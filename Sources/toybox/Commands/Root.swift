@@ -13,6 +13,6 @@ struct RootCommand: CommandProtocol {
     func run(_ options: Options) -> Result<(), ToyboxError> {
         let handler = ToyboxPlaygroundHandler()
         toybox.println(object: handler.rootURL.path)
-        return .success()
+        return .success(())
     }
 }
