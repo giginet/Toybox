@@ -7,7 +7,7 @@ matrix:
   include:
   - os: osx
     language: objective-c
-    osx_image: xcode8.3
+    osx_image: xcode9
     script:
     - swiftlint
     - set -o pipefail && xcodebuild test -project Toybox.xcodeproj -scheme ToyboxKitTests -destination 'platform=macOS' | xcpretty -c 
