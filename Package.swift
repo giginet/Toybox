@@ -14,8 +14,8 @@ let package = Package(
             targets: ["ToyboxKit"]),
     ],
     dependencies: [
-        .package(url: "git@github.com:drmohundro/SWXMLHash.git", from: "4.2.0"),
-        .package(url: "git@github.com:Carthage/Commandant.git", from: "0.12.0"),
+        .package(url: "https://github.com/drmohundro/SWXMLHash.git", from: "4.2.0"),
+        .package(url: "https://github.com/Carthage/Commandant.git", from: "0.12.0"),
     ],
     targets: [
         .target(

@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "Commandant",
-        "repositoryURL": "git@github.com:Carthage/Commandant.git",
+        "repositoryURL": "https://github.com/Carthage/Commandant.git",
         "state": {
           "branch": null,
           "revision": "c281992c31c3f41c48b5036c5a38185eaec32626",
@@ -21,7 +21,7 @@
       },
       {
         "package": "SWXMLHash",
-        "repositoryURL": "git@github.com:drmohundro/SWXMLHash.git",
+        "repositoryURL": "https://github.com/drmohundro/SWXMLHash.git",
         "state": {
           "branch": null,
           "revision": "12496b370363034ccc919e1d72a99b9970b4941e",
