@@ -29,7 +29,7 @@ struct ListCommand: CommandProtocol {
         switch handler.list(for: options.platform) {
         case let .success(playgrounds):
             let exportString = playgrounds.joined(separator: "\n")
-            toybox.println(object: exportString)
+            println(object: exportString)
         case let .failure(error):
             return .failure(error)
         }
