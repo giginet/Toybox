@@ -27,7 +27,6 @@ This product is under development so interfaces might change.
 
 ## Installation
 
-
 ### Mint
 
 You can install Toybox via [Mint](https://github.com/yonaskolb/Mint)
