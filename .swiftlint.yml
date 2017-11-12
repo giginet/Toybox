@@ -9,5 +9,5 @@ disabled_rules:
   - nesting
   - line_length
   - force_try
-variable_name:
+identifier_name:
   excluded: m # It's used to parse commandant options

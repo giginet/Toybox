@@ -40,6 +40,6 @@ struct OpenCommand: CommandProtocol {
         if case let .failure(error) = handler.open(fileName, with: options.xcodePath) {
             return .failure(error)
         }
-        return .success()
+        return .success(())
     }
 }

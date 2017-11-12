@@ -12,7 +12,7 @@ public struct VersionCommand: CommandProtocol {
 
     public func run(_ options: NoOptions<ToyboxError>) -> Result<(), ToyboxError> {
         if let versionString = PackagedTemplateLoader.bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
-            toybox.println(object: versionString)
+            println(object: versionString)
             return .success(())
         } else {
             return .failure(ToyboxError.versionError)
