@@ -12,3 +12,5 @@ matrix:
     - swiftlint
     - set -o pipefail && xcodebuild test -project Toybox.xcodeproj -scheme ToyboxKitTests -destination 'platform=macOS' | xcpretty -c 
     - set -o pipefail && xcodebuild build -project Toybox.xcodeproj -scheme toybox -destination 'platform=macOS' | xcpretty -c 
+    - swift build
+    - swift run
