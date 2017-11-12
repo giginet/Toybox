@@ -27,9 +27,17 @@ This product is under development so interfaces might change.
 
 ## Installation
 
-### Homebrew
 
-You can install Toybox via [Homebrew](http://brew.sh/index.html).
+### Mint
+
+You can install Toybox via [Mint](https://github.com/yonaskolb/Mint)
+
+```console
+$ mint install giginet/Toybox
+$ mint run toybox
+```
+
+### Homebrew
 
 ```console
 $ brew tap giginet/toybox
