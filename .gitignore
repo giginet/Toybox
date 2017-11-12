@@ -68,3 +68,4 @@ fastlane/test_output
 
 *.framework.zip
 *.pkg
+*.xcodeproj

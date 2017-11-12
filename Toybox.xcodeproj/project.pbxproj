@@ -170,7 +170,8 @@
 				072279F91D99A73500DB3E80 /* Info.plist */,
 				072279FA1D99A73500DB3E80 /* PlaygroundTests.swift */,
 			);
-			path = ToyboxKit;
+			name = ToyboxKit;
+			path = ToyboxKitTests;
 			sourceTree = "<group>";
 		};
 		0785B96F1D85577A0005AD4B = {
@@ -488,7 +489,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = Tests/ToyboxKit/Info.plist;
+				INFOPLIST_FILE = Tests/ToyboxKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.giginet.ToyboxKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -508,7 +509,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = Tests/ToyboxKit/Info.plist;
+				INFOPLIST_FILE = Tests/ToyboxKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.giginet.ToyboxKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
