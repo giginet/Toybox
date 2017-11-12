@@ -4,12 +4,12 @@ env:
 cache: carthage
 install:
   - carthage update --platform mac
+os: osx
+language: objective
+osx_image: xcode9
 matrix:
-  include:
-  - os: osx
-    language: objective-c
-    osx_image: xcode9
-    script:
+  include: 
+  - script:
     - swiftlint
     - set -o pipefail && xcodebuild test -project Toybox.xcodeproj -scheme ToyboxKitTests -destination 'platform=macOS' | xcpretty -c 
     - set -o pipefail && xcodebuild build -project Toybox.xcodeproj -scheme toybox -destination 'platform=macOS' | xcpretty -c 
