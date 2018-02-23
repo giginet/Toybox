@@ -39,7 +39,7 @@ $ mint run toybox
 ### Homebrew
 
 ```console
-$ brew tap giginet/toybox
+$ brew tap giginet/toybox https://github.com/giginet/Toybox.git
 $ brew install giginet/toybox/toybox
 ```
 
