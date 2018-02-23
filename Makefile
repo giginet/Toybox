@@ -1,3 +1,4 @@
+VERSION = 1.0.0
 TEMPORARY_FOLDER?=/tmp/Toybox.dst
 PREFIX?=/usr/local
 
@@ -17,7 +18,11 @@ BINARIES_FOLDER=/usr/local/bin
 VERSION_STRING=$(shell agvtool what-marketing-version -terse1)
 COMPONENTS_PLIST=Sources/toybox/Components.plist
 
-.PHONY: all bootstrap clean install package test uninstall
+REPO=https://github.com/giginet/Toybox
+RELEASE_TAR = $(REPO)/archive/$(VERSION).tar.gz
+SHA = $(shell curl -L -s $(RELEASE_TAR) | shasum -a 256 | sed 's/ .*//')
+
+.PHONY: all bootstrap clean install package test uninstall update_brew
 
 all: bootstrap
 	xcodebuild $(XCODEFLAGS) build
@@ -66,3 +71,7 @@ package: installables
 		"$(OUTPUT_PACKAGE)"
 	
 	(cd "$(TEMPORARY_FOLDER)$(FRAMEWORKS_FOLDER)" && zip -q -r --symlinks - "$(OUTPUT_FRAMEWORK)") > "$(OUTPUT_FRAMEWORK_ZIP)"
+
+update_brew:
+	sed -i '' 's|\(url ".*/archive/\)\(.*\)\(.tar\)|\1$(VERSION)\3|' Formula/toybox.rb
+	sed -i '' 's|\(sha256 "\)\(.*\)\("\)|\1$(SHA)\3|' Formula/toybox.rb
