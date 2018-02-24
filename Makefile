@@ -22,12 +22,13 @@ REPO=https://github.com/giginet/Toybox
 RELEASE_TAR = $(REPO)/archive/$(VERSION).tar.gz
 SHA = $(shell curl -L -s $(RELEASE_TAR) | shasum -a 256 | sed 's/ .*//')
 
-.PHONY: all bootstrap clean install package test uninstall update_brew
+.PHONY: all bootstrap clean install package test uninstall update_brew make_bottle
 
 all: bootstrap
 	xcodebuild $(XCODEFLAGS) build
 
 bootstrap:
+	echo `pwd`
 	git submodule update --init --recursive
 	carthage update --platform macOS
 
@@ -38,7 +39,7 @@ clean:
 	rm -f "$(OUTPUT_PACKAGE)"
 	rm -f "$(OUTPUT_FRAMEWORK_ZIP)"
 	rm -rf "$(TEMPORARY_FOLDER)"
-	xcodebuild $(XCODEFLAGS) clean
+	xcodebuild clean
 
 install: package
 	sudo installer -pkg Toybox.pkg -target /
@@ -75,3 +76,9 @@ package: installables
 update_brew:
 	sed -i '' 's|\(url ".*/archive/\)\(.*\)\(.tar\)|\1$(VERSION)\3|' Formula/toybox.rb
 	sed -i '' 's|\(sha256 "\)\(.*\)\("\)|\1$(SHA)\3|' Formula/toybox.rb
+
+make_bottle:
+	brew tap giginet/toybox file://`pwd`
+	brew install giginet/toybox/toybox --verbose --build-bottle
+	brew bottle toybox
+
