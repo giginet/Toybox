@@ -2,9 +2,7 @@ class Toybox < Formula
   desc "Xcode Playground management made easy"
   homepage "https://github.com/giginet/Toybox"
   url "https://github.com/giginet/Toybox.git",
-      :tag => "1.0.1",
-      :revision => "593db82fa3d52ded01b1710917a57a62c5f12e4b",
-      :shallow => false
+      :tag => "1.0.1"
   head "https://github.com/giginet/Toybox.git", :shallow => false
  
   bottle do
