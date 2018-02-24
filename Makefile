@@ -78,6 +78,7 @@ update_brew:
 	sed -i '' 's|\(sha256 "\)\(.*\)\("\)|\1$(SHA)\3|' Formula/toybox.rb
 
 make_bottle:
+	brew untap giginet/toybox
 	brew tap giginet/toybox file://`pwd`
 	brew install giginet/toybox/toybox --verbose --build-bottle
 	brew bottle toybox

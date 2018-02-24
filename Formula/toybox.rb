@@ -3,7 +3,7 @@ class Toybox < Formula
   homepage "https://github.com/giginet/Toybox"
   url "https://github.com/giginet/Toybox.git",
       :tag => "1.0.0",
-      :revision => "a020c486436870bcf58b376b661cad4c7b2998d2",
+      :revision => "b395e47407590297d37a2ea2c15c2f87512bdb25",
       :shallow => false
   head "https://github.com/giginet/Toybox.git", :shallow => false
  
