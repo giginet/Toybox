@@ -1,4 +1,4 @@
-### https://raw.github.com/github/gitignore/d1caffed352607b5415e9e0e827f4770eb39e316/Swift.gitignore
+### https://raw.github.com/github/gitignore/4bff4a2986af526650f1d329d97047dc1fa87599/Swift.gitignore
 
 # Xcode
 #
@@ -21,7 +21,8 @@ xcuserdata/
 
 ## Other
 *.moved-aside
-*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
 
 ## Obj-C/Swift specific
 *.hmap
@@ -37,6 +38,8 @@ playground.xcworkspace
 #
 # Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
 # Packages/
+# Package.pins
+# Package.resolved
 .build/
 
 # CocoaPods
@@ -50,7 +53,7 @@ playground.xcworkspace
 Carthage
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
-Carthage/Checkouts
+# Carthage/Checkouts
 
 Carthage/Build
 
@@ -59,12 +62,11 @@ Carthage/Build
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
 # screenshots whenever they are needed.
 # For more information about the recommended setup visit:
-# https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Gitignore.md
+# https://docs.fastlane.tools/best-practices/source-control/#source-control
 
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 
-*.framework.zip
-*.pkg
+
