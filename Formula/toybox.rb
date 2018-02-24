@@ -1,15 +1,9 @@
 class Toybox < Formula
   desc "Xcode Playground management made easy"
   homepage "https://github.com/giginet/Toybox"
-  url "https://github.com/giginet/Toybox.git",
-      :tag => "1.0.1"
-  head "https://github.com/giginet/Toybox.git", :shallow => false
- 
-  bottle do
-    cellar :any_skip_relocation
-    root_url "https://github.com/giginet/Toybox/releases/download/1.0.0"
-    sha256 "bcc9599a336a0043fb4eb0a48d2318b3db64ff111c7de8736d40b9deca3f37fa" => :sierra
-  end
+  url "https://github.com/giginet/Toybox/archive/1.0.0.tar.gz"
+  sha256 "bcc9599a336a0043fb4eb0a48d2318b3db64ff111c7de8736d40b9deca3f37fa"
+  head "https://github.com/giginet/Toybox.git"
 
   depends_on :xcode
   depends_on 'carthage' => :build

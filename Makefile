@@ -39,7 +39,7 @@ clean:
 	rm -f "$(OUTPUT_PACKAGE)"
 	rm -f "$(OUTPUT_FRAMEWORK_ZIP)"
 	rm -rf "$(TEMPORARY_FOLDER)"
-	xcodebuild clean
+	xcodebuild $(XCODEFLAGS) clean
 
 install: package
 	sudo installer -pkg Toybox.pkg -target /
@@ -78,7 +78,6 @@ update_brew:
 	sed -i '' 's|\(sha256 "\)\(.*\)\("\)|\1$(SHA)\3|' Formula/toybox.rb
 
 make_bottle:
-	brew untap giginet/toybox
 	brew tap giginet/toybox file://`pwd`
 	brew install giginet/toybox/toybox --verbose --build-bottle
 	brew bottle toybox
