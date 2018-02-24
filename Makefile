@@ -1,4 +1,4 @@
-VERSION = 1.0.0
+VERSION = 1.0.1
 TEMPORARY_FOLDER?=/tmp/Toybox.dst
 PREFIX?=/usr/local
 
@@ -28,7 +28,6 @@ all: bootstrap
 	xcodebuild $(XCODEFLAGS) build
 
 bootstrap:
-	echo `pwd`
 	git submodule update --init --recursive
 	carthage update --platform macOS
 
