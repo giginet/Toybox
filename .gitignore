@@ -69,4 +69,5 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 
-
+# Homebrew bottle
+*.tar.gz

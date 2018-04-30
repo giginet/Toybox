@@ -27,20 +27,21 @@ This product is under development so interfaces might change.
 
 ## Installation
 
-### Mint
+### Homebrew
+
+```console
+$ brew tap giginet/toybox https://github.com/giginet/Toybox.git
+$ brew install giginet/toybox/toybox
+$ toybox version
+```
+
+### Mint(Experimental)
 
 You can install Toybox via [Mint](https://github.com/yonaskolb/Mint)
 
 ```console
 $ mint install giginet/Toybox
 $ mint run toybox
-```
-
-### Homebrew
-
-```console
-$ brew tap giginet/toybox https://github.com/giginet/Toybox.git
-$ brew install giginet/toybox/toybox
 ```
 
 ## Features
