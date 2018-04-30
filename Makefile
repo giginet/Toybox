@@ -28,7 +28,6 @@ all: bootstrap
 	xcodebuild $(XCODEFLAGS) build
 
 bootstrap:
-	git submodule update --init --recursive
 	carthage update --platform macOS
 
 test: clean bootstrap
