@@ -78,5 +78,5 @@ update_brew:
 make_bottle:
 	brew tap giginet/toybox file://`pwd`
 	brew install giginet/toybox/toybox --verbose --build-bottle
-	brew bottle toybox
+	brew bottle giginet/toybox/toybox
 
