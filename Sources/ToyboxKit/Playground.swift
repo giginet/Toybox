@@ -64,9 +64,9 @@ public struct Playground: CustomStringConvertible {
             let platform: Platform = Platform(rawValue: targetPlatform) else {
                 return .failure(PlaygroundError.loadError)
         }
-        if let playground = try? Playground(platform:platform,
-                                        version: playgroundElement.value(ofAttribute: "version"),
-                                        path: path) {
+        if let playground = try? Playground(platform: platform,
+                                            version: playgroundElement.value(ofAttribute: "version"),
+                                            path: path) {
             return .success(playground)
         }
         return .failure(PlaygroundError.loadError)

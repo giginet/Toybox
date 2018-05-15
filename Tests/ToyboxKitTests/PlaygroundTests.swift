@@ -53,7 +53,7 @@ class PlaygroundTests: XCTestCase {
             let contents = String(data: data, encoding: .utf8)
             XCTAssertEqual(contents, "var str = \"Hello, playground\"\n")
         } else {
-            XCTFail()
+            XCTFail("Playground content can be parsed.")
         }
     }
 
@@ -65,7 +65,7 @@ class PlaygroundTests: XCTestCase {
             let contents = String(data: data, encoding: .utf8)
             XCTAssertEqual(contents, "print(\"Hello\")")
         } else {
-            XCTFail()
+            XCTFail("Playground content can be wrote.")
         }
     }
 }

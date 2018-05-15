@@ -41,7 +41,7 @@ class HandlerTests: XCTestCase {
     func testList() {
         _ = handler.bootstrap()
         guard case let .success(list0) = handler.list() else {
-            XCTFail()
+            XCTFail("handler.list should be success")
             return
         }
         XCTAssertTrue(list0.isEmpty)
@@ -50,13 +50,13 @@ class HandlerTests: XCTestCase {
         _ = handler.create("mac", for: .macOS)
 
         guard case let .success(list1) = handler.list() else {
-            XCTFail()
+            XCTFail("handler.list should be success")
             return
         }
         XCTAssertEqual(list1.count, 2)
 
         guard case let .success(list2) = handler.list(for: .macOS) else {
-            XCTFail()
+            XCTFail("handler.list should be success")
             return
         }
         XCTAssertEqual(list2.count, 1)
@@ -66,7 +66,7 @@ class HandlerTests: XCTestCase {
         XCTAssertFalse(manager.fileExists(atPath: playgroundURL(for: "hello").path))
         let result = handler.create("hello", for: .iOS)
         if case .failure(_) = result {
-            XCTFail()
+            XCTFail("handler.list should be failed")
         }
         XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: "hello").path))
     }
@@ -82,7 +82,7 @@ class HandlerTests: XCTestCase {
         _ = handler.create("bar", for: .iOS, temporary: true)
 
         guard case let .success(list1) = handler.list() else {
-            XCTFail()
+            XCTFail("handler.list should be success")
             return
         }
         XCTAssertEqual(list1.count, 1)
