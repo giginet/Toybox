@@ -161,7 +161,7 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
         do {
             let files = try FileManager.default.contentsOfDirectory(atPath: rootURL.path)
             let playgroundPathes = files.filter { $0.hasSuffix("playground") }.map { rootURL.appendingPathComponent($0) }
-            let playgrounds: [Playground] = playgroundPathes.flatMap { path in
+            let playgrounds: [Playground] = playgroundPathes.compactMap { path in
                 switch Playground.load(from: path) {
                 case let .success(playground):
                     return playground
