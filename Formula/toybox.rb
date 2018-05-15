@@ -2,7 +2,7 @@ class Toybox < Formula
   desc "Xcode Playground management made easy"
   homepage "https://github.com/giginet/Toybox"
   url "https://github.com/giginet/Toybox/archive/1.0.1.tar.gz"
-  sha256 "315446308e40c33aa46fca1b2558d14e005d6e91505c50d4dc67cf87d38d7ee1"
+  sha256 "848bb5db02a25af24869c77b54efd49003a4c42f68d47a8bd3821fb7c8f4bdb8"
   head "https://github.com/giginet/Toybox.git"
 
   depends_on :xcode
