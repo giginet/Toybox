@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/giginet/Toybox.svg?branch=master)](https://travis-ci.org/giginet/Toybox)
 [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/giginet/Toybox/master/LICENSE.md) 
 [![GitHub release](https://img.shields.io/github/release/giginet/Toybox.svg)](https://github.com/giginet/Toybox/releases)
-[![Language](https://img.shields.io/badge/language-Swift%204-orange.svg)](https://swift.org)
+[![Language](https://img.shields.io/badge/language-Swift%204.1-orange.svg)](https://swift.org)
 
 
 Toybox made easy to manage Xcode Playgrounds.
@@ -27,6 +27,8 @@ This product is under development so interfaces might change.
 
 ## Installation
 
+Toybox requires High Sierra or above.
+
 ### Homebrew
 
 ```console
@@ -35,14 +37,7 @@ $ brew install giginet/toybox/toybox
 $ toybox version
 ```
 
-### Mint(Experimental)
-
-You can install Toybox via [Mint](https://github.com/yonaskolb/Mint)
-
-```console
-$ mint install giginet/Toybox
-$ mint run toybox
-```
+If you got error on tapping the formula. try `brew untap giginet/toybox` before.
 
 ## Features
 
