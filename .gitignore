@@ -71,3 +71,5 @@ fastlane/test_output
 
 # Homebrew bottle
 *.tar.gz
+
+*.xcodeproj

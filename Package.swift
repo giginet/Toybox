@@ -8,7 +8,7 @@ let package = Package(
     products: [
         .executable(
             name: "toybox",
-            targets: ["Toybox"]),
+            targets: ["toybox"]),
         .library(
             name: "ToyboxKit",
             targets: ["ToyboxKit"]),
@@ -19,7 +19,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Toybox",
+            name: "toybox",
             dependencies: [
                 "ToyboxKit",
                 "Commandant",
@@ -32,6 +32,6 @@ let package = Package(
             ]),
         .testTarget(
             name: "ToyboxKitTests",
-            dependencies: ["Toybox"]),
+            dependencies: ["toybox"]),
     ]
 )
