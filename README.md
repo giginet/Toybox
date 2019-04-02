@@ -98,6 +98,13 @@ Open existing playgrouds with [peco](https://github.com/peco/peco)
 toybox list | peco | sed -E 's/\(.*\)$//g' | xargs toybox open
 ```
 
+## Development
+
+```console
+$ swift package generate-xcodeproj
+$ open Toybox.xcodeproj
+```
+
 ## Author
 
 giginet <<giginet.net@gmail.com>>
