@@ -23,19 +23,19 @@ class PlaygroundBuilder {
     private let contentsFileName = "Contents.swift"
     private let fileManager: FileManager = .default
     private let playgroundVersion = "5.0.0"
-    
+
     enum Error: Swift.Error {
         case invalidPath(URL)
         case creationFailure
     }
-    
+
     func build(for platform: Platform, to destination: URL, contents: String = defaultContent) throws -> URL {
         do {
             try fileManager.createDirectory(at: destination, withIntermediateDirectories: false, attributes: nil)
         } catch {
             throw Error.invalidPath(destination)
         }
-        
+
         let metadataURL = destination.appendingPathComponent(metadataFileName)
         let metadataContent = metadata(version: playgroundVersion, platform: platform).data(using: .utf8)
         guard fileManager.createFile(atPath: metadataURL.path,
@@ -43,7 +43,7 @@ class PlaygroundBuilder {
                                      attributes: nil) else {
                                         throw Error.creationFailure
         }
-        
+
         let contentsURL = destination.appendingPathComponent(contentsFileName)
         let content = contents.data(using: .utf8)
         guard fileManager.createFile(atPath: contentsURL.path,
@@ -51,7 +51,7 @@ class PlaygroundBuilder {
                                      attributes: nil) else {
                                         throw Error.creationFailure
         }
-        
+
         return destination
     }
 }

@@ -37,7 +37,7 @@ public struct XcodeOpener: PlaygroundOpenerType {
 
 public struct PlaygroundHandler<Workspace: WorkspaceType, Opener: PlaygroundOpenerType> {
     private let playgroundBuilder = PlaygroundBuilder()
-    
+
     public var rootURL: URL {
         return Workspace.rootURL
     }
