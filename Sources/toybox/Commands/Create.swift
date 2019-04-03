@@ -9,12 +9,12 @@ struct CreateOptions: OptionsProtocol {
     let platform: Platform
     let force: Bool
     let noOpen: Bool
-    let store: Bool
+    let save: Bool
     let enableStandardInput: Bool
     let xcodePath: URL?
 
     static func create(_ platform: Platform) -> (String?) -> (Bool) -> ([String]) -> (Bool) -> (Bool) -> (Bool) -> CreateOptions {
-        return { xcodePathString in { store in { fileNames in { force in { noOpen in { standardInput in
+        return { xcodePathString in { save in { fileNames in { force in { noOpen in { standardInput in
             let xcodePath: URL?
             if let xcodePathString = xcodePathString {
                 xcodePath = URL(fileURLWithPath: xcodePathString)
@@ -25,7 +25,7 @@ struct CreateOptions: OptionsProtocol {
                              platform: platform,
                              force: force,
                              noOpen: noOpen,
-                             store: store,
+                             save: save,
                              enableStandardInput: standardInput,
                              xcodePath: xcodePath)
             } } } } }
@@ -36,7 +36,7 @@ struct CreateOptions: OptionsProtocol {
         return create
             <*> m <| Option(key: "platform", defaultValue: Platform.iOS, usage: "Target platform (ios/macos/tvos)")
             <*> m <| Option<String?>(key: "xcode-path", defaultValue: nil, usage: "Xcode path to open with")
-            <*> m <| Switch(flag: "s", key: "store", usage: "Whether to save to workspace as anonymous playground")
+            <*> m <| Switch(flag: "s", key: "save", usage: "Whether to save to workspace as anonymous playground")
             <*> m <| Argument(defaultValue: [], usage: "Playground file name to create")
             <*> m <| Switch(flag: "f", key: "force", usage: "Whether to overwrite existing playground")
             <*> m <| Switch(key: "no-open", usage: "Whether to open new playground")
@@ -57,9 +57,8 @@ struct CreateCommand: CommandProtocol {
             return .failure(error)
         }
 
-        let shouldStore = options.store || (options.fileName == nil)
         let kind: ToyboxPlaygroundHandler.NewPlaygroundKind
-        switch (options.store, options.fileName) {
+        switch (options.save, options.fileName) {
         case (false, .some(let fileName)):
             kind = .named(fileName)
         case (true, .some(let fileName)):

@@ -113,6 +113,7 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Opener: PlaygroundOpen
         return .success(playground)
     }
 
+    @discardableResult
     public func open(_ playground: Playground, with xcodePath: URL? = nil) -> Result<(), ToyboxError> {
         let path = playground.path
         if isExist(at: path) {
@@ -122,7 +123,7 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Opener: PlaygroundOpen
         }
         return .success(())
     }
-    
+
     public func playground(for name: String) -> Playground? {
         return playgrounds.first { $0.name == name }
     }
