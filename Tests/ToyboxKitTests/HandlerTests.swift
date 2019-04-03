@@ -2,19 +2,26 @@ import XCTest
 import Cocoa
 @testable import ToyboxKit
 
-struct TestingStorage: WorkspaceType {
+struct TestingStorage: Workspace {
     static var rootURL: URL {
         return URL(fileURLWithPath: NSTemporaryDirectory().appending(".toybox"),
                    isDirectory: true)
     }
 }
 
-struct DummyOpener: PlaygroundOpenerType {
+struct AssertOpener: PlaygroundOpener {
+    static var opened = false
+
     static func open(at path: URL, with xcodePath: URL?) {
+        opened = true
     }
 }
 
-typealias TestingPlaygroundHandler = PlaygroundHandler<TestingStorage, DummyOpener>
+struct TestingDateProvider: DateProvider {
+    static var date: Date = .init(timeIntervalSinceReferenceDate: 0)
+}
+
+typealias TestingPlaygroundHandler = PlaygroundHandler<TestingStorage, TestingDateProvider, AssertOpener>
 
 class HandlerTests: XCTestCase {
     let handler = TestingPlaygroundHandler()
@@ -71,6 +78,18 @@ class HandlerTests: XCTestCase {
         XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: "hello").path))
     }
 
+    func testCreateAnonymous() {
+        XCTAssertFalse(manager.fileExists(atPath: playgroundURL(for: "hello").path))
+        let result = handler.create(.anonymous, for: .iOS)
+        switch result {
+        case .success(let playground):
+            XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: playground.name).path))
+            XCTAssertEqual(playground.name, "20010101090000")
+        case .failure:
+            XCTFail("handler.list should be failed")
+        }
+    }
+
     func testCreateWithTemporaryOption() {
         _ = handler.create(.temporary, for: .iOS)
         XCTAssertTrue(manager.fileExists(atPath: temporaryPlaygroundURL(for: "hello").path))
@@ -89,14 +108,6 @@ class HandlerTests: XCTestCase {
     }
 
     func testOpen() {
-        struct AssertOpener: PlaygroundOpenerType {
-            static var opened = false
-
-            static func open(at path: URL, with xcodePath: URL?) {
-                opened = true
-            }
-        }
-        let handler = PlaygroundHandler<TestingStorage, AssertOpener>()
         let result = handler.create(.named("foobar"), for: .iOS)
         switch result {
         case .success(let playground):
@@ -108,14 +119,6 @@ class HandlerTests: XCTestCase {
     }
 
     func testOpenTemporaryFile() {
-        struct AssertOpener: PlaygroundOpenerType {
-            static var opened = false
-
-            static func open(at path: URL, with xcodePath: URL?) {
-                opened = true
-            }
-        }
-        let handler = PlaygroundHandler<TestingStorage, AssertOpener>()
         let result = handler.create(.temporary, for: .iOS)
         switch result {
         case .success(let playground):
