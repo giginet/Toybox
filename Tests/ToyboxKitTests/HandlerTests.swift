@@ -14,7 +14,7 @@ struct DummyOpener: PlaygroundOpenerType {
     }
 }
 
-typealias TestingPlaygroundHandler = PlaygroundHandler<TestingStorage, PackagedTemplateLoader, DummyOpener>
+typealias TestingPlaygroundHandler = PlaygroundHandler<TestingStorage, DummyOpener>
 
 class HandlerTests: XCTestCase {
     let handler = TestingPlaygroundHandler()
@@ -96,7 +96,7 @@ class HandlerTests: XCTestCase {
                 opened = true
             }
         }
-        let handler = PlaygroundHandler<TestingStorage, PackagedTemplateLoader, AssertOpener>()
+        let handler = PlaygroundHandler<TestingStorage, AssertOpener>()
         _ = handler.create("foobar", for: .iOS)
         _ = handler.open("foobar")
         XCTAssertTrue(AssertOpener.opened)
@@ -110,7 +110,7 @@ class HandlerTests: XCTestCase {
                 opened = true
             }
         }
-        let handler = PlaygroundHandler<TestingStorage, PackagedTemplateLoader, AssertOpener>()
+        let handler = PlaygroundHandler<TestingStorage, AssertOpener>()
         _ = handler.create("foobar", for: .iOS, temporary: true)
         _ = handler.open("foobar", temporary: true)
         XCTAssertTrue(AssertOpener.opened)

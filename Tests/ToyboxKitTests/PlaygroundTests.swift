@@ -2,16 +2,11 @@ import XCTest
 @testable import ToyboxKit
 
 class PlaygroundTests: XCTestCase {
-    let bundle = Bundle(for: PlaygroundTests.self)
     let temporaryDirectory: URL = URL(fileURLWithPath: NSTemporaryDirectory())
 
     var iOSTemplatePath: URL {
-        guard let iOSPathString = bundle.path(forResource: "ios",
-                                              ofType: "playground",
-                                              inDirectory: "fixtures") else {
-                                                fatalError()
-        }
-        let iOSPath = URL(fileURLWithPath: iOSPathString)
+        let baseDir = URL(fileURLWithPath: #file).deletingLastPathComponent()
+        let iOSPath = baseDir.appendingPathComponent("../../Fixtures/ios.playground")
         return iOSPath
     }
 

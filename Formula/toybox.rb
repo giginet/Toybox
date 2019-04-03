@@ -6,7 +6,6 @@ class Toybox < Formula
   head "https://github.com/giginet/Toybox.git"
 
   depends_on :xcode
-  depends_on 'carthage' => :build
 
   bottle do
     cellar :any_skip_relocation
@@ -16,8 +15,8 @@ class Toybox < Formula
 
   def install
     system "make", "prefix_install", "PREFIX=#{prefix}"
-    bash_completion.install "Sources/Scripts/toybox-bash-completion" => "toybox"
-    zsh_completion.install "Sources/Scripts/toybox-zsh-completion" => "_toybox"
+    bash_completion.install "shell-completions/toybox-bash-completion" => "toybox"
+    zsh_completion.install "shell-completions/toybox-zsh-completion" => "_toybox"
   end
 
   test do

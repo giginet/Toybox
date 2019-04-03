@@ -3,18 +3,8 @@ import Cocoa
 import Commandant
 import Result
 
-internal class BundleWrapper {
-    public static var bundle: Bundle {
-        return Bundle(for: BundleWrapper.self)
-    }
-}
-
 public protocol WorkspaceType {
     static var rootURL: URL { get }
-}
-
-public protocol TemplateLoaderType {
-    static func templatePath(of platform: Platform) -> URL
 }
 
 public protocol PlaygroundOpenerType {
@@ -28,17 +18,6 @@ public struct FileSystemWorkspace: WorkspaceType {
         let homeDirectoryPath = URL(fileURLWithPath: NSHomeDirectory())
         return homeDirectoryPath.appendingPathComponent(FileSystemWorkspace.rootDirectoryName, isDirectory: true)
     }()
-}
-
-public struct PackagedTemplateLoader: TemplateLoaderType {
-    public static let bundle = BundleWrapper.bundle
-
-    public static func templatePath(of platform: Platform) -> URL {
-        guard let resourceURL = bundle.resourceURL else {
-            fatalError("Loading template is failure")
-        }
-        return resourceURL.appendingPathComponent("Templates/\(platform.rawValue).playground")
-    }
 }
 
 public struct XcodeOpener: PlaygroundOpenerType {
@@ -56,7 +35,9 @@ public struct XcodeOpener: PlaygroundOpenerType {
     }
 }
 
-public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoaderType, Opener: PlaygroundOpenerType> {
+public struct PlaygroundHandler<Workspace: WorkspaceType, Opener: PlaygroundOpenerType> {
+    private let playgroundBuilder = PlaygroundBuilder()
+
     public var rootURL: URL {
         return Workspace.rootURL
     }
@@ -102,10 +83,13 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
                 return .failure(ToyboxError.createError(baseName))
             }
         }
-        guard case let .success(createdURL) = copyTemplate(of: platform, for: baseName, temporary: temporary) else {
+        let playgroundURL: URL
+        do {
+            playgroundURL = try playgroundBuilder.build(for: platform, to: targetPath)
+        } catch {
             return .failure(ToyboxError.createError(baseName))
         }
-        guard case let .success(playground) = Playground.load(from: createdURL) else {
+        guard case let .success(playground) = Playground.load(from: playgroundURL) else {
             return .failure(ToyboxError.createError(baseName))
         }
         return .success(playground)
@@ -126,22 +110,6 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
             return temporaryDirectory.appendingPathComponent("\(name).playground")
         } else {
             return Workspace.rootURL.appendingPathComponent("\(name).playground")
-        }
-    }
-
-    private func templatePath(of platform: Platform) -> URL {
-        return Loader.templatePath(of: platform)
-    }
-
-    private func copyTemplate(of platform: Platform, for name: String, temporary: Bool = false) -> Result<URL, ToyboxError> {
-        let destinationPath = fullPath(from: name, temporary: temporary)
-        let sourcePath = templatePath(of: platform)
-        let manager = FileManager()
-        do {
-            try manager.copyItem(at: sourcePath, to: destinationPath)
-            return .success(destinationPath)
-        } catch {
-            return .failure(ToyboxError.createError(name))
         }
     }
 
@@ -184,4 +152,4 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Loader: TemplateLoader
     }
 }
 
-public typealias ToyboxPlaygroundHandler = PlaygroundHandler<FileSystemWorkspace, PackagedTemplateLoader, XcodeOpener>
+public typealias ToyboxPlaygroundHandler = PlaygroundHandler<FileSystemWorkspace, XcodeOpener>

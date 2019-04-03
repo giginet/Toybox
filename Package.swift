@@ -1,4 +1,4 @@
-// swift-tools-version:4.0
+// swift-tools-version:4.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -8,18 +8,18 @@ let package = Package(
     products: [
         .executable(
             name: "toybox",
-            targets: ["Toybox"]),
+            targets: ["toybox"]),
         .library(
             name: "ToyboxKit",
             targets: ["ToyboxKit"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/drmohundro/SWXMLHash.git", from: "4.2.0"),
-        .package(url: "https://github.com/Carthage/Commandant.git", from: "0.12.0"),
+        .package(url: "https://github.com/drmohundro/SWXMLHash.git", from: "4.9.0"),
+        .package(url: "https://github.com/Carthage/Commandant.git", from: "0.15.0"),
     ],
     targets: [
         .target(
-            name: "Toybox",
+            name: "toybox",
             dependencies: [
                 "ToyboxKit",
                 "Commandant",
@@ -32,6 +32,6 @@ let package = Package(
             ]),
         .testTarget(
             name: "ToyboxKitTests",
-            dependencies: ["Toybox"]),
+            dependencies: ["toybox"]),
     ]
 )
