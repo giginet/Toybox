@@ -67,13 +67,31 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Opener: PlaygroundOpen
         return .success(filteredPlaygrounds.map { String(describing: $0) })
     }
 
-    public func create(_ name: String?, for platform: Platform, force: Bool = false, temporary: Bool = false) -> Result<Playground, ToyboxError> {
-        let baseName: String = name ?? generateDefaultFileName()
-        let targetPath = fullPath(from: baseName, temporary: temporary)
+    public enum NewPlaygroundKind {
+        case named(String)
+        case anonymous
+        case temporary
+    }
+
+    public func create(_ kind: NewPlaygroundKind, for platform: Platform, force: Bool = false) -> Result<Playground, ToyboxError> {
+        let baseName: String
+        let shouldSaveToTemporary: Bool
+        switch kind {
+        case .named(let name):
+            baseName = name
+            shouldSaveToTemporary = false
+        case .anonymous:
+            baseName = generateDefaultFileName()
+            shouldSaveToTemporary = false
+        case .temporary:
+            baseName = generateDefaultFileName()
+            shouldSaveToTemporary = true
+        }
+        let targetPath = fullPath(from: baseName, temporary: shouldSaveToTemporary)
 
         if isExist(at: targetPath) {
             do {
-                if force || temporary {
+                if force || shouldSaveToTemporary {
                     let manager = FileManager()
                     try manager.removeItem(at: targetPath)
                 } else {

@@ -9,11 +9,12 @@ struct CreateOptions: OptionsProtocol {
     let platform: Platform
     let force: Bool
     let noOpen: Bool
+    let store: Bool
     let enableStandardInput: Bool
     let xcodePath: URL?
 
-    static func create(_ platform: Platform) -> (String?) -> ([String]) -> (Bool) -> (Bool) -> (Bool) -> CreateOptions {
-        return { xcodePathString in { fileNames in { force in { noOpen in { standardInput in
+    static func create(_ platform: Platform) -> (String?) -> ([String]) -> (Bool) -> (Bool) -> (Bool) -> (Bool) -> CreateOptions {
+        return { xcodePathString in { fileNames in { force in { noOpen in { store in { standardInput in
             let xcodePath: URL?
             if let xcodePathString = xcodePathString {
                 xcodePath = URL(fileURLWithPath: xcodePathString)
@@ -24,9 +25,10 @@ struct CreateOptions: OptionsProtocol {
                              platform: platform,
                              force: force,
                              noOpen: noOpen,
+                             store: store,
                              enableStandardInput: standardInput,
                              xcodePath: xcodePath)
-            } } } }
+            } } } } }
         }
     }
 
@@ -36,6 +38,7 @@ struct CreateOptions: OptionsProtocol {
             <*> m <| Option<String?>(key: "xcode-path", defaultValue: nil, usage: "Xcode path to open with")
             <*> m <| Argument(defaultValue: [], usage: "Playground file name to create")
             <*> m <| Switch(flag: "f", key: "force", usage: "Whether to overwrite existing playground")
+            <*> m <| Switch(flag: "s", key: "store", usage: "Whether to save to workspace as anonymous playground")
             <*> m <| Switch(key: "no-open", usage: "Whether to open new playground")
             <*> m <| Switch(key: "input", usage: "Whether to enable standard input")
     }
@@ -54,11 +57,21 @@ struct CreateCommand: CommandProtocol {
             return .failure(error)
         }
 
-        let fileName = options.fileName
-        let temporary = (fileName == nil)
-        switch handler.create(fileName, for: options.platform, force: options.force, temporary: temporary) {
-        case let .success(playground):
+        let shouldStore = options.store || (options.fileName == nil)
+        let kind: ToyboxPlaygroundHandler.NewPlaygroundKind
+        switch (options.store, options.fileName) {
+        case (false, .some(let fileName)):
+            kind = .named(fileName)
+        case (true, .some(let fileName)):
+            kind = .named(fileName)
+        case (false, .none):
+            kind = .temporary
+        case (true, .none):
+            kind = .anonymous
+        }
 
+        switch handler.create(kind, for: options.platform, force: options.force) {
+        case let .success(playground):
             if options.enableStandardInput {
                 let data = FileHandle.standardInput.readDataToEndOfFile()
                 if data.count > 0 {
@@ -70,7 +83,7 @@ struct CreateCommand: CommandProtocol {
             if !options.noOpen {
                 _ = handler.open(playground.name,
                                  with: options.xcodePath,
-                                 temporary: temporary)
+                                 temporary: shouldStore)
             }
             return .success(())
         case let .failure(error):
