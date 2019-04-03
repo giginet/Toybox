@@ -10,6 +10,12 @@ SHA = $(shell curl -L -s $(RELEASE_TAR) | shasum -a 256 | sed 's/ .*//')
 
 .PHONY: all bootstrap clean install package test uninstall update_brew make_bottle
 
+all: bootstrap
+
+
+bootstrap:
+	swift package generate-xcodeproj
+
 test: clean
 	swift test
 
