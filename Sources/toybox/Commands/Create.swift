@@ -13,8 +13,8 @@ struct CreateOptions: OptionsProtocol {
     let enableStandardInput: Bool
     let xcodePath: URL?
 
-    static func create(_ platform: Platform) -> (String?) -> ([String]) -> (Bool) -> (Bool) -> (Bool) -> (Bool) -> CreateOptions {
-        return { xcodePathString in { fileNames in { force in { noOpen in { store in { standardInput in
+    static func create(_ platform: Platform) -> (String?) -> (Bool) -> ([String]) -> (Bool) -> (Bool) -> (Bool) -> CreateOptions {
+        return { xcodePathString in { store in { fileNames in { force in { noOpen in { standardInput in
             let xcodePath: URL?
             if let xcodePathString = xcodePathString {
                 xcodePath = URL(fileURLWithPath: xcodePathString)
@@ -36,9 +36,9 @@ struct CreateOptions: OptionsProtocol {
         return create
             <*> m <| Option(key: "platform", defaultValue: Platform.iOS, usage: "Target platform (ios/macos/tvos)")
             <*> m <| Option<String?>(key: "xcode-path", defaultValue: nil, usage: "Xcode path to open with")
+            <*> m <| Switch(flag: "s", key: "store", usage: "Whether to save to workspace as anonymous playground")
             <*> m <| Argument(defaultValue: [], usage: "Playground file name to create")
             <*> m <| Switch(flag: "f", key: "force", usage: "Whether to overwrite existing playground")
-            <*> m <| Switch(flag: "s", key: "store", usage: "Whether to save to workspace as anonymous playground")
             <*> m <| Switch(key: "no-open", usage: "Whether to open new playground")
             <*> m <| Switch(key: "input", usage: "Whether to enable standard input")
     }
@@ -81,9 +81,8 @@ struct CreateCommand: CommandProtocol {
             }
 
             if !options.noOpen {
-                _ = handler.open(playground.name,
-                                 with: options.xcodePath,
-                                 temporary: shouldStore)
+                _ = handler.open(playground,
+                                 with: options.xcodePath)
             }
             return .success(())
         case let .failure(error):

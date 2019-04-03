@@ -75,23 +75,23 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Opener: PlaygroundOpen
 
     public func create(_ kind: NewPlaygroundKind, for platform: Platform, force: Bool = false) -> Result<Playground, ToyboxError> {
         let baseName: String
-        let shouldSaveToTemporary: Bool
+        let shouldSave: Bool
         switch kind {
         case .named(let name):
             baseName = name
-            shouldSaveToTemporary = false
+            shouldSave = true
         case .anonymous:
             baseName = generateDefaultFileName()
-            shouldSaveToTemporary = false
+            shouldSave = true
         case .temporary:
             baseName = generateDefaultFileName()
-            shouldSaveToTemporary = true
+            shouldSave = false
         }
-        let targetPath = fullPath(from: baseName, temporary: shouldSaveToTemporary)
+        let targetPath = fullPath(from: baseName, temporary: !shouldSave)
 
         if isExist(at: targetPath) {
             do {
-                if force || shouldSaveToTemporary {
+                if force || !shouldSave {
                     let manager = FileManager()
                     try manager.removeItem(at: targetPath)
                 } else {
@@ -113,14 +113,18 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Opener: PlaygroundOpen
         return .success(playground)
     }
 
-    public func open(_ name: String, with xcodePath: URL? = nil, temporary: Bool = false) -> Result<(), ToyboxError> {
-        let path = fullPath(from: name, temporary: temporary)
+    public func open(_ playground: Playground, with xcodePath: URL? = nil) -> Result<(), ToyboxError> {
+        let path = playground.path
         if isExist(at: path) {
             Opener.open(at: path, with: xcodePath)
         } else {
-            return .failure(ToyboxError.openError(name))
+            return .failure(ToyboxError.openError(playground.name))
         }
         return .success(())
+    }
+    
+    public func playground(for name: String) -> Playground? {
+        return playgrounds.first { $0.name == name }
     }
 
     private func fullPath(from name: String, temporary: Bool = false) -> URL {
