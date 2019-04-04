@@ -1,7 +1,6 @@
 import Cocoa
 import SWXMLHash
-import Commandant
-import Result
+import protocol Commandant.ArgumentProtocol
 
 public enum PlaygroundError: Error {
     case loadError
