@@ -5,7 +5,7 @@ class Toybox < Formula
   sha256 "946ecf32206ee40a0d1fc8846f440019cce157709c22586642a8ad6b08602a01"
   head "https://github.com/giginet/Toybox.git"
 
-  depends_on :xcode
+  depends_on :xcode => ["10.2", :build]
 
   bottle do
     cellar :any_skip_relocation
