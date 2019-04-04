@@ -7,10 +7,10 @@ class Toybox < Formula
 
   depends_on :xcode => ["10.2", :build]
 
+
   bottle do
     cellar :any_skip_relocation
-    root_url "https://github.com/giginet/Toybox/releases/download/2.0.0"
-    sha256 "64c6e7ec4c3d648a76a50ceae3dfcbc3e9860e044c58000bab485bb9eb5fadef" => :high_sierra
+    sha256 "555db9f89edad2ed8ce1e60a145f00cb2dd389145f9b4e25926be59a94976c3b" => :mojave
   end
 
   def install
