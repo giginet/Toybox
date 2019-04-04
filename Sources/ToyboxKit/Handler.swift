@@ -57,14 +57,14 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Opener: PlaygroundOpen
         return .success(())
     }
 
-    public func list(for platform: Platform? = nil) -> Result<[String], ToyboxError> {
+    public func list(for platform: Platform? = nil) -> Result<[Playground], ToyboxError> {
         let filteredPlaygrounds: [Playground]
         if let platform = platform {
             filteredPlaygrounds = playgrounds.filter { $0.platform == platform }
         } else {
             filteredPlaygrounds = playgrounds
         }
-        return .success(filteredPlaygrounds.sorted(by: { $0.creationDate < $1.creationDate }).map { String(describing: $0) })
+        return .success(filteredPlaygrounds.sorted(by: { $0.creationDate < $1.creationDate }))
     }
 
     public func create(_ name: String?, for platform: Platform, force: Bool = false, temporary: Bool = false) -> Result<Playground, ToyboxError> {

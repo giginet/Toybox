@@ -15,6 +15,14 @@ public enum Platform: String, ArgumentProtocol {
     case iOS = "ios"
     case macOS = "macos"
     case tvOS = "tvos"
+    
+    public var displayName: String {
+        switch self {
+        case .iOS: return "iOS"
+        case .macOS: return "macOS"
+        case .tvOS: return "tvOS"
+        }
+    }
 
     public static let name: String = "platform"
 }
@@ -77,6 +85,6 @@ public struct Playground: CustomStringConvertible {
     }
 
     public var description: String {
-        return "\(name) (\(platform))"
+        return "\(name) \(platform.displayName))"
     }
 }

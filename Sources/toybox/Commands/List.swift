@@ -17,6 +17,20 @@ struct ListOptions: OptionsProtocol {
     }
 }
 
+private func prettyList(_ playgrounds: [Playground]) -> String {
+    let maxNameCount = playgrounds.max { $0.name.count < $1.name.count }!.name.count
+    let maxPlatformCount = playgrounds.max { $0.platform.rawValue.count < $1.platform.rawValue.count }!.name.count
+    func pad(_ text: String, to count: Int) -> String {
+        let whitespaceCount = maxNameCount - text.count
+        let whitespaces = String(repeating: " ", count: whitespaceCount)
+        return "\(text)\(whitespaces)"
+    }
+    return playgrounds.map { playground in
+        return "\(pad(playground.name, to: maxNameCount))  \(pad(playground.platform.displayName, to: maxPlatformCount))"
+        }.joined(separator: "\n")
+}
+
+
 struct ListCommand: CommandProtocol {
     typealias Options = ListOptions
     typealias ClientError = ToyboxError
@@ -28,7 +42,7 @@ struct ListCommand: CommandProtocol {
         let handler = ToyboxPlaygroundHandler()
         switch handler.list(for: options.platform) {
         case let .success(playgrounds):
-            let exportString = playgrounds.joined(separator: "\n")
+            let exportString = prettyList(playgrounds)
             println(object: exportString)
         case let .failure(error):
             return .failure(error)
