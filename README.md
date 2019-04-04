@@ -95,7 +95,8 @@ $ toybox root
 Open existing playgrouds with [peco](https://github.com/peco/peco)
 
 ```sh
-toybox list | peco | sed -E 's/\(.*\)$//g' | xargs toybox open
+toybox list | peco | awk '{print $1}' | xargs toybox open
+
 ```
 
 ## Development

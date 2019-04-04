@@ -16,6 +16,14 @@ public enum Platform: String, ArgumentProtocol {
     case macOS = "macos"
     case tvOS = "tvos"
 
+    public var displayName: String {
+        switch self {
+        case .iOS: return "iOS"
+        case .macOS: return "macOS"
+        case .tvOS: return "tvOS"
+        }
+    }
+
     public static let name: String = "platform"
 }
 
@@ -41,12 +49,20 @@ public struct Playground: CustomStringConvertible {
             }
         }
     }
+    public let creationDate: Date
+    public var contentLength: Int? {
+        guard let data = contents else {
+            return nil
+        }
+        return String(data: data, encoding: .utf8)?.split(separator: "\n").count
+    }
 
-    public init(platform: Platform, version: String, path: URL) {
+    private init(platform: Platform, version: String, path: URL, creationDate: Date) {
         self.platform = platform
         self.version = version
         self.path = path
         self.name = path.deletingPathExtension().pathComponents.last ?? ""
+        self.creationDate = creationDate
     }
 
     public static func load(from path: URL) -> Result<Playground, PlaygroundError> {
@@ -64,15 +80,17 @@ public struct Playground: CustomStringConvertible {
             let platform: Platform = Platform(rawValue: targetPlatform) else {
                 return .failure(PlaygroundError.loadError)
         }
+        let cretionDate = try! FileManager.default.attributesOfItem(atPath: path.path)[.creationDate] as? Date
         if let playground = try? Playground(platform: platform,
                                             version: playgroundElement.value(ofAttribute: "version"),
-                                            path: path) {
+                                            path: path,
+                                            creationDate: cretionDate!) {
             return .success(playground)
         }
         return .failure(PlaygroundError.loadError)
     }
 
     public var description: String {
-        return "\(name) (\(platform))"
+        return "\(name) (\(platform.displayName))"
     }
 }
