@@ -64,7 +64,7 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Opener: PlaygroundOpen
         } else {
             filteredPlaygrounds = playgrounds
         }
-        return .success(filteredPlaygrounds.map { String(describing: $0) })
+        return .success(filteredPlaygrounds.sorted(by: { $0.creationDate < $1.creationDate }).map { String(describing: $0) })
     }
 
     public func create(_ name: String?, for platform: Platform, force: Bool = false, temporary: Bool = false) -> Result<Playground, ToyboxError> {

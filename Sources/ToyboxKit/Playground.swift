@@ -41,12 +41,14 @@ public struct Playground: CustomStringConvertible {
             }
         }
     }
+    public let creationDate: Date
 
-    public init(platform: Platform, version: String, path: URL) {
+    private init(platform: Platform, version: String, path: URL, creationDate: Date) {
         self.platform = platform
         self.version = version
         self.path = path
         self.name = path.deletingPathExtension().pathComponents.last ?? ""
+        self.creationDate = creationDate
     }
 
     public static func load(from path: URL) -> Result<Playground, PlaygroundError> {
@@ -64,9 +66,11 @@ public struct Playground: CustomStringConvertible {
             let platform: Platform = Platform(rawValue: targetPlatform) else {
                 return .failure(PlaygroundError.loadError)
         }
+        let cretionDate = try! FileManager.default.attributesOfItem(atPath: path.path)[.creationDate] as? Date
         if let playground = try? Playground(platform: platform,
                                             version: playgroundElement.value(ofAttribute: "version"),
-                                            path: path) {
+                                            path: path,
+                                            creationDate: cretionDate!) {
             return .success(playground)
         }
         return .failure(PlaygroundError.loadError)
