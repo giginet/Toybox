@@ -33,11 +33,10 @@ private func prettyList(_ playgrounds: [Playground]) -> String {
     return playgrounds.map { playground in
         return [pad(playground.name, to: maxNameCount),
                 pad(String(playground.contentLength ?? 0), to: maxContentLengthCount, trailing: true),
-                pad(playground.platform.displayName, to: maxPlatformCount),
+                pad(playground.platform.displayName, to: maxPlatformCount)
             ].joined(separator: " ")
         }.joined(separator: "\n")
 }
-
 
 struct ListCommand: CommandProtocol {
     typealias Options = ListOptions

@@ -15,7 +15,7 @@ public enum Platform: String, ArgumentProtocol {
     case iOS = "ios"
     case macOS = "macos"
     case tvOS = "tvos"
-    
+
     public var displayName: String {
         switch self {
         case .iOS: return "iOS"
