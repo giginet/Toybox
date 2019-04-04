@@ -78,13 +78,19 @@ class HandlerTests: XCTestCase {
         XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: "hello").path))
     }
 
+    func name(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMddHHmmss"
+        return formatter.string(from: date)
+    }
+
     func testCreateAnonymous() {
         XCTAssertFalse(manager.fileExists(atPath: playgroundURL(for: "hello").path))
         let result = handler.create(.anonymous, for: .iOS)
         switch result {
         case .success(let playground):
             XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: playground.name).path))
-            XCTAssertEqual(playground.name, "20190404090205")
+            XCTAssertEqual(playground.name, name(from: TestingDateProvider.date))
         case .failure:
             XCTFail("handler.list should be failed")
         }
