@@ -1,7 +1,5 @@
 import Foundation
 import Cocoa
-import Commandant
-import Result
 
 public protocol Workspace {
     static var rootURL: URL { get }
