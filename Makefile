@@ -26,7 +26,7 @@ uninstall:
 	rm -f "$(BINARIES_DIR)/toybox"
 
 installables: clean
-	swift build -c release
+	swift build -c release --disable-sandbox --disable-package-manifest-caching
 
 prefix_install: installables
 	mkdir -p "$(PREFIX)/bin"
