@@ -98,7 +98,7 @@ class HandlerTests: XCTestCase {
 
     func testCreateWithTemporaryOption() {
         _ = handler.create(.temporary, for: .iOS)
-        XCTAssertTrue(manager.fileExists(atPath: temporaryPlaygroundURL(for: "hello").path))
+        XCTAssertTrue(manager.fileExists(atPath: temporaryPlaygroundURL(for: name(from: TestingDateProvider.date)).path))
         XCTAssertFalse(manager.fileExists(atPath: playgroundURL(for: "hello").path))
     }
 
