@@ -3,15 +3,19 @@ import Cocoa
 import Commandant
 import Result
 
-public protocol WorkspaceType {
+public protocol Workspace {
     static var rootURL: URL { get }
 }
 
-public protocol PlaygroundOpenerType {
+public protocol PlaygroundOpener {
     static func open(at path: URL, with xcodePath: URL?)
 }
 
-public struct FileSystemWorkspace: WorkspaceType {
+public protocol DateProvider {
+    static var date: Date { get }
+}
+
+public struct FileSystemWorkspace: Workspace {
     private static let rootDirectoryName = ".toybox"
 
     public static var rootURL: URL = {
@@ -20,7 +24,7 @@ public struct FileSystemWorkspace: WorkspaceType {
     }()
 }
 
-public struct XcodeOpener: PlaygroundOpenerType {
+public struct XcodeOpener: PlaygroundOpener {
     public static func open(at path: URL, with xcodePath: URL? = nil) {
         if let xcodePath = xcodePath {
             let workspace = NSWorkspace.shared
@@ -35,11 +39,17 @@ public struct XcodeOpener: PlaygroundOpenerType {
     }
 }
 
-public struct PlaygroundHandler<Workspace: WorkspaceType, Opener: PlaygroundOpenerType> {
+public struct CurrentTimeDateProvider: DateProvider {
+    public static var date: Date {
+        return Date()
+    }
+}
+
+public struct PlaygroundHandler<WorkspaceManager: Workspace, Provider: DateProvider, Opener: PlaygroundOpener> {
     private let playgroundBuilder = PlaygroundBuilder()
 
     public var rootURL: URL {
-        return Workspace.rootURL
+        return WorkspaceManager.rootURL
     }
 
     public init() {
@@ -47,9 +57,9 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Opener: PlaygroundOpen
 
     public func bootstrap() -> Result<(), ToyboxError> {
         let manager = FileManager()
-        if !manager.fileExists(atPath: Workspace.rootURL.path, isDirectory: nil) {
+        if !manager.fileExists(atPath: WorkspaceManager.rootURL.path, isDirectory: nil) {
             do {
-                try manager.createDirectory(at: Workspace.rootURL, withIntermediateDirectories: false, attributes: nil)
+                try manager.createDirectory(at: WorkspaceManager.rootURL, withIntermediateDirectories: false, attributes: nil)
             } catch {
                 return .failure(ToyboxError.bootstrapError)
             }
@@ -67,13 +77,31 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Opener: PlaygroundOpen
         return .success(filteredPlaygrounds.sorted(by: { $0.creationDate < $1.creationDate }))
     }
 
-    public func create(_ name: String?, for platform: Platform, force: Bool = false, temporary: Bool = false) -> Result<Playground, ToyboxError> {
-        let baseName: String = name ?? generateDefaultFileName()
-        let targetPath = fullPath(from: baseName, temporary: temporary)
+    public enum NewPlaygroundKind {
+        case named(String)
+        case anonymous
+        case temporary
+    }
+
+    public func create(_ kind: NewPlaygroundKind, for platform: Platform, force: Bool = false) -> Result<Playground, ToyboxError> {
+        let baseName: String
+        let shouldSave: Bool
+        switch kind {
+        case .named(let name):
+            baseName = name
+            shouldSave = true
+        case .anonymous:
+            baseName = generateDefaultFileName()
+            shouldSave = true
+        case .temporary:
+            baseName = generateDefaultFileName()
+            shouldSave = false
+        }
+        let targetPath = fullPath(from: baseName, temporary: !shouldSave)
 
         if isExist(at: targetPath) {
             do {
-                if force || temporary {
+                if force || !shouldSave {
                     let manager = FileManager()
                     try manager.removeItem(at: targetPath)
                 } else {
@@ -95,21 +123,26 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Opener: PlaygroundOpen
         return .success(playground)
     }
 
-    public func open(_ name: String, with xcodePath: URL? = nil, temporary: Bool = false) -> Result<(), ToyboxError> {
-        let path = fullPath(from: name, temporary: temporary)
+    @discardableResult
+    public func open(_ playground: Playground, with xcodePath: URL? = nil) -> Result<(), ToyboxError> {
+        let path = playground.path
         if isExist(at: path) {
             Opener.open(at: path, with: xcodePath)
         } else {
-            return .failure(ToyboxError.openError(name))
+            return .failure(ToyboxError.openError(playground.name))
         }
         return .success(())
+    }
+
+    public func playground(for name: String) -> Playground? {
+        return playgrounds.first { $0.name == name }
     }
 
     private func fullPath(from name: String, temporary: Bool = false) -> URL {
         if temporary {
             return temporaryDirectory.appendingPathComponent("\(name).playground")
         } else {
-            return Workspace.rootURL.appendingPathComponent("\(name).playground")
+            return WorkspaceManager.rootURL.appendingPathComponent("\(name).playground")
         }
     }
 
@@ -120,7 +153,7 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Opener: PlaygroundOpen
 
     private func generateDefaultFileName() -> String {
         let formatter = DateFormatter()
-        let currentDate = Date()
+        let currentDate = Provider.date
         formatter.dateFormat = "yyyyMMddHHmmss"
         return formatter.string(from: currentDate)
     }
@@ -152,4 +185,4 @@ public struct PlaygroundHandler<Workspace: WorkspaceType, Opener: PlaygroundOpen
     }
 }
 
-public typealias ToyboxPlaygroundHandler = PlaygroundHandler<FileSystemWorkspace, XcodeOpener>
+public typealias ToyboxPlaygroundHandler = PlaygroundHandler<FileSystemWorkspace, CurrentTimeDateProvider, XcodeOpener>

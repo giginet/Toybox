@@ -48,6 +48,8 @@ If you got error on tapping the formula. try `brew untap giginet/toybox` before.
 $ toybox create UIKitDemo
 # Create a new Playground which is not saved
 $ toybox create
+# Create a new auto generated named Playground which is saved like 20190404082446.playground
+$ toybox create -s
 # Create 'SpriteKit.playground' for macOS
 $ toybox create SpriteKitDemo --platform macos
 # Overwrite existing playground 'UIKitDemo'
