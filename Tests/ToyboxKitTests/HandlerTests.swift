@@ -18,7 +18,7 @@ struct AssertOpener: PlaygroundOpener {
 }
 
 struct TestingDateProvider: DateProvider {
-    static var date: Date = .init(timeIntervalSinceReferenceDate: 0)
+    static var date: Date = .init(timeIntervalSince1970: 1554336125.712433)
 }
 
 typealias TestingPlaygroundHandler = PlaygroundHandler<TestingStorage, TestingDateProvider, AssertOpener>
@@ -84,7 +84,7 @@ class HandlerTests: XCTestCase {
         switch result {
         case .success(let playground):
             XCTAssertTrue(manager.fileExists(atPath: playgroundURL(for: playground.name).path))
-            XCTAssertEqual(playground.name, "20010101090000")
+            XCTAssertEqual(playground.name, "20190404090205")
         case .failure:
             XCTFail("handler.list should be failed")
         }
