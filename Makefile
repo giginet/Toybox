@@ -20,7 +20,7 @@ test: clean
 	swift test
 
 clean:
-	rm -rf .build
+	swift package clean
 
 uninstall:
 	rm -f "$(BINARIES_DIR)/toybox"
