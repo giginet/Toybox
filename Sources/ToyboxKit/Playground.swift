@@ -91,6 +91,6 @@ public struct Playground: CustomStringConvertible {
     }
 
     public var description: String {
-        return "\(name) \(platform.displayName))"
+        return "\(name) (\(platform.displayName))"
     }
 }
