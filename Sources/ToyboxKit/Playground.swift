@@ -50,6 +50,12 @@ public struct Playground: CustomStringConvertible {
         }
     }
     public let creationDate: Date
+    public var contentLength: Int? {
+        guard let data = contents else {
+            return nil
+        }
+        return String(data: data, encoding: .utf8)?.split(separator: "\n").count
+    }
 
     private init(platform: Platform, version: String, path: URL, creationDate: Date) {
         self.platform = platform
