@@ -39,6 +39,14 @@ $ toybox version
 
 If you got error on tapping the formula. try `brew untap giginet/toybox` before.
 
+### Mint
+
+Install [yonaskolb/Mint](https://github.com/yonaskolb/Mint).
+
+```console
+$ mint install giginet/toybox
+```
+
 ## Features
 
 ### Create new Playground
