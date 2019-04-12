@@ -20,7 +20,7 @@ struct ListOptions: OptionsProtocol {
 private func prettyList(_ playgrounds: [Playground]) -> String {
     let maxNameCount = playgrounds.map { $0.name.count }.max() ?? 0
     let maxPlatformCount = playgrounds.map { $0.platform.rawValue.count }.max() ?? 0
-    let maxContentLengthCount = playgrounds.map { $0.contentLength ?? 0 }.max() ?? 0
+    let maxContentLengthCount = String(playgrounds.map { $0.contentLength ?? 0 }.max() ?? 0).count
     func pad(_ text: String, to count: Int, trailing: Bool = false) -> String {
         let whitespaceCount = count - text.count
         let whitespaces = String(repeating: " ", count: whitespaceCount)
