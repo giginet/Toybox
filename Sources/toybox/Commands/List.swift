@@ -18,13 +18,9 @@ struct ListOptions: OptionsProtocol {
 }
 
 private func prettyList(_ playgrounds: [Playground]) -> String {
-    if playgrounds.isEmpty {
-        return ""
-    }
-
-    let maxNameCount = playgrounds.max { $0.name.count < $1.name.count }!.name.count
-    let maxPlatformCount = playgrounds.max { $0.platform.rawValue.count < $1.platform.rawValue.count }!.platform.displayName.count
-    let maxContentLengthCount = String(playgrounds.max { $0.contentLength ?? 0 < $1.contentLength ?? 0 }!.contentLength ?? 0).count
+    let maxNameCount = playgrounds.map { $0.name.count }.max() ?? 0
+    let maxPlatformCount = playgrounds.map { $0.platform.rawValue.count }.max() ?? 0
+    let maxContentLengthCount = playgrounds.map { $0.contentLength ?? 0 }.max() ?? 0
     func pad(_ text: String, to count: Int, trailing: Bool = false) -> String {
         let whitespaceCount = count - text.count
         let whitespaces = String(repeating: " ", count: whitespaceCount)
@@ -53,8 +49,12 @@ struct ListCommand: CommandProtocol {
         let handler = ToyboxPlaygroundHandler()
         switch handler.list(for: options.platform) {
         case let .success(playgrounds):
-            let exportString = prettyList(playgrounds)
-            println(object: exportString)
+            if playgrounds.isEmpty {
+                print("There are no playgrounds.")
+            } else {
+                let exportString = prettyList(playgrounds)
+                print(exportString)
+            }
         case let .failure(error):
             return .failure(error)
         }
