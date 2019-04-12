@@ -18,6 +18,10 @@ struct ListOptions: OptionsProtocol {
 }
 
 private func prettyList(_ playgrounds: [Playground]) -> String {
+    if playgrounds.isEmpty {
+        return ""
+    }
+
     let maxNameCount = playgrounds.max { $0.name.count < $1.name.count }!.name.count
     let maxPlatformCount = playgrounds.max { $0.platform.rawValue.count < $1.platform.rawValue.count }!.platform.displayName.count
     let maxContentLengthCount = String(playgrounds.max { $0.contentLength ?? 0 < $1.contentLength ?? 0 }!.contentLength ?? 0).count
