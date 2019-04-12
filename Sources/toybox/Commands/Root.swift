@@ -12,7 +12,7 @@ struct RootCommand: CommandProtocol {
 
     func run(_ options: Options) -> Result<(), ToyboxError> {
         let handler = ToyboxPlaygroundHandler()
-        println(object: handler.rootURL.path)
+        print(handler.rootURL.path)
         return .success(())
     }
 }

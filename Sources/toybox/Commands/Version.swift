@@ -11,7 +11,7 @@ public struct VersionCommand: CommandProtocol {
     public let function = "Display the current version of Toybox"
 
     public func run(_ options: NoOptions<ToyboxError>) -> Result<(), ToyboxError> {
-        println(object: ToyboxKit.toyboxVersion)
+        print(ToyboxKit.toyboxVersion)
         return .success(())
     }
 }
