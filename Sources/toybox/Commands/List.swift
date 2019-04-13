@@ -1,7 +1,6 @@
 import Foundation
 import ToyboxKit
 import Commandant
-import Result
 
 struct ListOptions: OptionsProtocol {
     typealias ClientError = ToyboxError

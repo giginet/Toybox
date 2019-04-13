@@ -1,7 +1,6 @@
 import Foundation
 import ToyboxKit
 import Commandant
-import Result
 
 public struct VersionCommand: CommandProtocol {
     public typealias Options = NoOptions<ToyboxError>

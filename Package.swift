@@ -15,7 +15,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/drmohundro/SWXMLHash.git", from: "4.9.0"),
-        .package(url: "https://github.com/Carthage/Commandant.git", from: "0.15.0"),
+        .package(url: "https://github.com/Carthage/Commandant.git", from: "0.17.0"),
     ],
     targets: [
         .target(

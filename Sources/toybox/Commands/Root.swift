@@ -1,7 +1,6 @@
 import Foundation
 import ToyboxKit
 import Commandant
-import Result
 
 struct RootCommand: CommandProtocol {
     typealias Options = NoOptions<ToyboxError>

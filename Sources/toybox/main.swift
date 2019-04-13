@@ -1,7 +1,6 @@
 import Foundation
 import ToyboxKit
 import Commandant
-import Result
 
 let registry = CommandRegistry<ToyboxError>()
 registry.register(CreateCommand())
