@@ -10,7 +10,7 @@ class Toybox < Formula
   bottle do
     cellar :any_skip_relocation
     root_url "https://github.com/giginet/Toybox/releases/download/2.1.0"
-    sha256 "1feefb92dc2369422b9a4a2b9557b9a5c0e879b97549cf3811ad151a5035193a" => :mojave
+    sha256 "c3cf3859312ee0c4212d2705f35f0307b20a87ed0222b86cd7fb578aec22958a" => :mojave
   end
 
   def install
