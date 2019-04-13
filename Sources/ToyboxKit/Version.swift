@@ -1,3 +1,3 @@
 import Foundation
 
-public let toyboxVersion = "2.0.0"
+public let toyboxVersion = "2.1.0"
