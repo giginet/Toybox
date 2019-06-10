@@ -5,24 +5,27 @@ import Commandant
 struct OpenOptions: OptionsProtocol {
     typealias ClientError = ToyboxError
     let fileName: String
-    let xcodePath: URL?
+    let xcode: XcodeSpecifier?
 
-    static func create(_ fileName: String) -> (String?) -> OpenOptions {
-        return { xcodePathString in
-            let xcodePath: URL?
+    static func create(_ fileName: String) -> (String?) -> (String?) -> OpenOptions {
+        return { xcodePathString in { xcodeVersion in
+            let xcode: XcodeSpecifier?
             if let xcodePathString = xcodePathString {
-                xcodePath = URL(fileURLWithPath: xcodePathString)
+                xcode = .path(URL(fileURLWithPath: xcodePathString))
+            } else if let xcodeVersion = xcodeVersion {
+                xcode = .version(xcodeVersion)
             } else {
-                xcodePath = nil
+                xcode = nil
             }
-            return self.init(fileName: fileName, xcodePath: xcodePath)
-        }
+            return self.init(fileName: fileName, xcode: xcode)
+            } }
     }
 
     static func evaluate(_ m: CommandMode) -> Result<OpenOptions, CommandantError<ToyboxError>> {
         return create
             <*> m <| Argument(defaultValue: "", usage: "Playground file name to open")
             <*> m <| Option<String?>(key: "xcode-path", defaultValue: nil, usage: "Xcode path to open with")
+            <*> m <| Option<String?>(key: "w", defaultValue: nil, usage: "Xcode version to open with")
     }
 }
 
@@ -39,7 +42,7 @@ struct OpenCommand: CommandProtocol {
         guard let playground = handler.playground(for: fileName) else {
             return .failure(ToyboxError.openError("\(fileName) is not exist"))
         }
-        if case let .failure(error) = handler.open(playground, with: options.xcodePath) {
+        if case let .failure(error) = handler.open(playground, with: options.xcode) {
             return .failure(error)
         }
         return .success(())

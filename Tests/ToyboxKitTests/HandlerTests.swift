@@ -12,7 +12,7 @@ struct TestingStorage: Workspace {
 struct AssertOpener: PlaygroundOpener {
     static var opened = false
 
-    static func open(at path: URL, with xcodePath: URL?) {
+    static func open(at path: URL, with xcode: XcodeSpecifier?) {
         opened = true
     }
 }

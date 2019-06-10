@@ -1,12 +1,17 @@
 import Foundation
 import Cocoa
 
+public enum XcodeSpecifier {
+    case version(String)
+    case path(URL)
+}
+
 public protocol Workspace {
     static var rootURL: URL { get }
 }
 
 public protocol PlaygroundOpener {
-    static func open(at path: URL, with xcodePath: URL?)
+    static func open(at path: URL, with xcode: XcodeSpecifier?)
 }
 
 public protocol DateProvider {
@@ -23,7 +28,18 @@ public struct FileSystemWorkspace: Workspace {
 }
 
 public struct XcodeOpener: PlaygroundOpener {
-    public static func open(at path: URL, with xcodePath: URL? = nil) {
+    public static func open(at path: URL, with xcode: XcodeSpecifier? = nil) {
+        let xcodePath: URL?
+        switch xcode {
+        case .some(.version(let version)):
+            let finder = SpotlightXcodeFinder()
+            xcodePath = finder.find(version)
+        case .some(.path(let path)):
+            xcodePath = path
+        case .none:
+            xcodePath = nil
+        }
+
         if let xcodePath = xcodePath {
             let workspace = NSWorkspace.shared
             _ = try? workspace.open([path],
@@ -122,10 +138,10 @@ public struct PlaygroundHandler<WorkspaceManager: Workspace, Provider: DateProvi
     }
 
     @discardableResult
-    public func open(_ playground: Playground, with xcodePath: URL? = nil) -> Result<(), ToyboxError> {
+    public func open(_ playground: Playground, with xcode: XcodeSpecifier? = nil) -> Result<(), ToyboxError> {
         let path = playground.path
         if isExist(at: path) {
-            Opener.open(at: path, with: xcodePath)
+            Opener.open(at: path, with: xcode)
         } else {
             return .failure(ToyboxError.openError(playground.name))
         }

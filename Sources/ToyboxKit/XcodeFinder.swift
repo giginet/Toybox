@@ -75,8 +75,8 @@ extension XcodeFinder {
                 .filter { $0.version?.hasPrefix(version) ?? false }
                 .compactMap { $0.versionCode }
                 .max()
-            if let v = matchingMaxVersion {
-                return versionMap[v]?.path
+            if let matchingVersion = matchingMaxVersion {
+                return versionMap[matchingVersion]?.path
             }
         }
 
