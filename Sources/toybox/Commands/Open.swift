@@ -40,7 +40,7 @@ struct OpenCommand: CommandProtocol {
         let handler = ToyboxPlaygroundHandler()
         let fileName = options.fileName
         guard let playground = handler.playground(for: fileName) else {
-            return .failure(ToyboxError.openError("\(fileName) is not exist"))
+            return .failure(ToyboxError.openError(fileName))
         }
         if case let .failure(error) = handler.open(playground, with: options.xcode) {
             return .failure(error)

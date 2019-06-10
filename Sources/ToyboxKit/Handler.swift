@@ -1,6 +1,11 @@
 import Foundation
 import Cocoa
 
+private func isExist(at path: URL) -> Bool {
+    let manager = FileManager()
+    return manager.fileExists(atPath: path.path)
+}
+
 public enum XcodeSpecifier {
     case version(String)
     case path(URL)
@@ -11,7 +16,7 @@ public protocol Workspace {
 }
 
 public protocol PlaygroundOpener {
-    static func open(at path: URL, with xcode: XcodeSpecifier?)
+    static func open(at path: URL, with xcode: XcodeSpecifier?) throws
 }
 
 public protocol DateProvider {
@@ -28,13 +33,19 @@ public struct FileSystemWorkspace: Workspace {
 }
 
 public struct XcodeOpener: PlaygroundOpener {
-    public static func open(at path: URL, with xcode: XcodeSpecifier? = nil) {
+    public static func open(at path: URL, with xcode: XcodeSpecifier? = nil) throws {
         let xcodePath: URL?
         switch xcode {
         case .some(.version(let version)):
             let finder = SpotlightXcodeFinder()
-            xcodePath = finder.find(version)
+            guard let foundXcode = finder.find(version) else {
+                throw ToyboxError.xcodeNotFoundError(xcode)
+            }
+            xcodePath = foundXcode
         case .some(.path(let path)):
+            guard isExist(at: path) else {
+                throw ToyboxError.xcodeNotFoundError(xcode)
+            }
             xcodePath = path
         case .none:
             xcodePath = nil
@@ -141,7 +152,11 @@ public struct PlaygroundHandler<WorkspaceManager: Workspace, Provider: DateProvi
     public func open(_ playground: Playground, with xcode: XcodeSpecifier? = nil) -> Result<(), ToyboxError> {
         let path = playground.path
         if isExist(at: path) {
-            Opener.open(at: path, with: xcode)
+            do {
+                try Opener.open(at: path, with: xcode)
+            } catch {
+                return .failure(ToyboxError.xcodeNotFoundError(xcode))
+            }
         } else {
             return .failure(ToyboxError.openError(playground.name))
         }
@@ -158,11 +173,6 @@ public struct PlaygroundHandler<WorkspaceManager: Workspace, Provider: DateProvi
         } else {
             return WorkspaceManager.rootURL.appendingPathComponent("\(name).playground")
         }
-    }
-
-    private func isExist(at path: URL) -> Bool {
-        let manager = FileManager()
-        return manager.fileExists(atPath: path.path)
     }
 
     private func generateDefaultFileName() -> String {

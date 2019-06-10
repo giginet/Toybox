@@ -82,8 +82,9 @@ struct CreateCommand: CommandProtocol {
             }
 
             if !options.noOpen {
-                _ = handler.open(playground,
-                                 with: options.xcode)
+                if case let .failure(error) = handler.open(playground, with: options.xcode) {
+                    return .failure(error)
+                }
             }
             return .success(())
         case let .failure(error):
