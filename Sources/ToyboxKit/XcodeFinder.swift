@@ -1,17 +1,16 @@
 import Foundation
 
-private let fileManager: FileManager = .default
-
-private struct Application {
+struct Application {
     let path: URL
+    let versionContainer: Version?
     
-    fileprivate struct Version: Decodable {
+    struct Version: Decodable {
         let version: String
         
-        init?(from application: Application) {
+        init?(from versionPlistPath: URL, dataLoader: DataLoader) {
             let decoder = PropertyListDecoder()
             do {
-                let data = try Data(contentsOf: application.versionPlistPath)
+                let data = try dataLoader.load(from: versionPlistPath)
                 self = try decoder.decode(Application.Version.self, from: data)
             } catch {
                 return nil
@@ -23,12 +22,16 @@ private struct Application {
         }
     }
     
-    init(path: URL) {
+    init(path: URL, dataLoader: DataLoader) {
         self.path = path
+        let versionPlistPath = path
+            .appendingPathComponent("Contents")
+            .appendingPathComponent("version.plist")
+        self.versionContainer = Version(from: versionPlistPath, dataLoader: dataLoader)
     }
     
     var version: String? {
-        return Version(from: self)?.version
+        return versionContainer?.version
     }
     
     /// Covert version to sortable version
@@ -44,15 +47,53 @@ private struct Application {
                 return defaultValue += Int(pow(10.0, Double(element.0))) * element.1
         }
     }
-    
-    var versionPlistPath: URL {
-        return path
-            .appendingPathComponent("Contents")
-            .appendingPathComponent("version.plist")
+}
+
+protocol DataLoader {
+    func load(from path: URL) throws -> Data
+}
+
+protocol XcodeFinder {
+    associatedtype Loader: DataLoader
+    var dataLoader: Loader { get }
+    func findXcodes() -> [URL]
+}
+
+extension XcodeFinder {
+    func find(_ version: String) -> URL? {
+        let xcodes = findXcodes()
+            .map { Application(path: $0, dataLoader: dataLoader) }
+        if let exactMatch = xcodes.first(where: { $0.version == version }) {
+            return exactMatch.path
+        } else {
+            let versionMap: [Int: Application] = xcodes.reduce(into: [:]) { (dict, xcode) in
+                if let versionCode = xcode.versionCode {
+                    dict[versionCode] = xcode
+                }
+            }
+            let matchingMaxVersion = xcodes
+                .filter { $0.version?.hasPrefix(version) ?? false }
+                .compactMap { $0.versionCode }
+                .max()
+            if let v = matchingMaxVersion {
+                return versionMap[v]?.path
+            }
+        }
+        
+        return nil
     }
 }
 
-private struct CommandExecutor {
+struct FileSystemDataLoader: DataLoader {
+    func load(from path: URL) throws -> Data {
+        return try Data(contentsOf: path)
+    }
+}
+
+struct SpotlightXcodeFinder: XcodeFinder {
+    typealias Loader = FileSystemDataLoader
+    let dataLoader: FileSystemDataLoader = FileSystemDataLoader()
+    
     func findXcodes() -> [URL] {
         let process = Process()
         process.launchPath = "/usr/bin/mdfind"
@@ -72,31 +113,5 @@ private struct CommandExecutor {
         return output
             .split(separator: "\n")
             .map { URL.init(fileURLWithPath: String($0)) }
-    }
-}
-
-struct XcodeFinder {
-    func find(_ version: String) -> URL? {
-        let executor = CommandExecutor()
-        let xcodes = executor.findXcodes()
-            .map(Application.init)
-        if let exactMatch = xcodes.first(where: { $0.version == version }) {
-            return exactMatch.path
-        } else {
-            let versionMap: [Int: Application] = xcodes.reduce(into: [:]) { (dict, xcode) in
-                if let versionCode = xcode.versionCode {
-                    dict[versionCode] = xcode
-                }
-            }
-            let matchingMaxVersion = xcodes
-                .filter { $0.version?.hasPrefix(version) ?? false }
-                .compactMap { $0.versionCode }
-                .max()
-            if let v = matchingMaxVersion {
-                return versionMap[v]?.path
-            }
-        }
-        
-        return nil
     }
 }
