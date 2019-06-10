@@ -3,10 +3,10 @@ import Foundation
 struct Application {
     let path: URL
     let versionContainer: Version?
-    
+
     struct Version: Decodable {
         let version: String
-        
+
         init?(from versionPlistPath: URL, dataLoader: DataLoader) {
             let decoder = PropertyListDecoder()
             do {
@@ -16,12 +16,12 @@ struct Application {
                 return nil
             }
         }
-        
+
         private enum CodingKeys: String, CodingKey {
             case version = "CFBundleShortVersionString"
         }
     }
-    
+
     init(path: URL, dataLoader: DataLoader) {
         self.path = path
         let versionPlistPath = path
@@ -29,11 +29,11 @@ struct Application {
             .appendingPathComponent("version.plist")
         self.versionContainer = Version(from: versionPlistPath, dataLoader: dataLoader)
     }
-    
+
     var version: String? {
         return versionContainer?.version
     }
-    
+
     /// Covert version to sortable version
     /// 10.2 -> 102
     var versionCode: Int? {
@@ -79,7 +79,7 @@ extension XcodeFinder {
                 return versionMap[v]?.path
             }
         }
-        
+
         return nil
     }
 }
@@ -93,23 +93,23 @@ struct FileSystemDataLoader: DataLoader {
 struct SpotlightXcodeFinder: XcodeFinder {
     typealias Loader = FileSystemDataLoader
     let dataLoader: FileSystemDataLoader = FileSystemDataLoader()
-    
+
     func findXcodes() -> [URL] {
         let process = Process()
         process.launchPath = "/usr/bin/mdfind"
         process.arguments = ["kMDItemCFBundleIdentifier == 'com.apple.dt.Xcode'"]
-        
+
         let pipe = Pipe()
         process.standardOutput = pipe
         process.launch()
-        
+
         let readHandle = pipe.fileHandleForReading
         let data = readHandle.readDataToEndOfFile()
-        
+
         guard let output = String(data: data, encoding: .utf8) else {
             return []
         }
-        
+
         return output
             .split(separator: "\n")
             .map { URL.init(fileURLWithPath: String($0)) }

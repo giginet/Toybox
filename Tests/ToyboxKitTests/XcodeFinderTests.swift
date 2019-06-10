@@ -20,7 +20,7 @@ func makeData(from versionString: String) -> Data {
             case version = "CFBundleShortVersionString"
         }
     }
-    
+
     let encoder = PropertyListEncoder()
     let version = Version(version: versionString)
     return try! encoder.encode(version)
@@ -30,12 +30,12 @@ private class TestingXcodeFinder: XcodeFinder {
     typealias Loader = TestingDataLoader
     var xcodes: [URL] = []
     let dataLoader = TestingDataLoader()
-    
+
     init(_ xcodes: [String]) {
         self.xcodes = xcodes
             .map(makeURL(from:))
     }
-    
+
     func findXcodes() -> [URL] {
         return xcodes
     }
@@ -43,11 +43,11 @@ private class TestingXcodeFinder: XcodeFinder {
 
 private class TestingDataLoader: DataLoader {
     private var dataMap: [URL: Data] = [:]
-    
+
     func setVersions(_ versions: [String]) {
         self.dataMap = versions.reduce(into: [:]) { $0[makePlistURL(from: $1)] = makeData(from: $1) }
     }
-    
+
     func load(from path: URL) throws -> Data {
         return dataMap[path]!
     }
@@ -60,14 +60,14 @@ final class XcodeFinderTests: XCTestCase {
         let xcodePath = finder.find("11")
         XCTAssertEqual(xcodePath?.path, "/Applications/Xcode-11.app")
     }
-    
+
     func testExactMatch() {
         let finder = TestingXcodeFinder(["10.2.1"])
         finder.dataLoader.setVersions(["10.2.1"])
         let xcodePath = finder.find("10.2.1")
         XCTAssertEqual(xcodePath?.path, "/Applications/Xcode-10.2.1.app")
     }
-    
+
     func testMultipleMinors() {
         let xcodes = ["10.2", "10.2.1", "10.0", "10.1"]
         let finder = TestingXcodeFinder(xcodes)
