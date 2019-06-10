@@ -1,28 +1,25 @@
 import Foundation
 
-private let xcodeIdentifier = "com.apple.dt.Xcode"
 private let fileManager: FileManager = .default
 
 private struct Application {
     let path: URL
     
-    fileprivate struct InfoPlist: Decodable {
+    fileprivate struct Version: Decodable {
         let version: String
-        let bundleIdentifier: String
-        let xcodeVersion: Int?
         
         init?(from application: Application) {
-            let parser = PlistParser()
-            guard let plist = parser.parse(application.plistPath) else {
+            let decoder = PropertyListDecoder()
+            do {
+                let data = try Data(contentsOf: application.versionPlistPath)
+                self = try decoder.decode(Application.Version.self, from: data)
+            } catch {
                 return nil
             }
-            self = plist
         }
         
         private enum CodingKeys: String, CodingKey {
             case version = "CFBundleShortVersionString"
-            case bundleIdentifier = "CFBundleIdentifier"
-            case xcodeVersion = "DTXcode"
         }
     }
     
@@ -30,59 +27,70 @@ private struct Application {
         self.path = path
     }
     
-    var plist: InfoPlist? {
-        return InfoPlist(from: self)
+    var version: String? {
+        return Version(from: self)?.version
     }
     
-    var plistPath: URL {
+    /// Covert version to sortable version
+    /// 10.2 -> 102
+    var versionCode: Int? {
+        return version?
+            .split(separator: ".")
+            .map(String.init)
+            .compactMap(Int.init)
+            .reversed()
+            .enumerated()
+            .reduce(into: 0) { ( defaultValue: inout Int, element: (Int, Int)) in
+                return defaultValue += Int(pow(10.0, Double(element.0))) * element.1
+        }
+    }
+    
+    var versionPlistPath: URL {
         return path
             .appendingPathComponent("Contents")
-            .appendingPathComponent("Info.plist")
+            .appendingPathComponent("version.plist")
     }
 }
 
-private struct PlistParser {
-    func parse(_ path: URL) -> Application.InfoPlist? {
+private struct CommandExecutor {
+    func findXcodes() -> [URL] {
         let process = Process()
-        process.launchPath = "/usr/bin/plutil"
-        process.arguments = ["-p", path.path]
-        if #available(OSX 10.13, *) {
-            try? process.run()
-        } else {
-            process.launch()
+        process.launchPath = "/usr/bin/mdfind"
+        process.arguments = ["kMDItemCFBundleIdentifier == 'com.apple.dt.Xcode'"]
+        
+        let pipe = Pipe()
+        process.standardOutput = pipe
+        process.launch()
+        
+        let readHandle = pipe.fileHandleForReading
+        let data = readHandle.readDataToEndOfFile()
+        
+        guard let output = String(data: data, encoding: .utf8) else {
+            return []
         }
-        process.waitUntilExit()
-        guard let output = process.standardOutput as? String, let data = output.data(using: .utf8) else {
-            return nil
-        }
-        let decoder = PropertyListDecoder()
-        return try? decoder.decode(Application.InfoPlist.self, from: data)
+        
+        return output
+            .split(separator: "\n")
+            .map { URL.init(fileURLWithPath: String($0)) }
     }
 }
 
 struct XcodeFinder {
     func find(_ version: String) -> URL? {
-        guard let applicationNames = try? fileManager.contentsOfDirectory(atPath: "/Applications") else {
-            return nil
-        }
-        let applicationPaths = applicationNames
-            .filter { $0.hasSuffix(".app") }
-            .map { URL(fileURLWithPath: "/Applications").appendingPathComponent($0, isDirectory: true) }
-        let xcodes = applicationPaths
+        let executor = CommandExecutor()
+        let xcodes = executor.findXcodes()
             .map(Application.init)
-            .filter { $0.plist?.bundleIdentifier == xcodeIdentifier }
-        
-        if let exactMatch = xcodes.first(where: { $0.plist?.version == version }) {
+        if let exactMatch = xcodes.first(where: { $0.version == version }) {
             return exactMatch.path
         } else {
             let versionMap: [Int: Application] = xcodes.reduce(into: [:]) { (dict, xcode) in
-                if let xcodeVersion = xcode.plist?.xcodeVersion {
-                    dict[xcodeVersion] = xcode
+                if let versionCode = xcode.versionCode {
+                    dict[versionCode] = xcode
                 }
             }
             let matchingMaxVersion = xcodes
-                .filter { $0.plist?.version.hasPrefix(version) ?? false }
-                .compactMap { $0.plist?.xcodeVersion }
+                .filter { $0.version?.hasPrefix(version) ?? false }
+                .compactMap { $0.versionCode }
                 .max()
             if let v = matchingMaxVersion {
                 return versionMap[v]?.path
