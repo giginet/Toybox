@@ -37,7 +37,7 @@ struct CreateOptions: OptionsProtocol {
         return create
             <*> m <| Option(key: "platform", defaultValue: Platform.iOS, usage: "Target platform (ios/macos/tvos)")
             <*> m <| Option<String?>(key: "xcode-path", defaultValue: nil, usage: "Xcode path to open with")
-            <*> m <| Option<String?>(key: "w", defaultValue: nil, usage: "Xcode version to open with")
+            <*> m <| Option<String?>(key: "xcode-version", defaultValue: nil, usage: "Xcode version to open with")
             <*> m <| Switch(flag: "s", key: "save", usage: "Whether to save to workspace as anonymous playground")
             <*> m <| Argument(defaultValue: [], usage: "Playground file name to create")
             <*> m <| Switch(flag: "f", key: "force", usage: "Whether to overwrite existing playground")

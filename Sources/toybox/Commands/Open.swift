@@ -25,7 +25,7 @@ struct OpenOptions: OptionsProtocol {
         return create
             <*> m <| Argument(defaultValue: "", usage: "Playground file name to open")
             <*> m <| Option<String?>(key: "xcode-path", defaultValue: nil, usage: "Xcode path to open with")
-            <*> m <| Option<String?>(key: "w", defaultValue: nil, usage: "Xcode version to open with")
+            <*> m <| Option<String?>(key: "xcode-version", defaultValue: nil, usage: "Xcode version to open with")
     }
 }
 
