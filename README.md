@@ -111,6 +111,12 @@ toybox list | peco | awk '{print $1}' | xargs toybox open
 
 ## Development
 
+# Xcode 11
+
+Open `Toybox` directory with Xcode 11 directly.
+
+# Under Xcode 10.2
+
 ```console
 $ swift package generate-xcodeproj
 $ open Toybox.xcodeproj
