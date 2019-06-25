@@ -12,4 +12,5 @@ matrix:
         - swift test
     - osx_image: xcode11
       script:
+        - xcodebuild -list -workspace .swiftpm/xcode/package.xcworkspace
         - xcodebuild test -workspace .swiftpm/xcode/package.xcworkspace -scheme ToyboxKit
