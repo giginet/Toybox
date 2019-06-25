@@ -6,11 +6,8 @@ language: objective-c
 matrix:
   include:
     - osx_image: xcode10.2
-      script:
-        - swiftlint --strict
-        - swift build
-        - swift test
     - osx_image: xcode11
-      script:
-        - xcodebuild -list -workspace .swiftpm/xcode/package.xcworkspace
-        - xcodebuild test -workspace .swiftpm/xcode/package.xcworkspace -scheme ToyboxKit
+script:
+  - swiftlint --strict
+  - swift build
+  - swift test
