@@ -3,8 +3,13 @@ env:
   - LC_CTYPE=en_US.UTF-8
 os: osx
 language: objective-c
-osx_image: xcode10.2
-script:
-  - swiftlint --strict
-  - swift build
-  - swift test
+matrix:
+  include:
+    - osx_image: xcode10.2
+      script:
+        - swiftlint --strict
+        - swift build
+        - swift test
+    - osx_image: xcode11
+      script:
+        - xcodebuild test -workspace .swiftpm/xcode/package.xcworkspace -scheme ToyboxPackage
