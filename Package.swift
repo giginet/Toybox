@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Toybox",
+    platforms: [.macOS(.v10_10)],
     products: [
         .executable(
             name: "toybox",
