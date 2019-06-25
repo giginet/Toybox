@@ -10,15 +10,17 @@ struct CreateOptions: OptionsProtocol {
     let noOpen: Bool
     let save: Bool
     let enableStandardInput: Bool
-    let xcodePath: URL?
+    let xcode: XcodeSpecifier?
 
-    static func create(_ platform: Platform) -> (String?) -> (Bool) -> ([String]) -> (Bool) -> (Bool) -> (Bool) -> CreateOptions {
-        return { xcodePathString in { save in { fileNames in { force in { noOpen in { standardInput in
-            let xcodePath: URL?
+    static func create(_ platform: Platform) -> (String?) -> (String?) -> (Bool) -> ([String]) -> (Bool) -> (Bool) -> (Bool) -> CreateOptions {
+        return { xcodePathString in { xcodeVersion in { save in { fileNames in { force in { noOpen in { standardInput in
+            let xcode: XcodeSpecifier?
             if let xcodePathString = xcodePathString {
-                xcodePath = URL(fileURLWithPath: xcodePathString)
+                xcode = .path(URL(fileURLWithPath: xcodePathString))
+            } else if let xcodeVersion = xcodeVersion {
+                xcode = .version(xcodeVersion)
             } else {
-                xcodePath = nil
+                xcode = nil
             }
             return self.init(fileName: fileNames.first,
                              platform: platform,
@@ -26,8 +28,8 @@ struct CreateOptions: OptionsProtocol {
                              noOpen: noOpen,
                              save: save,
                              enableStandardInput: standardInput,
-                             xcodePath: xcodePath)
-            } } } } }
+                             xcode: xcode)
+            } } } } } }
         }
     }
 
@@ -35,6 +37,7 @@ struct CreateOptions: OptionsProtocol {
         return create
             <*> m <| Option(key: "platform", defaultValue: Platform.iOS, usage: "Target platform (ios/macos/tvos)")
             <*> m <| Option<String?>(key: "xcode-path", defaultValue: nil, usage: "Xcode path to open with")
+            <*> m <| Option<String?>(key: "xcode-version", defaultValue: nil, usage: "Xcode version to open with")
             <*> m <| Switch(flag: "s", key: "save", usage: "Whether to save to workspace as anonymous playground")
             <*> m <| Argument(defaultValue: [], usage: "Playground file name to create")
             <*> m <| Switch(flag: "f", key: "force", usage: "Whether to overwrite existing playground")
@@ -79,8 +82,9 @@ struct CreateCommand: CommandProtocol {
             }
 
             if !options.noOpen {
-                _ = handler.open(playground,
-                                 with: options.xcodePath)
+                if case let .failure(error) = handler.open(playground, with: options.xcode) {
+                    return .failure(error)
+                }
             }
             return .success(())
         case let .failure(error):

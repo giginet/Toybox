@@ -8,5 +8,6 @@ disabled_rules:
   - nesting
   - line_length
   - force_try
+  - cyclomatic_complexity
 identifier_name:
   excluded: m # It's used to parse commandant options

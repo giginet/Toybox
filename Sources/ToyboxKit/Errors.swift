@@ -7,6 +7,7 @@ public enum ToyboxError: Error {
     case listError
     case duplicatedError(String)
     case versionError
+    case xcodeNotFoundError(XcodeSpecifier?)
 }
 
 public extension ToyboxError {
@@ -23,7 +24,17 @@ public extension ToyboxError {
         case let .duplicatedError(playgroundName):
             return "Playground '\(playgroundName)' is already exist. use '-f' flag to overwrite"
         case .versionError:
-            return "Cpuld not detect toybox version"
+            return "Could not detect toybox version"
+        case .xcodeNotFoundError(let xcode):
+            guard let xcode = xcode else {
+                return "Could not found any xcode"
+            }
+            switch xcode {
+            case .path(let url):
+                return "Xcode located at '\(url.path)' could not be found"
+            case .version(let version):
+                return "Xcode matching '\(version)' could not be found"
+            }
         }
     }
 }
