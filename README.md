@@ -66,6 +66,7 @@ $ toybox create UIKitDemo -f
 $ toybox create UIKitDemo --no-open
 # Create and open with specific Xcode
 $ toybox create UIKitDemo --xcode-path /Application/Xcode7.3.app
+$ toybox create UIKitDemo --xcode-version 11.1
 # Create Playground from standard input
 $ echo 'print("Hello World")' | toybox create --input
 ```
@@ -88,6 +89,7 @@ $ toybox list --platform ios
 $ toybox open UIKitDemo
 # Open UIKitDemo.playground with specific Xcode
 $ toybox open UIKitDemo --xcode-path /Application/Xcode7.3.app
+$ toybox open UIKitDemo --xcode-version 11.1
 ```
 
 ### Other
