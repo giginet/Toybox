@@ -17,6 +17,24 @@ import UIKit
 
 var str = "Hello, playground"
 """
+private let defaultContentForMac = """
+//: Playground - noun: a place where people can play
+
+import Cocoa
+
+var str = "Hello, playground"
+"""
+
+private func defaultContent(for platform: Platform) -> Data {
+    let content: String
+    switch platform {
+    case .iOS, .tvOS:
+        content = defaultContent
+    case .macOS:
+        content = defaultContentForMac
+    }
+    return content.data(using: .utf8)!
+}
 
 class PlaygroundBuilder {
     private let metadataFileName = "contents.xcplayground"
@@ -29,7 +47,7 @@ class PlaygroundBuilder {
         case creationFailure
     }
 
-    func build(for platform: Platform, to destination: URL, contents: String = defaultContent) throws -> URL {
+    func build(for platform: Platform, to destination: URL) throws -> URL {
         do {
             try fileManager.createDirectory(at: destination, withIntermediateDirectories: false, attributes: nil)
         } catch {
@@ -45,9 +63,9 @@ class PlaygroundBuilder {
         }
 
         let contentsURL = destination.appendingPathComponent(contentsFileName)
-        let content = contents.data(using: .utf8)
+        let contentData = defaultContent(for: platform)
         guard fileManager.createFile(atPath: contentsURL.path,
-                                     contents: content,
+                                     contents: contentData,
                                      attributes: nil) else {
                                         throw Error.creationFailure
         }
